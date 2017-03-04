@@ -1,3 +1,19 @@
+Hi,
+
+This is the source code of the Math-o-mir software (a simple math-notepad).
+The project is made in VisualStudio 2005. Importing to a newer VS version should be easy.
+
+If you accept the limitation that the software should remain exceptionally small and 
+efficient, then you can contribute directly here. If you have more grandiose plans, just
+fork it and do your best.
+
+You have no limitations on how to use the code. The code is licensed under MIT License.
+
+Danijel Gorupec
+
+
+
+
 /*****************************************  The MIT License ***********************************************
 
 Copyright  2017, Danijel Gorupec
