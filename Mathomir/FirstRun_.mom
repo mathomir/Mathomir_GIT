@@ -1,0 +1,1003 @@
+<?xml version="1.0"?>
+<mathomir>
+<obj type="1" X="64" Y="55" lock="1" page_w="1165" page_h="1650">
+	<expr fnt_h="250" hed="1" alig="0" brack="0">
+		<elm tp="1" tx="Hello," fnt="010101010101" mth="0" />
+		<elm tp="1" tx="first-time" fnt="01010101010101010101" mth="0" />
+		<elm tp="1" tx="user" fnt="01010101" mth="0" />
+		<elm tp="1" tx=":)" fnt="0101" mth="0" />
+	</expr>
+</obj>
+<obj type="1" X="72" Y="94" lock="1">
+	<expr fnt_h="100" stxt="1" alig="1" brack="0">
+		<elm tp="1" tx="Welcome" fnt="00000000000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="3-step" fnt="000000000000" />
+		<elm tp="1" tx="introduction" fnt="000000000000000000000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="Math-o-mir" fnt="00000000000000000000" />
+	</expr>
+</obj>
+<obj type="1" X="79" Y="338">
+	<expr fnt_h="297" alig="0" brack="0">
+		<elm tp="1" tx="x" fnt="00" />
+		<elm tp="2" stp="+" />
+		<elm tp="4" stp="fraction" Exp1="upp" Exp2="low">
+		<expr fnt_h="269" alig="0" brack="0">
+			<elm tp="1" tx="y" fnt="00" />
+		</expr>
+		<expr fnt_h="269" alig="0" brack="0">
+			<elm tp="1" tx="a" fnt="00" />
+			<elm tp="1" tx="b" fnt="00" />
+		</expr>
+		</elm>
+		<elm tp="2" stp="=" />
+		<elm tp="8"  Exp1="arg">
+		<expr fnt_h="269" alig="0" brack="0">
+			<elm tp="1" tx="3" fnt="00" />
+		</expr>
+		</elm>
+	</expr>
+</obj>
+<obj type="1" X="100" Y="490" lock="1">
+	<expr fnt_h="98" stxt="1" color="2" alig="0" brack="0">
+		<elm tp="1" tx="elements" fnt="0000000000000000" />
+	</expr>
+</obj>
+<obj type="1" X="231" Y="461" lock="1">
+	<expr fnt_h="98" stxt="1" color="1" alig="0" brack="0">
+		<elm tp="1" tx="insertion" fnt="000000000000000000" />
+		<elm tp="1" tx="points" fnt="000000000000" />
+	</expr>
+</obj>
+<obj type="2" X="92" Y="352" lock="1">
+	<draw type="31" width="1000" X1="5000" Y1="109000" X2="5369" Y2="766" X3="10286" Y3="11169" />
+	<draw type="31" width="1000" X1="5369" Y1="766" X2="451" Y2="11169" />
+</obj>
+<obj type="2" X="126" Y="352" lock="1">
+	<draw type="31" width="1000" X1="5000" Y1="110000" X2="5369" Y2="766" X3="10286" Y3="11169" />
+	<draw type="31" width="1000" X1="5369" Y1="766" X2="451" Y2="11169" />
+</obj>
+<obj type="2" X="157" Y="340" lock="1">
+	<draw type="31" width="1000" X1="5000" Y1="123000" X2="5369" Y2="766" X3="10286" Y3="11169" />
+	<draw type="31" width="1000" X1="5369" Y1="766" X2="451" Y2="11169" />
+</obj>
+<obj type="2" X="167" Y="389" lock="1">
+	<draw type="31" width="1000" X1="5000" Y1="73000" X2="5369" Y2="766" X3="10286" Y3="11169" />
+	<draw type="31" width="1000" X1="5369" Y1="766" X2="451" Y2="11169" />
+</obj>
+<obj type="2" X="216" Y="380" lock="1">
+	<draw type="21" width="1000" X1="5000" Y1="39000" X2="5369" Y2="766" X3="10286" Y3="11169" />
+	<draw type="21" width="1000" X1="5369" Y1="766" X2="451" Y2="11169" />
+</obj>
+<obj type="2" X="227" Y="343" lock="1">
+	<draw type="21" width="1000" X1="5000" Y1="76000" X2="5369" Y2="766" X3="10286" Y3="11169" />
+	<draw type="21" width="1000" X1="5369" Y1="766" X2="451" Y2="11169" />
+</obj>
+<obj type="2" X="273" Y="346" lock="1">
+	<draw type="21" width="1000" X1="5000" Y1="75000" X2="5369" Y2="766" X3="10286" Y3="11169" />
+	<draw type="21" width="1000" X1="5369" Y1="766" X2="451" Y2="11169" />
+</obj>
+<obj type="2" X="318" Y="347" lock="1">
+	<draw type="21" width="1000" X1="5000" Y1="73000" X2="5369" Y2="766" X3="10286" Y3="11169" />
+	<draw type="21" width="1000" X1="5369" Y1="766" X2="451" Y2="11169" />
+</obj>
+<obj type="2" X="351" Y="347" lock="1">
+	<draw type="21" width="1000" X1="5000" Y1="76000" X2="5369" Y2="766" X3="10286" Y3="11169" />
+	<draw type="21" width="1000" X1="5369" Y1="766" X2="451" Y2="11169" />
+</obj>
+<obj type="2" X="363" Y="347" lock="1">
+	<draw type="21" width="1000" X1="5000" Y1="78000" X2="5369" Y2="766" X3="10286" Y3="11169" />
+	<draw type="21" width="1000" X1="5369" Y1="766" X2="451" Y2="11169" />
+</obj>
+<obj type="2" X="186" Y="382" lock="1">
+	<draw type="21" width="1000" X1="5000" Y1="39000" X2="5369" Y2="766" X3="10286" Y3="11169" />
+	<draw type="21" width="1000" X1="5369" Y1="766" X2="451" Y2="11169" />
+</obj>
+<obj type="1" X="73" Y="214" lock="1">
+	<expr fnt_h="83" alig="1" brack="0">
+		<elm tp="1" tx="Touch" fnt="0000000000" mth="0" />
+		<elm tp="1" tx="various" fnt="00000000000000" mth="0" />
+		<elm tp="1" tx="equation" fnt="0000000000000000" mth="0" />
+		<elm tp="1" tx="parts" fnt="0000000000" mth="0" />
+		<elm tp="1" tx="by" fnt="0000" mth="0" />
+		<elm tp="1" tx="pointing" fnt="0000000000000000" mth="0" />
+		<elm tp="1" tx="the" fnt="000000" mth="0" />
+		<elm tp="1" tx="mouse" fnt="0000000000" mth="0" />
+		<elm tp="1" tx="arrow" fnt="0000000000" mth="0" />
+		<elm tp="1" tx="at" fnt="0000" mth="0" />
+		<elm tp="1" tx="right" fnt="0000000000" mth="0" />
+		<elm tp="1" tx="spots" fnt="0000000000" mth="0" />
+		<elm tp="2" stp="\09" />
+		<elm tp="1"  color="4" tx="(just" fnt="0000000000" mth="0" />
+		<elm tp="1"  color="4" tx="point," fnt="000000000000" mth="0" />
+		<elm tp="1"  color="4" tx="don't" fnt="0000000000" mth="0" />
+		<elm tp="1"  color="4" tx="click)." fnt="00000000000000" mth="0" />
+	</expr>
+</obj>
+<obj type="1" X="476" Y="330" lock="1">
+	<expr fnt_h="83" txt="1"" stxt="0" color="4" alig="1" brack="0">
+		<elm tp="2" stp="\B7" />
+		<elm tp="1" tx="Touched" fnt="00000000000000" />
+		<elm tp="1" tx="elements" fnt="0000000000000000" />
+		<elm tp="1" tx="will" fnt="00000000" />
+		<elm tp="1" tx="highlight" fnt="000000000000000000" />
+		<elm tp="1" tx="blue" fnt="00000000" />
+	<row_sep />
+	<row_sep />
+		<elm tp="2" stp="\B7" />
+		<elm tp="1" tx="A" fnt="00" />
+		<elm tp="1" tx="touched" fnt="00000000000000" />
+		<elm tp="1" tx="insertion" fnt="000000000000000000" />
+		<elm tp="1" tx="point" fnt="0000000000" />
+		<elm tp="1" tx="shows" fnt="0000000000" />
+	<row_sep />
+		<elm tp="2" stp="\09" />
+		<elm tp="1" tx="a" fnt="00" />
+		<elm tp="1" tx="blue" fnt="00000000" />
+		<elm tp="1" tx="vertical" fnt="0000000000000000" />
+		<elm tp="1" tx="line." fnt="0000000000" />
+	</expr>
+</obj>
+<obj type="1" X="89" Y="712">
+	<expr fnt_h="198" alig="0" brack="0">
+		<elm tp="4" stp="fraction" Exp1="upp" Exp2="low">
+		<expr fnt_h="179" alig="0" brack="0">
+			<elm tp="1" tx="m" fnt="00" />
+		</expr>
+		<expr fnt_h="179" alig="0" brack="0">
+			<elm tp="8"  Exp1="arg">
+			<expr fnt_h="162" alig="0" brack="0">
+				<elm tp="3" Exp1="bas" Exp2="exp">
+				<expr fnt_h="162" alig="0" brack="2">
+					<elm tp="1" tx="x" fnt="00" />
+				</expr>
+				<expr fnt_h="116" alig="0" brack="0">
+					<elm tp="1" tx="2" fnt="00" />
+				</expr>
+				</elm>
+				<elm tp="2" stp="+" />
+				<elm tp="3" Exp1="bas" Exp2="exp">
+				<expr fnt_h="162" alig="0" brack="2">
+					<elm tp="1" tx="y" fnt="00" />
+				</expr>
+				<expr fnt_h="116" alig="0" brack="0">
+					<elm tp="1" tx="2" fnt="00" />
+				</expr>
+				</elm>
+			</expr>
+			</elm>
+		</expr>
+		</elm>
+		<elm tp="2" stp="=" />
+		<elm tp="1" tx="2" fnt="00" />
+	</expr>
+</obj>
+<obj type="2" X="312" Y="786" lock="1">
+	<draw type="91" width="1000" X1="2053" Y1="820" X2="933" Y2="15054" X3="4964" Y3="12090" X4="8687" Y4="20745" X5="11973" Y5="19239" X6="8118" Y6="11044" X7="13726" Y7="10521" X8="2053" Y8="820" />
+</obj>
+<obj type="1" X="326" Y="816" lock="1">
+	<expr fnt_h="85" alig="0" brack="0">
+		<elm tp="8"  color="3"  Exp1="arg">
+		<expr fnt_h="77" alig="0" brack="0">
+			<elm tp="3" Exp1="bas" Exp2="exp">
+			<expr fnt_h="77" alig="0" brack="2">
+				<elm tp="1" tx="x" fnt="00" />
+			</expr>
+			<expr fnt_h="55" alig="0" brack="0">
+				<elm tp="1" tx="2" fnt="00" />
+			</expr>
+			</elm>
+			<elm tp="2" stp="+" />
+			<elm tp="3" Exp1="bas" Exp2="exp">
+			<expr fnt_h="77" alig="0" brack="2">
+				<elm tp="1" tx="y" fnt="00" />
+			</expr>
+			<expr fnt_h="55" alig="0" brack="0">
+				<elm tp="1" tx="2" fnt="00" />
+			</expr>
+			</elm>
+		</expr>
+		</elm>
+	</expr>
+</obj>
+<obj type="1" X="461" Y="713">
+	<expr fnt_h="198" alig="0" brack="0">
+		<elm tp="4" stp="fraction" Exp1="upp" Exp2="low">
+		<expr fnt_h="179" alig="0" brack="0">
+			<elm tp="1" tx="m" fnt="00" />
+		</expr>
+		<expr fnt_h="179" alig="0" brack="0">
+			<elm tp="1" tx="2" fnt="00" />
+		</expr>
+		</elm>
+		<elm tp="2" stp="=" />
+	</expr>
+</obj>
+<obj type="2" X="122" Y="765" lock="1">
+	<draw type="31" width="1000" X1="168000" Y1="28000" X2="154439" Y2="34410" />
+	<draw type="31" width="1000" X1="168000" Y1="28000" X2="154439" Y2="21590" />
+	<draw type="31" width="1000" X1="1000" Y1="1000" X2="17000" Y2="18000" X3="28000" Y3="25000" X4="39000" Y4="28000" X5="80000" Y5="28000" X6="95000" Y6="28000" X7="134000" Y7="28000" X8="155000" Y8="28000" X9="168000" Y9="28000" />
+</obj>
+<obj type="2" X="392" Y="731" lock="1">
+	<draw type="31" width="1000" X1="148000" Y1="1000" X2="149793" Y2="15892" />
+	<draw type="31" width="1000" X1="148000" Y1="1000" X2="137630" Y2="11837" />
+	<draw type="31" width="1000" X1="1000" Y1="61000" X2="68000" Y2="61000" X3="89000" Y3="58000" X4="107000" Y4="52000" X5="124000" Y5="42000" X6="138000" Y6="26000" X7="146000" Y7="7000" X8="148000" Y8="1000" />
+</obj>
+<obj type="1" X="300" Y="869" lock="1">
+	<expr fnt_h="83" color="4" alig="1" brack="0">
+		<elm tp="1" tx="Carry" fnt="0101010101" mth="0" />
+		<elm tp="1" tx="(tow)" fnt="0000000000" mth="0" />
+	</expr>
+</obj>
+<obj type="1" X="95" Y="860" lock="1">
+	<expr fnt_h="83" txt="1"" stxt="0" color="4" alig="1" brack="0">
+		<elm tp="1" tx="Touch" fnt="0101010101" />
+		<elm tp="1" tx="element(s)" fnt="00000000000000000000" />
+		<elm tp="1" tx="and" fnt="000000" />
+	<row_sep />
+		<elm tp="1" decor="3" tx="click" fnt="0000000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="pick-up." fnt="0101010101010101" />
+	</expr>
+</obj>
+<obj type="1" X="497" Y="860" lock="1">
+	<expr fnt_h="83" txt="1"" stxt="0" color="4" alig="1" brack="0">
+		<elm tp="1" tx="Touch" fnt="0101010101" />
+		<elm tp="1" tx="element(s)" fnt="00000000000000000000" />
+		<elm tp="1" tx="or" fnt="0000" />
+	<row_sep />
+		<elm tp="1" tx="an" fnt="0000" />
+		<elm tp="1" tx="insertion" fnt="000000000000000000" />
+		<elm tp="1" tx="point" fnt="0000000000" />
+		<elm tp="1" tx="and" fnt="000000" />
+	<row_sep />
+		<elm tp="1" decor="3" tx="click" fnt="0000000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="place-down." fnt="0101010101010101010101" />
+	</expr>
+</obj>
+<obj type="1" X="69" Y="868" lock="1">
+	<expr fnt_h="173" color="4" alig="0" brack="0">
+		<elm tp="1" tx="1" fnt="01" />
+	</expr>
+</obj>
+<obj type="1" X="273" Y="869" lock="1">
+	<expr fnt_h="173" color="4" alig="0" brack="0">
+		<elm tp="1" tx="2" fnt="01" />
+	</expr>
+</obj>
+<obj type="1" X="471" Y="868" lock="1">
+	<expr fnt_h="173" color="4" alig="0" brack="0">
+		<elm tp="1" tx="3" fnt="01" />
+	</expr>
+</obj>
+<obj type="1" X="78" Y="1043" lock="1">
+	<expr fnt_h="83" stxt="1" alig="1" brack="0">
+		<elm tp="1" tx="Let-mouse-click" fnt="000000000000000000000000000000" />
+		<elm tp="1" tx="anywhere" fnt="0000000000000000" />
+		<elm tp="1" tx="at" fnt="0000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="empty" fnt="0000000000" />
+		<elm tp="1" tx="area" fnt="00000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="start" fnt="0000000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" decor="3" tx="Typing" fnt="020202020202" />
+		<elm tp="1" decor="3" tx="Mode." fnt="0202020202" />
+	</expr>
+</obj>
+<obj type="1" X="402" Y="1248" lock="1">
+	<expr fnt_h="83" txt="1"" stxt="0" color="4" alig="1" brack="0">
+		<elm tp="2" stp="\B7" />
+		<elm tp="1" tx="Hold" fnt="00000000" />
+		<elm tp="1" tx="down" fnt="00000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="Alt" fnt="000000" />
+		<elm tp="1" tx="key" fnt="000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="type" fnt="00000000" />
+		<elm tp="1" tx="exponents" fnt="010101010101010101" />
+	<row_sep />
+		<elm tp="2" stp="\09" />
+		<elm tp="1" tx="(or" fnt="000000" />
+		<elm tp="1" tx="hit" fnt="000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="^" fnt="01" />
+		<elm tp="1" tx="key," fnt="00000000" />
+		<elm tp="1" tx="or" fnt="0000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="\22" fnt="01" />
+		<elm tp="1" tx="key)" fnt="00000000" />
+	<row_sep />
+		<elm tp="2" stp="\B7" />
+		<elm tp="1" tx="Hold" fnt="00000000" />
+		<elm tp="1" tx="down" fnt="00000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="Spacebar" fnt="0000000000000000" />
+		<elm tp="1" tx="key" fnt="000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="type" fnt="00000000" />
+		<elm tp="1" tx="indexes" fnt="01010101010101" />
+	<row_sep />
+		<elm tp="2" stp="\09" />
+		<elm tp="1" tx="(or" fnt="000000" />
+		<elm tp="1" tx="hit" fnt="000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="underline" fnt="000000000000000000" />
+		<elm tp="1" tx="key)" fnt="00000000" />
+	<row_sep />
+		<elm tp="2" stp="\B7" />
+		<elm tp="1" tx="Fast" fnt="00000000" />
+		<elm tp="1" tx="double-stroke" fnt="00000000000000000000000000" />
+		<elm tp="1" tx="letters" fnt="00000000000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="make" fnt="00000000" />
+		<elm tp="1" tx="Greek" fnt="0101010101" />
+		<elm tp="1" tx="symbols" fnt="01010101010101" />
+	<row_sep />
+		<elm tp="2" stp="\B7" />
+		<elm tp="1" tx="Double" fnt="000000000000" />
+		<elm tp="1" tx="stroke" fnt="000000000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="slash" fnt="0000000000" />
+		<elm tp="1" tx="key" fnt="000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="enter" fnt="0000000000" />
+		<elm tp="1" tx="fraction" fnt="0101010101010101" />
+		<elm tp="1" tx="sign" fnt="00000000" />
+	<row_sep />
+		<elm tp="2" stp="\09" />
+		<elm tp="1" tx="(also" fnt="0000000000" />
+		<elm tp="1" tx="use" fnt="000000" />
+		<elm tp="1" tx="#" fnt="01" />
+		<elm tp="1" tx="key" fnt="000000" />
+		<elm tp="1" tx="or" fnt="0000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="grave" fnt="0000000000" />
+		<elm tp="1" tx="accent" fnt="000000000000" />
+		<elm tp="1" tx="key" fnt="000000" />
+		<elm tp="1" tx="for" fnt="000000" />
+		<elm tp="1" tx="fractions)" fnt="00000000000000000000" />
+	<row_sep />
+		<elm tp="2" stp="\B7" />
+		<elm tp="1" tx="Use" fnt="000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="Enter" fnt="0101010101" />
+		<elm tp="1" tx="key" fnt="000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="jump" fnt="00000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="cursor" fnt="000000000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="next" fnt="00000000" />
+	<row_sep />
+		<elm tp="2" stp="\09" />
+		<elm tp="1" tx="entry" fnt="0000000000" />
+		<elm tp="1" tx="position" fnt="0000000000000000" />
+	<row_sep />
+		<elm tp="2" stp="\B7" />
+		<elm tp="1" tx="Type" fnt="00000000" />
+		<elm tp="1" tx="commands" fnt="0101010101010101" />
+		<elm tp="1" tx="starting" fnt="0000000000000000" />
+		<elm tp="1" tx="with" fnt="00000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="backslash" fnt="000000000000000000" />
+		<elm tp="1" tx="key" fnt="000000" />
+	<row_sep />
+		<elm tp="2" stp="\09" />
+		<elm tp="1" tx="(example:" fnt="000000000000000000" />
+		<elm tp="1" tx="\5Csqrt" fnt="0101010101" />
+		<elm tp="1" tx=")" fnt="00" />
+	<row_sep />
+		<elm tp="2" stp="\B7" />
+		<elm tp="1" tx="convert" fnt="00000000000000" />
+		<elm tp="1" tx="variables" fnt="000000000000000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="functions" fnt="010101010101010101" />
+		<elm tp="1" tx="by" fnt="0000" />
+		<elm tp="1" tx="using" fnt="0000000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="period" fnt="000000000000" />
+		<elm tp="1" tx="key" fnt="000000" />
+	<row_sep />
+		<elm tp="2" stp="\09" />
+		<elm tp="1" tx="(example:" fnt="000000000000000000" />
+		<elm tp="1" tx="cos." fnt="01010101" />
+		<elm tp="1" tx=")" fnt="00" />
+	<row_sep />
+		<elm tp="2" stp="\B7" />
+		<elm tp="1" tx="Toggle" fnt="000000000000" />
+		<elm tp="1" tx="between" fnt="00000000000000" />
+		<elm tp="1" tx="math" fnt="01010101" />
+		<elm tp="1" tx="and" fnt="010101" />
+		<elm tp="1" tx="text" fnt="01010101" />
+		<elm tp="1" tx="mode" fnt="01010101" />
+		<elm tp="1" tx="by" fnt="0000" />
+		<elm tp="1" tx="using" fnt="0000000000" />
+	<row_sep />
+		<elm tp="2" stp="\09" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="Alt+Spacebar" fnt="000000000000000000000000" />
+		<elm tp="1" tx="combination" fnt="0000000000000000000000" />
+	<row_sep />
+		<elm tp="2" stp="\B7" />
+		<elm tp="1" tx="Mouse-click" fnt="0000000000000000000000" />
+		<elm tp="1" tx="at" fnt="0000" />
+		<elm tp="1" tx="element(s)" fnt="00000000000000000000" />
+		<elm tp="1" tx="to" fnt="0000" />
+		<elm tp="1" tx="auto-place-down" fnt="010101010101010101010101010101" />
+		<elm tp="1" tx="at" fnt="0000" />
+	<row_sep />
+		<elm tp="2" stp="\09" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="cursor" fnt="000000000000" />
+		<elm tp="1" tx="position!" fnt="000000000000000000" />
+	</expr>
+</obj>
+<obj type="1" X="73" Y="625" lock="1">
+	<expr fnt_h="83" stxt="1" alig="0" brack="0">
+		<elm tp="1" tx="Copy" fnt="00000000" />
+		<elm tp="1" tx="elements" fnt="0000000000000000" />
+		<elm tp="1" tx="from" fnt="00000000" />
+		<elm tp="1" tx="one" fnt="000000" />
+		<elm tp="1" tx="expression" fnt="00000000000000000000" />
+		<elm tp="1" tx="into" fnt="00000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="other" fnt="0000000000" />
+		<elm tp="1" tx="one" fnt="000000" />
+		<elm tp="1" tx="using" fnt="0000000000" />
+		<elm tp="1" tx="your" fnt="00000000" />
+		<elm tp="1" tx="mouse." fnt="000000000000" />
+	</expr>
+</obj>
+<obj type="1" X="402" Y="1537" lock="1">
+	<expr fnt_h="87" txt="1"" stxt="1" alig="1" brack="0">
+		<elm tp="1" tx="To" fnt="0000" />
+		<elm tp="1" tx="exit" fnt="01010101" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="Typing" fnt="000000000000" />
+		<elm tp="1" tx="mode" fnt="00000000" />
+		<elm tp="1" tx="hit" fnt="000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="Esc" fnt="000000" />
+		<elm tp="1" tx="key" fnt="000000" />
+	<row_sep />
+		<elm tp="1" tx="or" fnt="0000" />
+		<elm tp="1" tx="right-mouse-click" fnt="0000000000000000000000000000000000" />
+		<elm tp="1" tx="at" fnt="0000" />
+		<elm tp="1" tx="empty" fnt="0000000000" />
+		<elm tp="1" tx="area" fnt="00000000" />
+	</expr>
+</obj>
+<obj type="1" X="476" Y="446" lock="1">
+	<expr fnt_h="83" txt="1"" stxt="0" color="4" alig="1" brack="0">
+		<elm tp="2" stp="\B7" />
+		<elm tp="1" tx="Using" fnt="0000000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="Shift" fnt="0000000000" />
+		<elm tp="1" tx="key" fnt="000000" />
+	<row_sep />
+		<elm tp="2" stp="\09" />
+		<elm tp="1" tx="you" fnt="000000" />
+		<elm tp="1" tx="can" fnt="000000" />
+		<elm tp="1" tx="multi-touch" fnt="0202020202020202020202" />
+	</expr>
+</obj>
+<obj type="2" X="89" Y="459" lock="1">
+	<draw type="31" width="2000" X1="2000" Y1="2000" X2="10700" Y2="12000" X3="36800" Y3="12000" X4="45500" Y4="22000" X5="54200" Y5="12000" X6="80300" Y6="12000" X7="89000" Y7="2000" />
+</obj>
+<obj type="2" X="181" Y="419" lock="1">
+	<draw type="21" width="2000" X1="2000" Y1="2000" X2="16071" Y2="15000" X3="86428" Y3="15000" X4="100500" Y4="28000" X5="114571" Y5="15000" X6="184928" Y6="15000" X7="199000" Y7="2000" />
+</obj>
+<obj type="1" X="95" Y="899" lock="1">
+	<expr fnt_h="69" txt="1"" stxt="0" color="4" alig="1" brack="0">
+		<elm tp="1" tx="you" fnt="000000" />
+		<elm tp="1" tx="can" fnt="000000" />
+		<elm tp="1" tx="also" fnt="00000000" />
+		<elm tp="1" tx="pick-up" fnt="00000000000000" />
+		<elm tp="1" tx="math" fnt="00000000" />
+	<row_sep />
+		<elm tp="1" tx="elements" fnt="0000000000000000" />
+		<elm tp="1" tx="from" fnt="00000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="toolbox." fnt="0000000000000000" />
+	</expr>
+</obj>
+<obj type="1" X="300" Y="896" lock="1">
+	<expr fnt_h="69" txt="1"" stxt="0" color="4" alig="1" brack="0">
+		<elm tp="1" tx="you" fnt="000000" />
+		<elm tp="1" tx="can" fnt="000000" />
+		<elm tp="1" tx="cancel" fnt="000000000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="carrying" fnt="0000000000000000" />
+	<row_sep />
+		<elm tp="1" tx="process" fnt="00000000000000" />
+		<elm tp="1" tx="by" fnt="0000" />
+		<elm tp="1" tx="hitting" fnt="00000000000000" />
+		<elm tp="1" tx="the" fnt="000000" />
+		<elm tp="1" tx="Esc" fnt="000000" />
+	<row_sep />
+		<elm tp="1" tx="key" fnt="000000" />
+		<elm tp="1" tx="or" fnt="0000" />
+		<elm tp="1" tx="by" fnt="0000" />
+		<elm tp="1" tx="right-click" fnt="0000000000000000000000" />
+		<elm tp="1" tx="at" fnt="0000" />
+	<row_sep />
+		<elm tp="1" tx="empty" fnt="0000000000" />
+		<elm tp="1" tx="area." fnt="0000000000" />
+	</expr>
+</obj>
+<obj type="1" X="498" Y="915" lock="1">
+	<expr fnt_h="69" txt="1"" stxt="0" color="4" alig="1" brack="0">
+		<elm tp="1" tx="element(s)" fnt="00000000000000000000" />
+		<elm tp="2" stp="\AE" />
+		<elm tp="1" tx="replace" fnt="00000000000000" />
+	<row_sep />
+		<elm tp="1" tx="insertion-point" fnt="000000000000000000000000000000" />
+		<elm tp="2" stp="\AE" />
+		<elm tp="1" tx="insert" fnt="000000000000" />
+	</expr>
+</obj>
+<obj type="2" X="28" Y="165" lock="1">
+	<draw type="121" width="650" X1="1000" Y1="1000" X2="36000" Y2="1000" X3="36000" Y3="37000" X4="1000" Y4="37000" X5="1000" Y5="1000" />
+</obj>
+<obj type="1" X="28" Y="184" lock="1">
+	<expr fnt_h="207" stxt="1" hed="2" alig="0" brack="0">
+		<elm tp="1"  color="3" tx="1." fnt="0101" />
+		<elm tp="1" tx="Touching" fnt="0000000000000000" />
+	</expr>
+</obj>
+<obj type="2" X="33" Y="571" lock="1">
+	<draw type="121" width="650" X1="1000" Y1="1000" X2="36000" Y2="1000" X3="36000" Y3="37000" X4="1000" Y4="37000" X5="1000" Y5="1000" />
+</obj>
+<obj type="1" X="33" Y="591" lock="1">
+	<expr fnt_h="207" hed="2" alig="0" brack="0">
+		<elm tp="1"  color="3" tx="2." fnt="0101" mth="0" />
+		<elm tp="1" tx="Pick-up," fnt="0000000000000000" mth="0" />
+		<elm tp="1" tx="place-down" fnt="00000000000000000000" mth="0" />
+	</expr>
+</obj>
+<obj type="2" X="35" Y="989" lock="1">
+	<draw type="121" width="650" X1="1000" Y1="1000" X2="36000" Y2="1000" X3="36000" Y3="37000" X4="1000" Y4="37000" X5="1000" Y5="1000" />
+</obj>
+<obj type="1" X="35" Y="1009" lock="1">
+	<expr fnt_h="207" hed="2" alig="0" brack="0">
+		<elm tp="1"  color="3" tx="3." fnt="0101" mth="0" />
+		<elm tp="1" tx="Typing" fnt="000000000000" mth="0" />
+	</expr>
+</obj>
+<obj type="2" X="48" Y="1254" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="1" X="56" Y="1267" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="E" fnt="03" />
+	</expr>
+</obj>
+<obj type="2" X="167" Y="1279" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13700" Y2="3100" X3="37800" Y3="3100" />
+	<draw type="51" width="1500" X1="34500" Y1="23000" X2="8755" Y2="22950" X3="3570" Y3="20910" X4="8500" Y4="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+</obj>
+<obj type="2" X="198" Y="1279" lock="1">
+	<draw type="51" width="1500" X1="2700" Y1="3100" X2="10000" Y2="3100" X3="15555" Y3="1105" X4="10965" Y4="21165" X5="6205" Y5="23205" X6="850" Y6="23115" />
+	<draw type="51" width="1500" X1="10965" Y1="21165" X2="14450" Y2="28560" />
+	<draw type="51" width="1500" X1="15555" Y1="1105" X2="19550" Y2="9350" />
+</obj>
+<obj type="1" X="88" Y="1267" lock="1">
+	<expr fnt_h="100" stxt="1" color="4" alig="0" brack="0">
+		<elm tp="1" tx="=" fnt="01" />
+	</expr>
+</obj>
+<obj type="1" X="118" Y="1267" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="m" fnt="03" />
+	</expr>
+</obj>
+<obj type="1" X="152" Y="1267" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="c" fnt="03" />
+	</expr>
+</obj>
+<obj type="1" X="195" Y="1267" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="2" fnt="03" />
+	</expr>
+</obj>
+<obj type="1" X="177" Y="1291" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="Alt" fnt="020202" />
+	</expr>
+</obj>
+<obj type="2" X="79" Y="1254" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="2" X="110" Y="1254" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="2" X="141" Y="1254" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="2" X="186" Y="1254" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="2" X="45" Y="1361" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="1" X="57" Y="1373" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="f" fnt="03" />
+	</expr>
+</obj>
+<obj type="2" X="76" Y="1361" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="1" X="89" Y="1372" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="." fnt="03" />
+	</expr>
+</obj>
+<obj type="2" X="108" Y="1361" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="1" X="118" Y="1372" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="x" fnt="03" />
+	</expr>
+</obj>
+<obj type="2" X="140" Y="1361" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13700" Y2="3100" X3="48000" Y3="3000" />
+	<draw type="51" width="1500" X1="44000" Y1="23000" X2="8755" Y2="22950" X3="3570" Y3="20910" X4="8500" Y4="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+</obj>
+<obj type="2" X="182" Y="1361" lock="1">
+	<draw type="51" width="1500" X1="2700" Y1="3100" X2="10000" Y2="3100" X3="15555" Y3="1105" X4="10965" Y4="21165" X5="6205" Y5="23205" X6="850" Y6="23115" />
+	<draw type="51" width="1500" X1="10965" Y1="21165" X2="14450" Y2="28560" />
+	<draw type="51" width="1500" X1="15555" Y1="1105" X2="19550" Y2="9350" />
+</obj>
+<obj type="1" X="146" Y="1373" lock="1">
+	<expr fnt_h="100" stxt="1" color="4" alig="0" brack="0">
+		<elm tp="1" tx="Enter" fnt="0202020202" />
+	</expr>
+</obj>
+<obj type="1" X="206" Y="1374" lock="1">
+	<expr fnt_h="100" stxt="1" color="4" alig="0" brack="0">
+		<elm tp="1" tx="=" fnt="01" />
+	</expr>
+</obj>
+<obj type="2" X="196" Y="1361" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="1" X="237" Y="1373" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="1" fnt="03" />
+	</expr>
+</obj>
+<obj type="2" X="228" Y="1361" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="2" X="260" Y="1361" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="1" X="269" Y="1373" lock="1">
+	<expr fnt_h="100" stxt="1" color="4" alig="0" brack="0">
+		<elm tp="1" tx="#" fnt="03" />
+	</expr>
+</obj>
+<obj type="2" X="292" Y="1361" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="1" X="302" Y="1372" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="x" fnt="03" />
+	</expr>
+</obj>
+<obj type="2" X="324" Y="1361" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13700" Y2="3100" X3="48000" Y3="3000" />
+	<draw type="51" width="1500" X1="44000" Y1="23000" X2="8755" Y2="22950" X3="3570" Y3="20910" X4="8500" Y4="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+</obj>
+<obj type="2" X="366" Y="1361" lock="1">
+	<draw type="51" width="1500" X1="2700" Y1="3100" X2="10000" Y2="3100" X3="15555" Y3="1105" X4="10965" Y4="21165" X5="6205" Y5="23205" X6="850" Y6="23115" />
+	<draw type="51" width="1500" X1="10965" Y1="21165" X2="14450" Y2="28560" />
+	<draw type="51" width="1500" X1="15555" Y1="1105" X2="19550" Y2="9350" />
+</obj>
+<obj type="1" X="330" Y="1373" lock="1">
+	<expr fnt_h="100" stxt="1" color="4" alig="0" brack="0">
+		<elm tp="1" tx="Enter" fnt="0202020202" />
+	</expr>
+</obj>
+<obj type="2" X="44" Y="1450" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="1" X="54" Y="1461" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="x" fnt="03" />
+	</expr>
+</obj>
+<obj type="2" X="72" Y="1477" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13700" Y2="3100" X3="102000" Y3="2300" />
+	<draw type="51" width="1500" X1="96600" Y1="23600" X2="8755" Y2="22950" X3="3570" Y3="20910" X4="8500" Y4="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+</obj>
+<obj type="2" X="167" Y="1477" lock="1">
+	<draw type="51" width="1500" X1="2700" Y1="3100" X2="10000" Y2="3100" X3="15555" Y3="1105" X4="10965" Y4="21165" X5="6205" Y5="23205" X6="1000" Y6="23000" />
+	<draw type="51" width="1500" X1="10965" Y1="21165" X2="14450" Y2="28560" />
+	<draw type="51" width="1500" X1="15555" Y1="1105" X2="19550" Y2="9350" />
+</obj>
+<obj type="1" X="84" Y="1489" lock="1">
+	<expr fnt_h="100" stxt="1" color="4" alig="0" brack="0">
+		<elm tp="1" tx="SpaceBar" fnt="0202020202020202" />
+	</expr>
+</obj>
+<obj type="1" X="99" Y="1462" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="1" fnt="03" />
+	</expr>
+</obj>
+<obj type="2" X="90" Y="1450" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="2" X="122" Y="1450" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="1" X="135" Y="1461" lock="1">
+	<expr fnt_h="100" stxt="1" color="4" alig="0" brack="0">
+		<elm tp="1" tx="," fnt="23" />
+	</expr>
+</obj>
+<obj type="1" X="163" Y="1462" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="2" fnt="03" />
+	</expr>
+</obj>
+<obj type="2" X="154" Y="1450" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="1" X="199" Y="1461" lock="1">
+	<expr fnt_h="100" stxt="1" color="4" alig="0" brack="0">
+		<elm tp="1" tx="=" fnt="01" />
+	</expr>
+</obj>
+<obj type="2" X="189" Y="1450" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="2" X="220" Y="1450" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="2" X="252" Y="1450" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="2" X="283" Y="1450" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="2" X="314" Y="1450" lock="1">
+	<draw type="51" width="1500" X1="8500" Y1="1105" X2="13400" Y2="3200" X3="27600" Y3="3200" X4="33405" Y4="1105" X5="28815" Y5="21165" X6="24055" Y6="23205" X7="8755" Y7="22950" X8="3570" Y8="20910" X9="8500" Y9="1105" />
+	<draw type="51" width="1500" X1="3570" Y1="20910" X2="1360" Y2="27710" />
+	<draw type="51" width="1500" X1="28815" Y1="21165" X2="32300" Y2="28560" />
+	<draw type="51" width="1500" X1="33405" Y1="1105" X2="37400" Y2="9350" />
+</obj>
+<obj type="1" X="229" Y="1461" lock="1">
+	<expr fnt_h="100" stxt="1" color="4" alig="0" brack="0">
+		<elm tp="1" tx="+" fnt="03" />
+	</expr>
+</obj>
+<obj type="1" X="264" Y="1461" lock="1">
+	<expr fnt_h="100" stxt="1" color="4" alig="0" brack="0">
+		<elm tp="1" tx="-" fnt="03" />
+	</expr>
+</obj>
+<obj type="1" X="291" Y="1461" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="w" fnt="03" />
+	</expr>
+</obj>
+<obj type="1" X="323" Y="1461" lock="1">
+	<expr fnt_h="100" color="4" alig="0" brack="0">
+		<elm tp="1" tx="w" fnt="03" />
+	</expr>
+</obj>
+<obj type="1" X="302" Y="1483" lock="1">
+	<expr fnt_h="83" stxt="1" color="4" alig="0" brack="0">
+		<elm tp="1" tx="fast" fnt="00000000" />
+	</expr>
+</obj>
+<obj type="2" X="285" Y="1481" lock="1">
+	<draw type="51" width="650" X1="0" Y1="0" X2="0" Y2="12700" />
+</obj>
+<obj type="2" X="346" Y="1481" lock="1">
+	<draw type="51" width="650" X1="0" Y1="0" X2="0" Y2="10700" />
+</obj>
+<obj type="2" X="286" Y="1490" lock="1">
+	<draw type="51" width="650" X1="0" Y1="0" X2="58700" Y2="0" />
+	<draw type="51" width="650" X1="0" Y1="0" X2="6576" Y2="2400" />
+	<draw type="51" width="650" X1="0" Y1="0" X2="6576" Y2="-2399" />
+	<draw type="51" width="650" X1="58700" Y1="0" X2="52124" Y2="-2400" />
+	<draw type="51" width="650" X1="58700" Y1="0" X2="52124" Y2="2399" />
+</obj>
+<obj type="1" X="49" Y="1232" lock="1">
+	<expr fnt_h="83" color="4" alig="0" brack="0">
+		<elm tp="1"  color="3" tx="Example" fnt="01010101010101" mth="0" />
+		<elm tp="1"  color="3" tx="1:" fnt="0101" mth="0" />
+		<elm tp="2" stp="\09" />
+		<elm tp="1"  color="0" tx="E" fnt="00" />
+		<elm tp="2"  color="0" stp="=" />
+		<elm tp="1"  color="0" tx="m" fnt="00" />
+		<elm tp="3"  color="0" Exp1="bas" Exp2="exp">
+		<expr fnt_h="83" alig="0" brack="2">
+			<elm tp="1" tx="c" fnt="00" />
+		</expr>
+		<expr fnt_h="59" alig="0" brack="0">
+			<elm tp="1" tx="2" fnt="00" />
+		</expr>
+		</elm>
+	</expr>
+</obj>
+<obj type="1" X="47" Y="1339" lock="1">
+	<expr fnt_h="83" color="4" alig="0" brack="0">
+		<elm tp="1"  color="3" tx="Exmaple" fnt="01010101010101" mth="0" />
+		<elm tp="1"  color="3" tx="2:" fnt="0101" mth="0" />
+		<elm tp="2" stp="\09" />
+		<elm tp="6"  color="0" tx="f" fnt="20" Exp1="arg">
+		<expr fnt_h="83" alig="0" brack="3" b_shape="(" b_height="1" b_data="0">
+			<elm tp="1" tx="x" fnt="00" />
+		</expr>
+		</elm>
+		<elm tp="2"  color="0" stp="=" />
+		<elm tp="4"  color="0" stp="fraction" Exp1="upp" Exp2="low">
+		<expr fnt_h="75" alig="0" brack="0">
+			<elm tp="1" tx="1" fnt="00" />
+		</expr>
+		<expr fnt_h="75" alig="0" brack="0">
+			<elm tp="1" tx="x" fnt="00" />
+		</expr>
+		</elm>
+	</expr>
+</obj>
+<obj type="1" X="50" Y="1431" lock="1">
+	<expr fnt_h="83" color="4" alig="0" brack="0">
+		<elm tp="1"  color="3" tx="Example" fnt="01010101010101" mth="0" />
+		<elm tp="1"  color="3" tx="3:" fnt="0101" mth="0" />
+		<elm tp="2" stp="\09" />
+		<elm tp="1"  color="0" tx="x" fnt="00" Exp1="ndx">
+		<expr fnt_h="59" alig="0" brack="0">
+			<elm tp="1" tx="1" fnt="00" />
+			<elm tp="2" stp="," />
+			<elm tp="1" tx="2" fnt="00" />
+		</expr>
+		</elm>
+		<elm tp="2"  color="0" stp="=" />
+		<elm tp="2"  color="0" stp="\B1" />
+		<elm tp="1"  color="0" tx="w" fnt="60" />
+	</expr>
+</obj>
+<obj type="2" X="464" Y="1052" lock="1">
+	<draw type="111" width="1000" X1="87405" Y1="42132" X2="75702" Y2="35300" X3="63179" Y3="32000" X4="39000" Y4="39000" X5="1466" Y5="1500" X6="31589" Y6="45100" X7="28769" Y7="66100" X8="23079" Y8="72011" X9="7010" Y9="86936" />
+	<draw type="111" width="1000" X1="7010" Y1="86936" X2="5454" Y2="91781" X3="5197" Y3="104116" X4="13056" Y4="116026" X5="18825" Y5="119549" X6="35113" Y6="122507" X7="38052" Y7="125149" X8="40206" Y8="136457" X9="43132" Y9="140670" />
+	<draw type="111" width="1000" X1="43132" Y1="140670" X2="56596" Y2="147291" X3="104784" Y3="151170" X4="119150" Y4="142091" X5="125569" Y5="136500" X6="129743" Y6="134000" X7="145770" Y7="135507" X8="152856" Y8="133544" X9="161780" Y9="126608" />
+	<draw type="111" width="1000" X1="161780" Y1="126608" X2="174676" Y2="102938" X3="175827" Y3="79167" X4="163956" Y4="71709" X5="162658" Y5="54494" X6="156788" Y6="46550" X7="150672" Y7="43411" X8="119473" Y8="43893" X9="105042" Y9="46754" />
+	<draw type="111" width="1000" X1="105042" Y1="46754" X2="87405" Y2="42132" />
+</obj>
+<obj type="2" X="508" Y="1107" lock="1">
+	<draw type="41" width="2000" X1="3615" Y1="3615" X2="3615" Y2="25226" />
+</obj>
+<obj type="2" X="504" Y="1107" lock="1">
+	<draw type="41" width="650" X1="8772" Y1="738" X2="638" Y2="738" />
+	<draw type="41" width="650" X1="14116" Y1="11660" X2="14116" Y2="3527" />
+	<draw type="41" width="650" X1="14116" Y1="27765" X2="14116" Y2="19793" />
+	<draw type="41" width="650" X1="13954" Y1="27765" X2="14116" Y2="27765" />
+	<draw type="41" width="650" X1="638" Y1="27765" X2="5821" Y2="27765" />
+	<draw type="41" width="650" X1="638" Y1="24814" X2="638" Y2="27765" />
+	<draw type="41" width="650" X1="638" Y1="8549" X2="638" Y2="16682" />
+</obj>
+<obj type="2" X="512" Y="1144" lock="1">
+	<draw type="91" width="1000" X1="696" Y1="596" X2="1528" Y2="19553" />
+	<draw type="91" width="1000" X1="696" Y1="596" X2="16314" Y2="12449" X3="16646" Y3="15591" X4="14496" Y4="18174" X5="12104" Y5="17925" X6="8698" Y6="16038" X7="8428" Y7="20230" X8="6367" Y8="22267" X9="3558" Y9="21947" />
+	<draw type="91" width="1000" X1="3558" Y1="21947" X2="1528" Y2="19553" />
+</obj>
+<obj type="1" X="549" Y="1162" lock="1">
+	<expr fnt_h="71" txt="1"" stxt="0" color="2" alig="1" brack="0">
+		<elm tp="1" tx="The" fnt="000000" />
+		<elm tp="1" tx="\22uggly\22" fnt="00000000000000" />
+	<row_sep />
+		<elm tp="1" tx="mouse" fnt="0000000000" />
+		<elm tp="1" tx="arrow" fnt="0000000000" />
+	</expr>
+</obj>
+<obj type="1" X="538" Y="1115" lock="1">
+	<expr fnt_h="71" txt="1"" stxt="0" color="2" alig="1" brack="0">
+		<elm tp="1" tx="The" fnt="000000" />
+		<elm tp="1" tx="blinking" fnt="0000000000000000" />
+	<row_sep />
+		<elm tp="1" tx="keyboard" fnt="0000000000000000" />
+		<elm tp="1" tx="cursor" fnt="000000000000" />
+	</expr>
+</obj>
+<obj type="2" X="532" Y="1158" lock="1">
+	<draw type="31" width="1000" X1="18785" Y1="8670" X2="722" Y2="722" X3="11554" Y3="428" />
+	<draw type="31" width="1000" X1="722" Y1="722" X2="7824" Y2="8907" />
+</obj>
+<obj type="2" X="513" Y="1118" lock="1">
+	<draw type="31" width="1000" X1="26100" Y1="2000" X2="722" Y2="7670" X3="9295" Y3="1041" />
+	<draw type="31" width="1000" X1="722" Y1="7670" X2="11285" Y2="10087" />
+</obj>
+<obj type="2" X="81" Y="1051" lock="1">
+	<draw type="51" width="2000" X1="28000" Y1="41000" X2="13305" Y2="37992" />
+	<draw type="51" width="2000" X1="28000" Y1="41000" X2="20998" Y2="27735" />
+	<draw type="51" width="2000" X1="2000" Y1="2000" X2="8000" Y2="21000" X3="16000" Y3="32000" X4="28000" Y4="41000" />
+</obj>
+<obj type="1" X="72" Y="115" lock="1">
+	<expr fnt_h="83" stxt="1" alig="1" brack="0">
+		<elm tp="1"  color="4" tx="(or" fnt="000000" />
+		<elm tp="1"  color="4" tx="choose" fnt="000000000000" />
+		<elm tp="1"  color="4" tx="File" fnt="01010101" />
+		<elm tp="2"  color="4" stp="\AE" />
+		<elm tp="1"  color="4" tx="New" fnt="010101" />
+		<elm tp="1"  color="4" tx="to" fnt="0000" />
+		<elm tp="1"  color="4" tx="skip)" fnt="0000000000" />
+	</expr>
+</obj>
+</mathomir>
