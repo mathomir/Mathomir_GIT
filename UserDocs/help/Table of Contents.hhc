@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="FrameName" value=".\GeneraInfo.htm">
+	<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="What Is Math-o-mir?">
+		<param name="Local" value="html\GeneraInfo.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="The Toolbox">
+		<param name="Local" value="html\Toolbox.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Editing equations using mouse">
+		<param name="Local" value="html\BasicOperations.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Four basic mouse operations">
+			<param name="Local" value="html\BasicOperations.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Selecting">
+			<param name="Local" value="html\Selectingi.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Moving objects - the moving dot">
+			<param name="Local" value="html\MovingDot.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Vertical spacing">
+			<param name="Local" value="html\VSpacing.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Right mouse button">
+			<param name="Local" value="html\RightClick.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Guidelines">
+			<param name="Local" value="html\Guidelines.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Editing equations using keyboard">
+		<param name="Local" value="html\KeyboardStart.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Starting the Typing mode">
+			<param name="Local" value="html\KeyboardStart.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Determining the Variable Mode">
+			<param name="Local" value="html\VariableMode.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Font casting modes">
+			<param name="Local" value="html\FormatingMode.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Typing tips">
+			<param name="Local" value="html\KeyboardTips.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Entering commands, units and functions">
+			<param name="Local" value="html\Functions.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Entering indexes and exponents">
+			<param name="Local" value="html\Indexes.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ENTERNING PLAIN TEXT">
+			<param name="Local" value="html\Text.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Working with selections">
+			<param name="Local" value="html\KeyboardSelections.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Matrices">
+		<param name="Local" value="html\Matrices.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="The Presentation Mode and Printing">
+		<param name="Local" value="html\Presentation.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="The Options menu">
+		<param name="Local" value="html\OptionsMenu.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Exporting equation images and LaTeX code">
+		<param name="Local" value="html\EquationImages.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Hand-drawing">
+		<param name="Local" value="html\HandDrawingi.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Drawing boxes - technical drawing">
+		<param name="Local" value="html\DrawingBox.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Symbolic computation">
+		<param name="Local" value="html\Computation.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Function plotting">
+		<param name="Local" value="html\Plotting.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Using Math-o-mir in classroom">
+		<param name="Local" value="html\Classroom.htm">
+		</OBJECT>
+</UL>
+</BODY></HTML>
