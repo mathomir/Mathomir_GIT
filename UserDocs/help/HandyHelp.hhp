@@ -1,0 +1,16 @@
+[OPTIONS]
+Binary Index=No
+Compatibility=1.1 or later
+Compiled file=HandyHelp.chm
+Contents file=Table of Contents.hhc
+Default Window=MainWindowType
+Default topic=html\GeneraInfo.htm
+Display compile progress=No
+Language=0x409 English (United States)
+
+[WINDOWS]
+MainWindowType=,"Table of Contents.hhc","html\Index.hhk","html\GeneraInfo.htm",,,,,,0x2120,,0x3006,[371,6,1267,667],,,,,,,0
+
+
+[INFOTYPES]
+
