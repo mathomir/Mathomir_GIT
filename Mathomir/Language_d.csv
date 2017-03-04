@@ -1,0 +1,559 @@
+
+; This is a Math-o-mir language definition file, you can define strings displayed
+; in the Math-o-mir application by editing this file. The file should reside in 
+; Math-o-mir application directory. Keep this file plain text, non-unicode.
+;
+; Each line starting with semicolon is a comment.
+; Lines starting with numbers are defintions, the number is the ID that must not be changed
+; Please change only text under quotation marks. Take care that the lenght of the 
+; translated text doesn't differ much from the original english text.
+;
+; Language: GERMAN, Egon Rath, 2012
+
+
+
+;*********************************************************************************
+;*
+;* Following section defines the main menu text
+;*
+;*********************************************************************************
+;
+;****************** the main items of the main menu ******************************
+;
+30001,"Datei";		--File--
+30002,"Bearbeiten";	--Edit--
+30003,"Anzeige";	--View--
+30004,"Optionen";	--Options--
+30005,"Hilfe";		--Help---
+;
+;******************* the file menu ************************************************
+;
+31000,"Neu";			--New--
+31001,"Öffnen...";		--Open...--
+31002,"Speichern	Ctrl+S";	--Save \t Ctrl+S--
+31003,"Speichern als...";		--Save as...--
+30101,"Automatisches speichern";	--Autosave--
+32850,"Niemals";		--Never--
+32855,"Niedrig";		--Low frequency--
+32856,"Mittel";			--Medium frequency--
+32857,"Oft";			--High frequency--
+32854,"Öffne Autosave.mom";	--Load Autosave.mom--
+31004,"Drucken";		--Print--
+31005,"Druckvorschau";	--Print prview--
+31006,"Drucker einrichten...";--Print setup--
+31007,"Beenden";			--Exit--
+;
+;*********************** the Edit menu ********************************************
+;
+31101,"Rückgängig";					--Undo--
+31102,"Ausschneiden	Ctrl+X";		--Cut \t Ctrl+X--
+31103,"Kopieren		Ctrl+C";		--Copy \t Ctrl+C--
+31104,"Einfügen		Ctrl+V";		--Paste \t Ctrl+V--
+31105,"Löschen		Del";			--Delete \t Del--
+32880,"Text suchen...";				--Find text--
+32832,"Auf gesperrte Objekte zugreifen";	--Access Locked objects--- (this option enables you to access even object that are locked)
+32813,"Objekte als Grafik kopieren	F9";	--Copy equation image \t F9-- (copies equation image into clipboard)
+32846,"Objekte als Grafik speichern	F8";	--Save equation image \t F8-- (saves equation image to disk)
+32871,"Objekte als LaTeX kopieren	F6";	--Copy LaTeX code \t F6--  (Copes LaTeX code into clipboard)
+;
+;************************* the View menu ******************************************
+;
+30301,"Zoom";							--Zoom--
+32773,"Zoom 240%";						--Zoom 240%--
+32774,"Zoom 150%";						--Zoom 150%--
+32775,"Zoom 100%";						--Zoom 100%--
+32776,"Zoom 80%";						--Zoom 80%--
+32777,"Zoom 60%";						--Zoom 60%--
+32778,"Zoom 40%";						--Zoom 40%--
+32863,"Zoom vergrößern	F2";				--Zoom in \t F2--
+32864,"Zoom verkleinern	F3";				--Zoom out \t F3--
+32873,"Zoom zurücksetzen auf 1:1";			--Zoom to Default (1:1)--
+30302,"Seitenformat";					--Page--
+32799,"A4 Querformat";					--A4 portrait--
+32800,"A4 Hochformat";					--A4 landscape--
+32882,"Letter Querformat";				--Letter portrait--  ***TRANSLATE***
+32883,"Letter Hochformat";				--Letter landscape --***TRANSLATE***
+32896,"Seitennummerierung";				--Page numbering--   ***TRANSLATE***
+32897,"Keine";						--None--	     ***TRANSLATE***
+32898,"- 1 -";						--- 1 ---	     ***TRANSLATE***
+32899,"- 1/10 -";					--- 1/10 ---	     ***TRANSLATE***
+32900,"Seite 1 von 10";					--Page 1 of 10--     ***TRANSLATE***
+32901,"Unten";						--Bottom--	     ***TRANSLATE***
+32902,"Rechts";						--Right--	     ***TRANSLATE***
+32903,"Ausnehmen erste Seite";				--Exclude firsta page-- ***TRANSLATE***
+32838,"Seitenraster";					--Show grid--
+30303,"Werkzeuge und Kontextmenü";		--Toolbox and context menu--
+32885,"Sehr Groß";						--Very Large--  ***TRANSLATE***
+32802,"Groß";							--Large--
+32803,"Mittel";							--Medium--
+32804,"Klein";							--Small--
+32904,"Auto";						--Auto-resize--    ***TRANSLATE***
+32881,"Symbolleiste";						--Show Toolbar--  ***TRANSLATE***
+32797,"Halbton-Rendering";				--Halftone rendering-- (wheter halftoning is used when equation images are created)
+32783,"Presentations-Rendering	F5";	--Presentation rendering \t F5--
+;
+;**************************** the Options menu ***************************************
+;
+30401,"Auswahl";				--Selections--
+32793,"Automatischer Rahmen";			--Inteligent framing--
+32848,"Ausgewählte Objekte fett darstellen";	--Bold selections--
+30402,"Objekt Greifpunkt";			--Moving dot--
+32827,"Groß";					--Large--
+32828,"Mittel";					--Medium--
+32829,"Klein";					--Small--
+32830,"Immer anzeigen";				--Permanent--
+30410,"Maus";					--Mouse--   		***TRANSLATE***
+32878,"Mausrad-Funktion: Blättern";		--Mouse function: Scroll up/down-- ***TRANSLATE***
+32893,"Mausrad-Funktion: Zoom";			--Mouse function: Zoom in/out-- ***TRANSLATE***
+32894,"Hold right button to toggle the mouse-wheel function";	--Hold right button to toggle the mouse-wheel function-- ***TRANSLATE***
+32858,"Mauszeiger folgt Zoom";			--Zooming with mouse wheel adjusts pointer-- (wheter mouse pointer is automatically repositioned on zoom)
+32888,"Reverse direction for mouse wheel scrolling"; --Reverse direction for mouse wheel scrolling--    ***TRANSLATE ***
+32895,"Slow-speed mouse-wheel scrolling";	--Slow-speed mouse-wheel scrolling-- ***TRANSLATE***
+30403,"Tastatur";						--Keyboard--
+32795,"Schrift mit fester Breite für Nummern";	--Fix font for numbers--
+32862,"Benutze ALT+D,B,A für Zugriff auf das Menü";	--Use ALT+F,E,V for menu access-- 
+32872,"F1 für Zoom 100%";		--Use F1 to set zoom level to 100%--
+32884,"Mit CapsLock Schreibmodus schalten"; --Use CapsLock to toggle typing mode--    ***TRANSLATE***
+32875,"Benutze Beistrich als Dezimaltrennzeichen";	--Allow comma as decimal separator--
+32906,"Use complex indexes";			--Use complex indexes---		 ***TRANSLATE***
+32859,"Allgemeiner Modus für Variablen";		--Prefer Multi-Letter variables--   ***TRANSLATE***
+32840,"Einfacher Modus für Variablen";		--Prefer Single-Letter variables --     ***TRANSLATE***
+30404,"Ausgabedatei";			--Output image--
+32815,"Größe 200%";				--Size 200%--
+32816,"Größe 150%";				--Size 150%--
+32817,"Größe 100%";				--Size 100%--
+32818,"Größe 80%";				--Size 80%--
+32819,"Presentations-Rendering";		--Presentation rendering--
+32820,"Halbton-Rendering";		--Halftone rendering--
+32874,"Drucke Schriftarten als Grafik";		--Print font as images--
+30405,"Schriftgröße und Zoom";			--Font size & Zoom--		***TRANSLATE***
+32889,"Standard Zoom ist 150%";		--Default zoom is 150%--		***TRANSLATE***
+32890,"Standard Zoom ist 120%";		--Default zoom is 120%--		***TRANSLATE***
+32891,"Standard Zoom ist 100%";		--Default zoom is 100%--		***TRANSLATE***
+32892,"Standard Zoom ist 80%";		--Default zoom is 80%--			***TRANSLATE***
+32822,"Standard Schriftgröße -> Sehr groß";	--Default font size is Very large-- 	***TRANSLATE***
+32823,"Standard Schriftgröße -> Groß";		--Default font size is Large-- 		***TRANSLATE***
+32824,"Standard Schriftgröße -> Mittel";	--Default font size is Medium-- 	***TRANSLATE***
+32825,"Standard Schriftgröße -> Klein";		--Default font size is Small--		***TRANSLATE***
+30451,"Schriftarten";				--Font faces--
+32866,"Schriftart 1";				--Font 1---
+32867,"Schriftart 2";				--Font 2---
+32868,"Schriftart 3";				--Font 3---
+32869,"Schriftart 4";				--Font 4---
+32870,"Schriftarten auf Standard zurücksetzen";	--Set Fonts to defaults--
+;30406,"Klammerngröße";				--Parentheses height--
+;32785,"Groß";					--Large--
+;32786,"Normal";				--Normal--
+;32787,"Klein";					--Small--
+30407,"Raster und Hilfslinien";			--Grid and Guidelines--
+32834,"Feines Raster";				--Fine grid--
+32835,"Mittleres Raster";			--Medium grid--
+32836,"Großes Raster";				--Coarse grid--
+32837,"An Raster ausrichten			F11";		--Snap to grid \t F11--
+32877,"An Hilfslinien ausrichten	F12";	--Snap to guidelines \t F12--
+30408,"Symbolische Berechnungen";			--Symbolic computation--
+32842,"Aktivieren";				--Enable--
+30481,"Imaginäre Einheit";			--Imaginary unit--
+30409,"Einstellungen speichern";			--Save settings--
+32807,"Als Standard speichern";		--Save as default--
+32808,"Speichern als...";				--Save as...--
+32809,"Laden...";			--Load...--
+;
+;****************************** the Help menu **************************************
+;
+32831,"Schnellübersicht...";		--Handy help...--
+31501,"Über Math-o-mir...";		--About Math-o-mir---
+
+
+
+;*********************************************************************************
+;*
+;* Following section defines text displayed in context menus
+;*
+;*********************************************************************************
+;
+;******* guidelines/ruller menu - activated by right click to the ruller ********
+;
+820,"Allgemeine Hilfslinie";		--Normal guideline--
+821,"Textuelle Hilfslinie";		--Text guideline--
+822,"Hilfslinie für Zeilenumbruch";	--Text autowrap guideline--
+823,"Hilfslinie löschen";		--Delete guideline--
+;
+;*************** text search menu - activated from Edit->Find text ****************
+;
+1801,"Text suchen:";	--String search:--
+0801,"Abwärts";			--down--
+0802,"Aufwärts";			--up--
+;
+;*************** Context menu options for hand-drawings and selections ***********
+;
+501,"Löschen";			--Delete--
+570,"Auswählen";		--Select--
+567,"Sperren";		--Lock--
+568,"Alle sperren";		--Lock all--
+589,"Füllen";			--Fill--
+569,"Alle entsperren";		--Unlock all--
+
+1502,"Linienbreite:";	--Line width:--
+576,"Haar";			--Hair--
+502,"Dünn";			--Thin--
+577,"3/2";			--3/2--
+503,"Mittel";			--Medium--
+504,"Dick";			--Thick--
+566,"Fett";		--Fat--
+591,"Strichliert";		--dash-dash--
+592,"Strich-Punktiert";		--dash-dot--
+
+1560,"Anordnen:";		--Arrange:--
+560,"Linksbündig";		--Left align--
+562,"Horizontal mittig";	--H. center align--
+564,"Rechtsbündig";		--Right align--
+561,"Oberkante";		--Top align--
+563,"Vertikal mittig";	--V. center align--
+565,"Unterkante";		--Bottom align--
+578,"Vert. untereinander";	--Vertical distribute--
+579,"An Gleichheitszeichen";	--Align to equal sign--
+505,"Gruppieren";			--Group--
+514,"Verbinden";			--Combine--
+506,"Gruppierung aufheben";		--Ungroup--
+513,"Verbindung lösen";		--Break apart--
+
+1507,"Größe:";		--Size--
+517,"Horizontal -50%";		--H. stretch -50%--
+518,"Horizontal -15%";		--H. stretch -15%--
+519,"Horizontal -5%";		--H. stretch -5%--
+520,"Horizontal +5%";		--H. stretch +5%--
+521,"Horizontal +15%";		--H. stretch +15%--
+522,"Horizontal +50%";		--H. stretch +50%--
+527,"Vertikal -50%";		--V. stretch -50%--
+528,"Vertikal -15%";		--V. stretch -15%--
+529,"Vertikal -5%";		--V. stretch -5%--
+530,"Vertikal +5%";		--V. stretch +5%--
+531,"Vertikal +15%";		--V. stretch +15%--
+532,"Vertikal +50%";		--V. stretch +50%--
+535,"Horizontal spiegeln";	--Horizontal mirror--
+536,"Vertikal spiegeln";		--Vertical mirror--
+1536,"Rotieren:";		--Rotate--
+
+593,"Pfad schlieÖen";		--Close path--
+590,"Mittelpunkt hinzufügen";	--Add center point--
+594,"Gitterlinie hinzufügen";	--Add grid lines--
+595,"arrow";			--arrow--		*** TRANSLATE ***
+596,"arrow (narrow)";		--arrow (narrow)--	*** TRANSLATE ***
+597,"dot";			--dot--			*** TRANSLATE ***
+550,"Knoten bearbeiten";		--Edit nodes--
+551,"Knoten hinzufügen";		--Add node--
+
+;
+; ************************ context menu options for math and text ***************************
+;
+1;"Aufnehmen";			--Pick up--
+2;"Löschen";			--Delete--
+8;"Sperren";			--Lock--
+
+1411;"Schnellselektion:";	--Quick multitouch:-- (section with quick-multitouch commands)
+9,"Kopieren";			--Copy--
+29,"Einfügen";			--Paste--
+
+1044,"Dekoration:";		--Decoration:-- (section with decoration options)
+3,"Keine";				--None--
+4,"Durchgestrichen";	--Strikeout--
+5,"Eingekreist";		--Encircle--
+6,"Linie unterhalb";	--Underline--
+7,"Linie oberhalb";		--Overline--
+130,"Klammer unterhalb";--Underbrace--
+78,"Verknüpfung erstellen";	--Convert to hyperlink--
+
+
+1004,"Einsetzen:";		--Implanting--
+0,"Abbrechen";			--Exit--
+
+1005,"Konditionen:";		--Condition list:-- (section with commands that define condition list elements)
+70,"Strich links";		--Left bar--
+71,"Strich rechts";		--Right bar--
+72,"Links ausrichten";		--Left align--
+73,"Zentriert ausrichten";	--Center align--
+74,"Rechts ausrichten";		--Right align--
+
+1003,"Symbolgröße:";			--Symbol:"-- (section with commands to define symbol apereance [sum,prod,integral...])
+52,"Klein";			--Small--
+51,"Mittel";			--Medium--
+50,"Groß";			--Large--
+53,"Parameter innenliegend";		--limits inline--
+
+1002,"Klammern:";		--Brackets:-- (section with commands that define brackets formatting)
+30,"Keine";		--None--
+32,"Rund";			--Curved-- (...)
+33,"Eickig";			--Square-- [...]
+34,"Geschweift";			--Curly--  {...}
+35,"Striche";			--Bars--   |...|
+56,"Links offen";		--Open left-- (...]
+36,"Schräg";			--Slash--  /.../
+37,"Doppelstrich";		--Double-bar-- ||...||
+38,"Spitz";			--Angled-- <...>
+39,"Rahmen";			--Box--
+49,"Durchkreuzt";		--Cross--
+57,"Rechts offen";		--Open right--  [...)
+151,"Links/Oben ausschlieÖen";	--Exclude left/top-- (to exclude left or top bracket)
+152,"Rechts/Unten ausschlieÖen";	--Exclute right/bottom-- (to exclude right or bottom bracket)
+150,"Horizontales Layout";	--Horizontal layout-- (to draw brackets horizontaly)
+42,"Klein";		--Small-- (brackets are no higher than text)
+41,"Mittel";	--Medium-- (brackets height depends on surrounding)
+40,"Groß";			--Large-- (brackets are always as high the highest element inside them)
+
+1042,"Klammerninhalt:";		--B. contents:--  (section with commands to modify brackets content formatting)
+54,"Größe -50%";		--Size -50%--
+47,"Größe -15%";		--Size -15%--
+45,"Größe -5%";			--Size -5%--
+46,"Größe +5%";			--Size +5%--
+48,"Größe +15%";		--Size +15%--
+55,"Größe +50%";		--Size +50%--
+90,"Linksbündig";		--Align left--
+91,"Zentriert";			--Align center--
+92,"RechtsbÖndig";		--Align right--
+
+94,"Cursor ausserhalb";		--Expand outside-- (new insertion points are to be added outside brackets)
+95,"Cursor nur innerhalb";		--Condense outside-- (insertion points outside brackets are to be removed)
+93,"Vertikal ausrichten";	--Vertical orientation-- (to orientate math/text vertically)
+
+1001,"Schriftart:";			--Font:-- (section with commands to define font formatting)
+14,"Kursiv";			--Italic--
+15,"Fett";		--Bold--
+16,"Strichliert";			--Dash--
+17,"Pfeil";			--Arrow--
+18,"Dach";			--Hat--
+24,"Punkt";			--Dot--
+25,"Doppelpunkt";		--Double dot--
+
+1017,"Variable:";		--Variable:-- (section with commands specific for variables)
+19,"Index";			--Has index-- (button that defines if a variable has index or not)
+23,"In Einheit umwandeln";	--Convert to unit--
+20,"In Funktion umwandeln";	--Convert to function--
+27,"Zu Variable umwandeln";	--Convert to variable--
+
+1018,"Funktion:";		--Function--
+21,"Index";			--Has index--
+22,"Zu Variable umwandlen";	--Convert to variable--
+
+1650,"Tabelle:";		    --Table lines:-- (section that defines table/matrix borderlines and inter-lines)	**NEW!**
+650,"Kein Rahmen";		   --No border-- (button that removes borderlines)
+651,"Einfacher Rahmen";	--Single line border-- (button that puts single-line borderline)
+652,"Doppelter Rahmen";	--Double line border-- (button that puts double-line borderline)
+653,"Keine Linien";		--No lines-- (button that removes inter-lines, that is lines between cells)
+654,"Einfache Linien";		--Single lines--" (button that puts single-line inter-lines)
+655,"Doppelte Linien";		--Double lines--" (button that puts double-line inter-lines)
+
+1601,"Linienart:";		--Line type:-- (section that defines single line of table/matrix)
+601,"Keine Linie";		--No line-- (button that removes the line)		
+602,"Einfache Linie";	--Single line-- (button that puts single line)	
+603,"Doppelte Linie";	--Double line-- (button that puts double line)	
+
+1630,"Zellenausrichtung:";		--Cell alignment:-- (section that defines text alignment for table/matrix cells)
+630,"Linksbündig";		--Align left--						
+631,"Zentriert";		--Align center--					
+632,"Rechtsbündig";		--Align right--						
+;
+;****************** context menu options for symbolic computation *******************
+;
+2000,"Wird zu:";		--equals to:-- (results of computation/evaluation)
+2001,"Runden:";		--rounding:-- (rounding numbers)
+2002,"Wert der Variable:";		--Extracted:-- (extracting variables)
+2003,"Polynom:";		--Polynome-like:"-- (rearanging summands to make polynome-like form)
+2004,"Korrigiert:";		--Corrected:"-- (after a syntax error is corrected in an equation)
+2005,"Ersetzt:";		--Substituted:"-- (after a variable is substituted)
+2006,"Summe:";			--Sum of array:"-- (result of summation of an array of values)
+2007,"Durchschnitt:"	--Average:-- (average value of an array of values)
+;
+;******************* Context menu for toolbox accelerators ************************
+;
+2500,"Schriftart...";		--FONT...-- (after right-click at 'O','U','M' toolbox option)
+2501,"Easycast..";		--Easycast..-- (Not to be traslated for latin-written languages)
+;
+;********************** Context menu for Hyperlinks ********************************
+;
+77,"Verknüpfung";			--Hyperlink--
+1078,"Internal links:";		--Internal links:-- (list of all internal links)     ***TRANSLATE***
+849,"mehr...";			--more...-- 
+
+;*********************************************************************************
+;*
+;* Following section defines UNDO information text - text written behind the 'Undo'
+;* word in the main menu (for example 'Undo font formating' or 'Undo delete').
+;*
+;*********************************************************************************
+;
+;******* operations with hand drawings and multi-object selections (from context menu) *********
+;
+20100,"Mittelpunkt hinzufügen";	--add centerpoint-- (center point to an circle is added, see also ID 590)
+20101,"Strichlieren";		--make dashed-- (line is made dashed, see also ID 591)
+20102,"Strich-Punktieren";		--dash-dot-- (line is made dash-dot-dash-, see also ID 592) 
+20103,"Pfeile hinzufügen";	--add arrows-- (arrows are added to a line, see also ID 595)
+20104,"Gitterlinien hinzufügen";		--add grid lines-- (coordinate grid is added, see ID 594)
+20105,"Pfad schließen";		--close path-- (an open line was closed, see ID 593)
+20106,"Löschen";		--delete-- (after an object or its part was deleted, see ID 2 and ID 501)
+20107,"Farbe ändern";		--color-- (after color is canged)
+20108,"Liniendicke ändern";	--line width-- (after line width is changed, see IDs 502,503,504,566,577)
+20109,"Verbindung lösen";		--break apart-- (after a drawing is broken apart, see ID 513)
+20110,"Kombinieren";		--combine-- (after two drawing are combined into one, see ID 514)
+20112,"Vertikal aneinander reihen";	--v. distribution-- (after objects are vertically distributed, see ID 578)
+20113,"Ausrichtung ändern";		--align-- (after objects are aligned, see IDs 560...565 and 579)
+20114,"Rotieren";		--rotate-- (after objects are rotated)
+20115,"Spiegeln";		--mirror-- (after objects are mirrored, see IDs 535 and 536)
+20116,"Größe Öndern";	--size-- (after objects are resized, see IDs 517..522 and 527..532)
+20117,"Gruppieren";		--ungroup-- (after object are ungrouped, see  ID 506)
+20118,"Gruppierung auflösen";		--group-- (after objects are grouped, see ID 505)
+;
+;************* operations with math and text objects (from context menu) *****************
+;
+20200,"Dekoration ändern";		--decoration-- (after decoration was changed, see IDs 3..7 and 130)
+20201,"Einfügen";		--paste--
+20202,"Aufnehmen";		--pick up-- (after an object is picked up, see ID 1)
+20203,"Löschen";			--delete-- (after an object is deleted, see ID 2)
+20204,"Vertikal ausrichten";		--vertical-- (after an object is vertically oriented, see ID 93)
+20205,"Erweitern";		--expanding-- (after an object is expanded/condensed outside, see IDs 94 and 95)
+20206,"Ausrichtung ändern";		--alignment-- (after an multi-line object is aligned, see IDs 90, 91 and 92)
+20208,"SymbolgrÖÖe ändern";		--symbol height-- (after height of symbols sum/prod/integral is changed, see IDs 50 to 52)
+20209,"Einsetzen";		--implanting-- (after an implanting operation)
+20210,"Berechnen";		--computation-- (after an computation operation)
+20211,"Schriftgröße ändern";		--font size-- (after font size is changed, see IDs 45..48 and 55..56)
+20212,"Klammernformat ändern";		--parentheses format-- (after brackets are modified, see IDs 30...39, 57..58)
+20213,"Index entfernen";	--indeks remove-- (after index is removed, see IDs 19,21)
+20214,"Index hinzufügen";	--index add-- (after index is added, see IDs 19,21)
+20215,"In Funktion umwandeln";	--convert to function-- (after a variable is converted to function, see ID 20)
+20216,"In Variable umwandeln";	--converto to variable-- (ater a function or unit is converted to variable, see IDs 22 and 27)
+20217,"In Einheit umwandeln;	--convert to unit-- (after a variable is converted to unit, see ID 23)
+20218,"Schrift formatieren";	--font formatting-- (after font formating is changed, see IDs 14..18 and 24..25)
+;
+;**************** operations made with keyboard (editing objects) ***********
+;
+20300,"Spalte hinzufügen";		--insert column-- (ater Shift+TAB is used)
+20301,"Reihe hinzufügen";		--insert row-- (after Shift+Enter is used)
+20302,"Kommando";	--command entry-- (after a command, like \sin, is casted)
+20303,"Einfügen in";		--insert into-- (after an object is inserted to the cursor position, for example a toolbox was clicked)
+20304,"ENTF Taste";		--del key-- (after the Del key is used to delete something)
+20305,"RÜCKSCHRITT Taste";	--backspace key-- (after the backspace key is used to delete something)
+20306,"keyboard implanting";	--keyboard implanting-- (after an keyboard implanting operation was used)
+20307,"EINGABE Taste";		--Enter key-- (afte the Enter key was hit)
+20308,"Klammern";	--parentheses entry-- (after brackets are entered)
+20309,"Operator";	--operator entry-- (after operator are inserted, like +,-...)
+20310,"Exponent";	--exponent enty-- (after exponent is inserted, by using '^' key)
+20311,"Index";	--index entry-- (after index is inserted, by using '_' key)
+20312,"Leerzeichen";	--spacer-- (after the Tab key was hit)
+20313,"Variable einsetzen";	--variable entry-- (after any variable is entered)
+20314,"In Text umwandeln";	--text conversion-- (automatic conversion to text after several text characters were entered)	
+20315,"In Funktion umwandeln";	--convert to function-- (after the dot key is hit)						
+20316,"Automatisch vervollständigen";	--autocomplete-- (after the dot key is hit)								
+;
+;**************** operations made with mouse (editing objects ***************
+;
+20400,"Zeichnung löschen";	--erase drawing-- (the eraser tool was used to erase part of drawing)
+20401,"Neu einfügen";		--insert new-- (new object was inserted into the document by mouse)
+20402,"Verschieben";		--move-- (an object or selection was moved by mouse)
+20409,"Zeichnen";			--drawing-- (when some drawing is created by mouse)
+20410,"Abstand verringern";		--decrese spacing-- (the spacing tool was used)
+20411,"Abstand erhöhen";		--increase spacing-- (the spacing tool was used)
+20412,"Selektion ausschneiden";	--cut selection-- (a 'cut' command or Ctrl+X is used from the main menu)
+20413,"Tabelle formatieren";	--table formatting-- (changed borderlines or alignment of table cells. See IDs 601..655)	
+
+
+;*********************************************************************************
+;*
+;* Following section defines text in various dialog boxes and message boxes 
+;*
+;*********************************************************************************
+;
+; ************** Save As and Open dialog boxes ************************
+;
+5000, "MOM Datei (1.x)";		--MOM file (1.x)-- (file-save dialog)
+5001, "MOM Datei (2.x)";		--MOM file (2.x)-- (file-save dialog)
+5002, "MOM Datei, Verschlüsselt";	--MOM encripted file-- (file-save dialog)
+5003, "MOM Prüfungsdatei";		--MOM exam file-- (file-save dialog)
+5004, "MOM Datei, Schreibgeschützt";	--MOM view-only file-- (file-save dialog)
+5005, "MOM PrÖfungs-Ergebnisdatei"; 		--MOM exam result file-- (file-save dialog)
+5010, "MOM Dateien";			--MOM files-- (file-open dialog)
+5011, "Alle Dateien";			--All files-- (file-open dialog)
+5015, "Einstellungen";			--Settings-- (save settings dialog: Options->Settings->Save..)
+;
+5020, "Dokument speichern?";		--Save changes?-- (closing an unsaved document)
+5030, "Die Datei kann nicht geöffnet werden!";	--Cannot open file!-- (error opening a document)
+5031, "Die Datei kann nicht gespeichert werden!";	--Cannot create file!-- (error saving a document)
+;
+; *************** various stuff ********************************************
+;
+5050, "Zeit abgelaufen!\\\\Speichern Sie Ihre Arbeit.";	--Time elapsed!\\\\Save your work-- (time for an exam elapsed. Use \\ for new line)
+5051, "Zeitbeschränkte PrÖfung.\\\\Verbleibende Minuten:";	--Time limited exam.\\\\Minutes left:-- (prewarning during exam taking)
+5040, "Keine Übereinstimmung gefunden";			--Nothing found-- (searching for a text string)
+5060, "Die Einstellungen wurden als Standard gespeichert.";	--Settings saved to defaults-- (after 'Options->Settings->Save as defaults')
+5070, "Editieren";		--Edit-- (for the bitmap menu - editing a bitmap)
+5071, "Laden";			--Load-- (for the bitmap menu - loading a bitmap)
+5072, "Aktualisieren";		--Update-- (fot the bitmap menu - refreshing a bitmap after edited in an external tool)
+5080, "Zur Toolbox hinzufügen?";	--Insert Into Toolbox-- (when insertiong new objects into toolbox, ater right-mouse click)	
+5081, "Schriftart...";		--font...-- (to edit fonts for uniform formatting)  ***TRANSLATE***
+5082, "Per-character font settings";		--Per-character font settings-- (title caption for mixed font formatting table)   ***TRANSLATE***
+5083, "Alles verändern";	--Alter all-- (to define all per-character fonts at once)  ***TRANSLATE***
+;
+; ****************** Password / Exam dialog box **************************
+;
+5500, "Kennworteingabe:";	--Password Entry-- (password entry dialog box title)
+5501, "Kennwort:";		--Password:--
+5502, "Zeitlimit:";		--Time limit:--
+5503, "Rechner deaktivieren";	--Disable calculator--
+5504, "Symbolische Berechnungen deaktivieren";	--Disable symbolic computation--
+5505, "Prüfungsparameter";	--Exam parameters-- (exam dialog box title)
+5506, "Kennwort wird zum Öffnen der PrÖfungsergebnisse genutzt";	--Password is used to open exam results"-- 
+;
+;********************** Toolbox and toolbar help (use \\ to insert new line)****************************
+;
+6001,"Schreibmodus";		--Typing mode-- (mouse pointer hovers above typing-mode button)					
+6002,"Zeilenumbruch";		--Line wrap-- (mouse pointer hovers above line-wrap button)					
+6003,"Spalte einfügen";		--Insert column-- (mouse pointer hovers above insert-column button)				
+6004,"Zeile einfügen";		--Insert row-- (mouse pointer hovers above insert-row button)						
+6006,"Einheitliche\\Formatierung";	--Uniform\\font casting-- (mouse pointer hovers above unifrom font casting button)			
+6007,"Gemischte\\Formatierung";	--Mixed\\font casting-- (mouse pointer hovers above mixed font casting button)			
+6008,"Freihändig\\Zeichnen";		--Freehand-- (mouse pointer hovers above freehand drawing tool button)				
+6009,"Rechteck";		--Rectangle-- (mouse pointer hovers above rectangle drawing tool button)			
+6010,"Linie";			--Line-- (mouse pointer hovers above line drawing tool button)					
+6011,"Ellipse";			--Ellipse-- (mouse pointer hovers above ellipse drawing tool button)				
+6012,"Radiergummi";		--Eraser-- (mouse pointer hovers above eraser tool button)					
+6013,"Gerade Linie";	--Section\\line-- (mouse pointer hovers above section-line drawing tool button)			
+6014,"Zeichenbox";		--Drawing box-- (mouse pointer hovers above drawing-box tool button)				
+6015,"Funktionsplot";	--Function\\plotter-- (mouse pointer hovers above function-plotter tool button)			
+6016,"Grafikbox";		--Bitmap box-- (mouse pointer hovers above bitmap-box tool button)	
+6017,"Zeichnung";		--Drawing-- (an icon from toolbar to select various drawing tools)    ***TRANSLATE***
+6018,"Headline";		--Headline-- (an icon from toolbar to convert text box into a headline 'H')  ***TRANSLATE***
+6019,"Arrow";			--Arrow-- (mouse pointer hovers above the arrow drawing tool button)         ***TRANSLATE***
+6020,"Vector";			--Vector-- (variable decoration in the text control-box)		    ***TRANSLATE***
+6021,"Dash";			--Dash-- (variable decoration in the text control-box)			    ***TRANSLATE***
+6022,"Hat";			--Hat--  (Variable decoration in the text control-box)			    ***TRANSLATE***
+6023,"Dot";			--Dot--  (variable decoration in the text control-box)			   ***TRANSLATE***
+6024,"Double dot";		--Double dot-- (variable decoration in the text control-box)		   ***TRANSLATE***
+6050,"mehr...";			--more...-- (mouse pointer hovers above a triangle that opens subtoolbox)				
+6051,"Virtuelle\\Tastatur";	--Virtual\\keyboard-- (mouse pointer hovers above triangle that opens the virtual keyboard - 'M' toolbox option)  
+6052,"Text-";			--Text-- (first line of the "Text mode" button label - the text-control box)
+6053,"modus";			--mode-- (second line of the "Text mode" button label - the text-control box)
+6054,"Mathe-";			--Math-- (first line of the "Math mode" button label - the text-control box)
+6055,"modus";			--mode-- (second line of the "Math mode" button label - the text-control box)
+6056,"place into\\main menu";	--place into main menu-- (mouse pointer hovers above a triangle that trasfers the item into the main toolbox)   ***TRANSLATE***
+6070,"schwarze Farbe";          --black color-- (pointing at the black color option in the colorbox)  ***TRANSLATE***
+6071,"Farbe rot";		--red color--   ***TRANSLATE***
+6072,"grüne Farbe";		--green color--   ***TRANSLATE***
+6073,"blaue Farbe";		--blue color--   ***TRANSLATE***
+6074,"Farbe grau";		--gray color--   ***TRANSLATE***
+6080,"Linienbreite";		--line width--   ***TRANSLATE***
+6090,"Knoten bearbeiten";	--node edit--   ***TRANSLATE***
+6091,"Fadenkreuz";		--corsshair cursor--   ***TRANSLATE***
+6092,"auswählen letzter";	--select last--   ***TRANSLATE***
+
+;
+;********************** short-lived notification texts *************************+
+;
+7000,"Speichern...";		--Saving...-- (when Ctrl+S is used to save document)			
+7001,"An Gitter ausrichten AUS";	--Snap to grid OFF-- (when grid is switched off - F11)
+7002,"An Gitter ausrichten EIN;		--Snap to grid ON-- (when grid is switched on - F11)
+7003,"Hilfslinien AUS";		--Guidelines OFF-- (when guidelines are switched off - F12)	
+7004,"Hilfslinien EIN";		--Guidelines ON-- (when guidelines are switcheed on - F12)	
+7005,"Präsentationsmodus aktiviert (F5 zum wechseln)";  --Presentation mode is active (F5 to toggle)-- (when user tries to edit an equation while the presentation mode is active) 
+7006,"Automatisch speichern...";		--Autosaving..."-- (when autosaving is executed)			
+7007,"Editiermodus";		--Edit mode-- (when edit mode is switched on - F5)			
+7008,"Präsentationsmodus";	--Presentation mode-- (when presentation mode is switched on - F5)	
+7009,"SHIFT+CAPS schaltet die Feststell"; --SHIFT+CAPS toggles the Caps Lock--
