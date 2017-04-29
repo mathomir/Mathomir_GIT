@@ -768,7 +768,7 @@ CToolbox::CToolbox(int IsSubtoolbox)
 
 		Toolbar=new CToolbox(4);
 		Toolbar->m_IsToolbar=1;
-		Toolbar->CreateEx(/*WS_EX_TOPMOST*/0,AfxRegisterWndClass(CS_OWNDC),"Toolbar",WS_POPUP,5,5,10,10,theApp.m_pMainWnd->m_hWnd,NULL,0);
+		Toolbar->CreateEx(/*WS_EX_TOPMOST*/0,AfxRegisterWndClass(CS_OWNDC),"Toolbar",WS_CHILD,5,5,10,10,theApp.m_pMainWnd->m_hWnd,NULL,0);
 		Toolbar->ShowWindow(SW_HIDE);
 
 		Keyboard=new CToolbox(3);
@@ -1050,9 +1050,9 @@ void CToolbox::OnPaint()
 	{
 		int i;
 		while (PrintRendering) return;
-		pdc.FillSolidRect(0,0,ClientRect.right,(ToolboxNumMembers+1)/2*2*ToolboxSize/3+ToolboxSize/2/*ClientRect.bottom*/,RGB(255,255,255));
+		if (ToolboxNumMembers&0x01) //if odd number of items, we need to paint one empty place
+			pdc.FillSolidRect(ToolboxSize/2,(ToolboxNumMembers-1)/2*m_ItemHeight+ToolboxSize/2,ToolboxSize/2,m_ItemHeight,RGB(255,255,255));
 
-		
 		PaintToolboxHeader(&pdc);
 
 		for (i=0;i<ToolboxNumMembers;i++)
@@ -1320,25 +1320,43 @@ void CToolbox::AdjustPosition(void)
 
 	if (m_IsMain)
 	{
+		theApp.m_pMainWnd->GetClientRect(&cr);
+		m_ItemHeight=(cr.bottom-ToolboxSize/2-ToolboxSize-7)/((ToolboxNumMembers+1)/2);
+		if (m_ItemHeight>2*ToolboxSize/3) m_ItemHeight=2*ToolboxSize/3;
+		else if (m_ItemHeight<ToolboxSize/3) m_ItemHeight=ToolboxSize/3;
+
+		int additionals=ToolboxSize+5; //for the colorbox or text-controlbox
+		if (m_ItemHeight<ToolboxSize/2) 
+		{
+			m_LowHeightMode=1; 
+			additionals=ToolboxSize*2/3+1+5; //shortened colorbox/text-controlbox
+			m_ItemHeight+=ToolboxSize/3/((ToolboxNumMembers+1)/2);
+
+		}
+		else 
+			m_LowHeightMode=0;
+		m_ItemHeight&=0xFFFE; //item height must be an even number for nicer painting
+
 		//if ((theApp.m_pMainWnd) && (theApp.m_pMainWnd->IsWindowVisible()))
 		//	if (!Toolbox->IsWindowVisible()) ShowWindow(SW_SHOW);
-		theApp.m_pMainWnd->GetWindowRect(&wr);
-		theApp.m_pMainWnd->GetClientRect(&cr);
-		border=((wr.right-wr.left)-(cr.right-cr.left))/2;
-		header=wr.bottom-wr.top-border-(cr.bottom-cr.top);
-		int additionals=0;
+		//theApp.m_pMainWnd->GetWindowRect(&wr);
+		//theApp.m_pMainWnd->GetClientRect(&cr);
+		//border=((wr.right-wr.left)-(cr.right-cr.left))/2;
+		//header=wr.bottom-wr.top-border-(cr.bottom-cr.top);
+		//int additionals=0;
 		//if ((KeyboardEntryBaseObject) && (KeyboardEntryObject) && (IsDrawingMode==0))
 		//	additionals=ToolboxSize+5;
 		//else 
 		//	additionals=2*ToolboxSize/3+5;
-		additionals=ToolboxSize+5;
+		//int additionals=((m_LowHeightMode)?ToolboxSize/2:ToolboxSize)+5;
 
 		SetWindowPos(NULL, //insert after
-			wr.left+border,  //x
-			wr.top+header+1,  //y
+			0,//wr.left+border,  //x
+			1,//wr.top+header+1,  //y
 			ToolboxSize, //cx
-			((ToolboxNumMembers+1)/2)*2*ToolboxSize/3+ToolboxSize/2+additionals,
+			((ToolboxNumMembers+1)/2)*m_ItemHeight+ToolboxSize/2+additionals,
 			SWP_NOZORDER | SWP_NOACTIVATE);
+		ShowWindow(SW_SHOWNA);
 		if (Subtoolbox) Subtoolbox->AdjustPosition();
 		if (ContextMenu) ContextMenu->AdjustPosition();
 		if (Toolbar) Toolbar->AdjustPosition();
@@ -1348,6 +1366,7 @@ void CToolbox::AdjustPosition(void)
 		RECT wr;
 		int cx,cy;
 		Toolbox->GetWindowRect(&wr);
+		m_ItemHeight=2*ToolboxSize/3;
 		if (m_IsSubtoolbox==-4) //special hand-drawing toolbox
 		{
 			POINT p;
@@ -1401,11 +1420,13 @@ void CToolbox::AdjustPosition(void)
 			wr.top+=((m_IsSubtoolbox+1)/2)*2*ToolboxSize/3+ToolboxSize/3+ToolboxSize/5;
 			if (wr.top-c.y>ToolboxSize/4) wr.top=c.y+ToolboxSize/4;
 			cx=(ToolboxMembers[m_IsSubtoolbox-1].NumSubmembers+1)/2*ToolboxSize/2;
-			cy=4*ToolboxSize/3;
+			//cy=4*ToolboxSize/3;
+			cy=2*m_ItemHeight;
 			cx+=2;
 			cy+=2;
 		}
 		SetWindowPos(NULL ,wr.left,wr.top,cx,cy,SWP_NOZORDER | SWP_NOACTIVATE);
+		
 	}
 	else if (m_IsContextMenu)
 	{
@@ -1448,8 +1469,8 @@ void CToolbox::AdjustPosition(void)
 		if ((UseToolbar) && (ViewOnlyMode==0) && (pMainView->IsWindowVisible()))
 		{
 			SetWindowPos(NULL, //insert after
-				wr.left+border+ToolboxSize,  //x
-				wr.top+header+1,  //y
+				ToolboxSize,//wr.left+border+ToolboxSize,  //x
+				1,//wr.top+header+1,  //y
 				cr.right-ToolboxSize, //cx
 				ToolboxSize/2-1,
 				SWP_NOZORDER | SWP_NOACTIVATE);
@@ -2110,7 +2131,7 @@ void CToolbox::PaintColorbox(CDC * dc)
 	
 	if (dc==NULL) dc=this->GetDC();
 	TextControlboxMode=-1;
-	int ToolboxBottom=(ToolboxNumMembers+1)/2*2*ToolboxSize/3+ToolboxSize/2; //the bottom of toolbox main part
+	int ToolboxBottom=(ToolboxNumMembers+1)/2*m_ItemHeight+ToolboxSize/2; //the bottom of toolbox main part
 	dc->FillSolidRect(1,ToolboxBottom,ToolboxSize-2,4,RGB(128,128,128));
 	dc->FillSolidRect(0,ToolboxBottom+4,ToolboxSize,1,RGB(96,96,96));
 
@@ -2299,8 +2320,8 @@ void CToolbox::PaintTextcontrolbox(CDC * dc)
 {
 	if ((IsDrawingMode)||(NumSelectedObjects)) return;
 	if (dc==NULL) dc=this->GetDC();
-	dc->FillSolidRect(1,(ToolboxNumMembers+1)/2*2*ToolboxSize/3+ToolboxSize/2,ToolboxSize-2,5,RGB(128,128,128));
-	dc->FillSolidRect(0,(ToolboxNumMembers+1)/2*2*ToolboxSize/3+ToolboxSize/2+4,ToolboxSize,1,RGB(96,96,96));
+	dc->FillSolidRect(1,(ToolboxNumMembers+1)/2*m_ItemHeight+ToolboxSize/2,ToolboxSize-2,5,RGB(128,128,128));
+	dc->FillSolidRect(0,(ToolboxNumMembers+1)/2*m_ItemHeight+ToolboxSize/2+4,ToolboxSize,1,RGB(96,96,96));
 
 	CDC pdc;
 	pdc.CreateCompatibleDC(dc);
@@ -2461,8 +2482,7 @@ void CToolbox::PaintTextcontrolbox(CDC * dc)
 	}
 	pdc.FillSolidRect(0,ToolboxSize-1,ToolboxSize,1,RGB(96,96,96));
 	
-	dc->BitBlt(1,(ToolboxNumMembers+1)/2*2*ToolboxSize/3+ToolboxSize/2+5,ToolboxSize-2,ToolboxSize-1,&pdc,1,0,SRCCOPY);
-
+	dc->BitBlt(1,(ToolboxNumMembers+1)/2*m_ItemHeight+ToolboxSize/2+5,ToolboxSize-2,ToolboxSize-1,&pdc,1,0,SRCCOPY);
 }
 
 //this paints elements of the toolbox (both, main toolbox and subtoolbox)
@@ -2782,7 +2802,7 @@ int CToolbox::PaintToolboxElement(CDC * dc, int member , char IsBlue)
 
 
 	int Lx=(ToolboxSize+((m_IsMain)?2:0))/4;
-	int Ly=ToolboxSize/3;
+	int Ly=m_ItemHeight/2;
 	int Cx,Cy;
 	if (m_IsMain)
 	{
@@ -2795,14 +2815,16 @@ int CToolbox::PaintToolboxElement(CDC * dc, int member , char IsBlue)
 			return 0;
 		}
 		Cx=(j%2)*ToolboxSize/2+(ToolboxSize+2)/4-1;
-		Cy=(j/2)*2*ToolboxSize/3+ToolboxSize/2+ToolboxSize/3-1;
+		//Cy=(j/2)*2*ToolboxSize/3+ToolboxSize/2+ToolboxSize/3-1;
+		Cy=(j/2)*m_ItemHeight+Ly-1+ToolboxSize/2;
 	}
 	else if (m_IsSubtoolbox>0)
 	{
 		j=m_IsSubtoolbox-1;
 		i=member;
 		Cx=(i/2)*ToolboxSize/2+ToolboxSize/4;
-		Cy=(i%2)*2*ToolboxSize/3+ToolboxSize/3;
+		//Cy=(i%2)*2*ToolboxSize/3+ToolboxSize/3;
+		Cy=(i%2)*m_ItemHeight+Ly;
 	}
 
 	CDC xdc;
@@ -2815,10 +2837,10 @@ int CToolbox::PaintToolboxElement(CDC * dc, int member , char IsBlue)
 	int issel=0;
 	if ((member==m_SelectedElement) && (!IsBlue)) issel=1;
 	if (issel)
-		xdc.FillSolidRect(0,0,ToolboxSize/2,2*ToolboxSize/3,RGB(200,200,255));
+		xdc.FillSolidRect(0,0,ToolboxSize/2,m_ItemHeight,RGB(200,200,255));
 	else if (xdc.GetDeviceCaps(BITSPIXEL)>16) 
 	{
-		int aa=2*ToolboxSize/3;
+		int aa=m_ItemHeight;
 		int bb=ToolboxSize/2+1;
 		unsigned char cc=255;
 		for (int i=0;i<aa;i+=4)
@@ -2828,28 +2850,28 @@ int CToolbox::PaintToolboxElement(CDC * dc, int member , char IsBlue)
 		}
 	}
 	else
-		xdc.FillSolidRect(0,0,ToolboxSize/2,2*ToolboxSize/3,RGB(255,255,255));
+		xdc.FillSolidRect(0,0,ToolboxSize/2,m_ItemHeight,RGB(255,255,255));
 
 
 	
-	if (ToolboxMembers[j].prevToolboxSize[i]!=ToolboxSize)
+	if (ToolboxMembers[j].prevToolboxSize[i]!=m_ItemHeight*2)
 	{
 		int zm=70;
-		ToolboxMembers[j].prevToolboxSize[i]=ToolboxSize;
+		ToolboxMembers[j].prevToolboxSize[i]=m_ItemHeight*2;
 		ToolboxMembers[j].zoom[i]=zm*ToolboxSize/50;
 		int corr=0;
 		int llx,lly;
 		if (ToolboxMembers[j].Above[i]==-1)
 		{
 			((CDrawing*)ToolboxMembers[j].Submembers[i])->CalculateSize(&xdc,ToolboxMembers[j].zoom[i],&ToolboxMembers[j].Length[i],&ToolboxMembers[j].Below[i]);
-			lly=ToolboxSize;
+			lly=m_ItemHeight;
 			llx=ToolboxSize/3;
 		}
 		else
 		{
 			ToolboxMembers[j].Submembers[i]->CalculateSize(&xdc,ToolboxMembers[j].zoom[i],&ToolboxMembers[j].Length[i],&ToolboxMembers[j].Above[i],&ToolboxMembers[j].Below[i],1,1);
 			if (ToolboxMembers[j].Submembers[i]->m_pElementList->Type==5) corr=ToolboxSize/8;
-			lly=9*ToolboxSize/16-corr;
+			lly=27*m_ItemHeight/32-corr;
 			llx=ToolboxSize/2+8-zm/10-corr;
 		}
 		int delta1=32*(ToolboxMembers[j].Length[i])/llx;
@@ -2942,7 +2964,7 @@ int CToolbox::PaintToolboxElement(CDC * dc, int member , char IsBlue)
 
 		dc->MoveTo(0,Cy+Ly);dc->LineTo(cr.right,Cy+Ly);
 		int ttt=0;if (ToolboxSize==102) ttt=-1;
-		dc->MoveTo(Cx+Lx+ttt,ToolboxSize/2);dc->LineTo(Cx+Lx+ttt,(ToolboxNumMembers+1)/2*2*ToolboxSize/3+ToolboxSize/2/*cr.bottom*/);
+		dc->MoveTo(Cx+Lx+ttt,ToolboxSize/2);dc->LineTo(Cx+Lx+ttt,(ToolboxNumMembers+1)/2*m_ItemHeight+ToolboxSize/2/*cr.bottom*/);
 		dc->MoveTo(cr.right,0);dc->LineTo(cr.right,cr.bottom+1);
 		dc->MoveTo(0,0);dc->LineTo(0,cr.bottom);
 
@@ -3630,7 +3652,7 @@ void CToolbox::OnMouseMove(UINT nFlags, CPoint point)
 			ToolboxAutoopenX=point.x;
 			ToolboxAutoopenY=point.y;
 		}
-		else if ((point.y<(ToolboxNumMembers+1)/2*2*ToolboxSize/3+ToolboxSize/2))
+		else if ((point.y<(ToolboxNumMembers+1)/2*m_ItemHeight+ToolboxSize/2))
 		{
 			//mouse over an main-toolbox element
 			//calculating the element the mouse is pointing at
@@ -3642,17 +3664,17 @@ void CToolbox::OnMouseMove(UINT nFlags, CPoint point)
 
 			point.y-=ToolboxSize/2; //subsctract the header size
 			int xx=point.x*2/ToolboxSize;
-			int yy=point.y*3/ToolboxSize/2;
+			int yy=point.y/m_ItemHeight;
 			element=xx+yy*2;
 
 			if (xx+yy*2<ToolboxNumMembers)
 			{
-				int Cx,Cy;  //Centerpoints
+				//int Cx,Cy;  //Centerpoints
 				element=xx+yy*2;
-				Cx=xx*ToolboxSize/2+ToolboxSize/4;
-				Cy=yy*2*ToolboxSize/3+ToolboxSize/3+ToolboxSize/2;
+				//Cx=xx*ToolboxSize/2+ToolboxSize/4;
+				//Cy=yy*m_ItemHeight+m_ItemHeight/2+ToolboxSize/2;
 				int Xres=point.x-(xx+1)*(ToolboxSize/2);
-				int Yres=point.y-(yy+1)*(2*ToolboxSize/3);
+				int Yres=point.y-(yy+1)*(m_ItemHeight);
 				m_SelectedElement=element;
 				if (Xres+Yres>=-ToolboxSize/5-3)
 				{
@@ -3679,9 +3701,9 @@ void CToolbox::OnMouseMove(UINT nFlags, CPoint point)
 
 
 		}
-		else if ((point.y>=(ToolboxNumMembers+1)/2*2*ToolboxSize/3+ToolboxSize/2+5))//mouse is pointing at colorbox or textcontrolbox
+		else if ((point.y>=(ToolboxNumMembers+1)/2*m_ItemHeight+ToolboxSize/2+5))//mouse is pointing at colorbox or textcontrolbox
 		{
-			int y=point.y-(ToolboxNumMembers+1)/2*2*ToolboxSize/3-ToolboxSize/2-5;
+			int y=point.y-(ToolboxNumMembers+1)/2*m_ItemHeight-ToolboxSize/2-5;
 			if ((NumSelectedObjects) || (IsDrawingMode) || (KeyboardEntryObject==0))
 			{
 				//color box
@@ -5942,7 +5964,7 @@ void CToolbox::ShowHelptext(char *text,char *command, char *accelerator, char *e
 	}
 	
 	if (prev_lang_code!=language_code+yy)
-		DC->FillSolidRect(0,yy-2*ToolboxSize,ToolboxSize,ToolboxSize*3,RGB(128,128,128));
+		DC->FillSolidRect(0,yy,ToolboxSize,ToolboxSize*2,RGB(128,128,128));
 
 	prev_lang_code=language_code+yy;
 	if (!language_code) return;
@@ -6206,7 +6228,7 @@ void CToolbox::AutoResize()
 		while (sizes[i])
 		{
 			int bottom=sizes[i]*((ToolboxNumMembers+7)/3);
-			if (sizes[i]>=100) bottom+=150;
+			if (sizes[i]>=100) bottom+=100;
 			if (sizes[i]<=60) bottom-=60;
 			if ((bottom<r.bottom) && ((sizes[i]*6<r.right) || (!UseToolbar)))
 			{

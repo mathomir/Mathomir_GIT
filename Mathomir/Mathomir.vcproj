@@ -334,6 +334,54 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
+				RelativePath=".\res\arrowcop.cur"
+				>
+			</File>
+			<File
+				RelativePath=".\res\cur00001.cur"
+				>
+			</File>
+			<File
+				RelativePath=".\res\cur00002.cur"
+				>
+			</File>
+			<File
+				RelativePath=".\res\cur00003.cur"
+				>
+			</File>
+			<File
+				RelativePath=".\res\cur00004.cur"
+				>
+			</File>
+			<File
+				RelativePath=".\res\cur00005.cur"
+				>
+			</File>
+			<File
+				RelativePath=".\res\cursor1.cur"
+				>
+			</File>
+			<File
+				RelativePath=".\res\cursor2.cur"
+				>
+			</File>
+			<File
+				RelativePath=".\res\cursor3.cur"
+				>
+			</File>
+			<File
+				RelativePath=".\res\icon1.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\icon2.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\icon3.ico"
+				>
+			</File>
+			<File
 				RelativePath=".\res\Mathomir.ico"
 				>
 			</File>
@@ -347,6 +395,22 @@
 			</File>
 			<File
 				RelativePath=".\res\MathomirDoc.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\menuitem.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\menuitems.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\Toolbar.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\toolbar2.bmp"
 				>
 			</File>
 		</Filter>
@@ -371,6 +435,10 @@
 			>
 		</File>
 		<File
+			RelativePath=".\res\MathomirHandyHelp.chm"
+			>
+		</File>
+		<File
 			RelativePath=".\MIT_License.txt"
 			>
 		</File>
@@ -380,5 +448,9 @@
 		</File>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="Mathomir.rc"
+		/>
 	</Globals>
 </VisualStudioProject>

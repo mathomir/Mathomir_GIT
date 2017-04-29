@@ -156,7 +156,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	// TODO: Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
 
-	cs.style = WS_OVERLAPPED | WS_CAPTION | FWS_ADDTOTITLE 
+	cs.style = WS_OVERLAPPED | WS_CAPTION | FWS_ADDTOTITLE /*| WS_CLIPCHILDREN*/
 		 | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU | WS_SIZEBOX;
 
 	cs.x=300;
@@ -379,17 +379,17 @@ void CMainFrame::OnMoving(UINT fwSide, LPRECT pRect)
 {
 	//while it is moving
 	CFrameWnd::OnMoving(fwSide, pRect);
-	if (Toolbox) {Sleep(10);Toolbox->AdjustPosition();Reenable=2;}
+	//if (Toolbox) {Sleep(10);Toolbox->AdjustPosition();Reenable=2;}
 }
 
 void CMainFrame::OnMove(int x, int y)
 {
 	//after it was moved
 	CFrameWnd::OnMove(x,y);
-	WINDOWPLACEMENT wp;
+	/*WINDOWPLACEMENT wp;
 	GetWindowPlacement(&wp);
 	if (wp.showCmd!=SW_SHOWMINIMIZED)
-		if (Toolbox) {Sleep(10);Toolbox->AdjustPosition();Reenable=2;}
+		if (Toolbox) {Sleep(10);Toolbox->AdjustPosition();Reenable=2;}*/
 }
 
 void CMainFrame::OnSize(UINT nType, int cx, int cy)
@@ -399,9 +399,15 @@ void CMainFrame::OnSize(UINT nType, int cx, int cy)
 	GetWindowPlacement(&wp);
 	if (wp.showCmd!=SW_SHOWMINIMIZED)
 	{
-		if ((Toolbox) && (AutoResizeToolbox))
-			Toolbox->AutoResize();
-		if ((UseToolbar) && (Toolbox) && (Toolbox->Toolbar)) Toolbox->Toolbar->AdjustPosition(); 
+		//if ((Toolbox) && (AutoResizeToolbox))
+		//	Toolbox->AutoResize();
+		if ((Toolbox) && (ToolboxSize))
+		{
+			if (AutoResizeToolbox) 
+				Toolbox->AutoResize();
+			Toolbox->AdjustPosition();
+		}
+		//if ((UseToolbar) && (Toolbox) && (Toolbox->Toolbar)) Toolbox->Toolbar->AdjustPosition(); 
 	}
 }
 
@@ -432,8 +438,6 @@ extern char dont_empty_clipboard;
 //if yes, convert this into a bitmap so it can be pasted into any other application
 void CMainFrame::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 {
-	CFrameWnd::OnActivate(nState, pWndOther, bMinimized);
-
 	dont_empty_clipboard=1;
 	if (nState==WA_INACTIVE)	
 	{
@@ -555,10 +559,18 @@ void CMainFrame::OnPaint()
 
 	RECT ClientRect;
 	this->GetClientRect(&ClientRect);
-	if (UseToolbar)
-		dc.FillSolidRect(0,0,ClientRect.right,ToolboxSize/2+2,0x808080);
-	ClientRect.right=ToolboxSize+4;
-	dc.FillSolidRect(&ClientRect,0x808080);
+	//if (UseToolbar)
+	//	dc.FillSolidRect(0,0,ClientRect.right,ToolboxSize/2+2,0x808080);
+	//ClientRect.right=ToolboxSize+4;
+	//dc.FillSolidRect(&ClientRect,0x808080);
+	dc.FillSolidRect(0,0,ClientRect.right,1,0x808080);
+	RECT ToolboxRect;
+	ToolboxRect.top=ToolboxRect.bottom=0;
+	if ((Toolbox) && (ToolboxSize))
+	{
+		Toolbox->GetWindowRect(&ToolboxRect);
+	}
+	dc.FillSolidRect(0,ToolboxRect.bottom-ToolboxRect.top,ToolboxSize,ClientRect.bottom-(ToolboxRect.bottom-ToolboxRect.top),0x808080);
 }
 
 

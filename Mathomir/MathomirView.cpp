@@ -9513,7 +9513,7 @@ void CMathomirView::OnHelpQuickguide()
 		hg=LoadResource(NULL,resinfo);
 		if (hg)
 		{ 
-			int size=64989;  //the exact size of the help file (from the resource)
+			int size=64387;  //the exact size of the help file (from the resource)
 			LPVOID pnt=LockResource(hg);
 			if (pnt)
 			{

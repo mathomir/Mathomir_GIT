@@ -37,6 +37,8 @@ public:
 	int m_prevFontModeSelection;
 	int m_KeyboardSmallCaps;
 	int m_KeyboardElement;
+	int m_ItemHeight;
+	int m_LowHeightMode;
 
 	int m_KeyboardX;
 	int m_KeyboardY;

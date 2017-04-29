@@ -7,7 +7,7 @@ DefaultGroupName=Math-o-mir
 UninstallDisplayIcon={app}\Mathomir.exe
 Compression=lzma
 SolidCompression=yes
-OutputDir=C:\Equation_2005\Setup
+OutputDir=C:\Mathomir\Setup
 ChangesAssociations=yes
 
 [Registry]
@@ -27,7 +27,7 @@ Type: files; Name: "{app}\Mathomir.chm"
 Type: files; Name: "{app}\FirstRun_.mom"
 
 [Files]
-Source: "Release\Mathomir.exe"; DestDir: "{app}"
+Source: "..\Release\Mathomir.exe"; DestDir: "{app}"
 Source: "Example.mom"; DestDir: "{app}"
 Source: "FirstRun_.mom"; DestDir: "{app}"; Permissions: everyone-modify
 ;Source: "Readme.txt"; DestDir: "{app}"; Flags: isreadme

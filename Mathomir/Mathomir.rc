@@ -48,7 +48,7 @@ BEGIN
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
     "LANGUAGE 9, 1\r\n"
     "#pragma code_page(1252)\r\n"
-    "#include ""res\\Equation.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""res\\Mathomir.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
     "#include ""afxres.rc""         // Standard components\r\n"
     "#include ""afxprint.rc""       // printing/print preview resources\r\n"
     "#endif\r\n"
@@ -181,7 +181,7 @@ CAPTION "About Math-o-mir"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,14,20,20
-    LTEXT           "Math-o-mir  2.0",IDC_STATIC,43,13,125,8,SS_NOPREFIX
+    LTEXT           "Math-o-mir  2.1 beta",IDC_STATIC,43,13,125,8,SS_NOPREFIX
     LTEXT           "Danijel Gorupec, 2017.",IDC_STATIC,44,42,95,8
     DEFPUSHBUTTON   "OK",IDOK,178,6,50,16,WS_GROUP
     LTEXT           "E-mail me at: danijel.gorupec@gmail.com",IDC_STATIC,43,100,134,8
@@ -425,8 +425,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2,0,0,5
- PRODUCTVERSION 2,0,0,5
+ FILEVERSION 2,1,0,0
+ PRODUCTVERSION 2,1,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -442,11 +442,11 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "FileDescription", "Math-o-mir, the mathematical notepad."
-            VALUE "FileVersion", "2.0"
+            VALUE "FileVersion", "2.1"
             VALUE "InternalName", "mathomir.exe"
             VALUE "OriginalFilename", "mathomir.exe"
             VALUE "ProductName", "Math-o-mir"
-            VALUE "ProductVersion", "2.0"
+            VALUE "ProductVersion", "2.1"
         END
     END
     BLOCK "VarFileInfo"

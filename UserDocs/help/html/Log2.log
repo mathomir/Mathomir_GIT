@@ -1,0 +1,81 @@
+Microsoft HTML Help Compiler 4.74.8702
+
+Compiling c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm
+
+HHC5003: Error: Compilation failed while compiling mom_help.hhk.
+
+
+The following files were not compiled:
+mom_help.hhk
+Microsoft HTML Help Compiler 4.74.8702
+
+Compiling c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm
+
+
+Compile time: 0 minutes, 0 seconds
+1	Topic
+1	Local link
+0	Internet links
+0	Graphics
+
+
+Created c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm, 19,210 bytes
+Compression decreased file by 6,958 bytes.
+Microsoft HTML Help Compiler 4.74.8702
+
+Compiling c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm
+
+
+Compile time: 0 minutes, 0 seconds
+3	Topics
+2	Local links
+0	Internet links
+1	Graphic
+
+
+Created c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm, 45,880 bytes
+Compression decreased file by 15,452 bytes.
+Microsoft HTML Help Compiler 4.74.8702
+
+Compiling c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm
+
+
+Compile time: 0 minutes, 0 seconds
+3	Topics
+2	Local links
+0	Internet links
+0	Graphics
+
+
+Created c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm, 26,324 bytes
+Compression decreased file by 162,933 bytes.
+Microsoft HTML Help Compiler 4.74.8702
+
+Compiling c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm
+
+
+Compile time: 0 minutes, 0 seconds
+8	Topics
+8	Local links
+0	Internet links
+0	Graphics
+
+
+Created c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm, 36,682 bytes
+Compression decreased file by 428,791 bytes.
+Microsoft HTML Help Compiler 4.74.8702
+
+Compiling c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm
+
+
+Compile time: 0 minutes, 0 seconds
+16	Topics
+17	Local links
+0	Internet links
+0	Graphics
+
+
+Created c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm, 37,060 bytes
+Compression decreased file by 439,733 bytes.
+HHC5010: Error: Cannot open "c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm". Compilation stopped.
+HHC5010: Error: Cannot open "c:\Documents and Settings\hrdagor\Desktop\Setup\help\MathomirHandyHelp.chm". Compilation stopped.

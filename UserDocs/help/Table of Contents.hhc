@@ -61,7 +61,7 @@
 			<param name="Local" value="html\VariableMode.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Font casting modes">
+			<param name="Name" value="Fonts">
 			<param name="Local" value="html\FormatingMode.htm">
 			</OBJECT>
 		<LI> <OBJECT type="text/sitemap">
@@ -116,10 +116,6 @@
 	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Function plotting">
 		<param name="Local" value="html\Plotting.htm">
-		</OBJECT>
-	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="Using Math-o-mir in classroom">
-		<param name="Local" value="html\Classroom.htm">
 		</OBJECT>
 </UL>
 </BODY></HTML>
