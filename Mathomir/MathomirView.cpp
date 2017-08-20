@@ -39,6 +39,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+int MouseWheelAnimation; //scrolling in Y direction
+int MouseWheelAnimationX; //scrolling in X direction
 
 int prevCursorX;
 int prevCursorY;
@@ -129,16 +131,16 @@ int ExecuteLink(char *command);
 unsigned int LongClickStartTime;
 CPoint LongClickPosition;
 CExpression *LongClickObject;
-
+tDocumentStruct *prevTouchedObject=NULL;
 char IsWindowOutOfFocus;
 
 #define NUM_SPECIAL_KEYS 21
 const UINT keystring[]={'0','1','2','3','4','5','6','7','8','9',VK_OEM_PLUS,VK_OEM_MINUS,VK_OEM_COMMA,VK_OEM_PERIOD,VK_OEM_1,VK_OEM_2,VK_OEM_3,VK_OEM_4,VK_OEM_5,VK_OEM_6,VK_OEM_7,0};
-UINT keystring2[NUM_SPECIAL_KEYS+1];
-UINT keystring3[NUM_SPECIAL_KEYS+1];
-char keystringtimer=6;
-char keystringmode=0;
-char keystringcnt=0;
+//UINT keystring2[NUM_SPECIAL_KEYS+1];
+//UINT keystring3[NUM_SPECIAL_KEYS+1];
+//char keystringtimer=6;
+//char keystringmode=0;
+//char keystringcnt=0;
 
 struct
 {
@@ -390,7 +392,7 @@ int CMathomirView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CView::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	SetTimer(1,100,NULL); //this is for cursor and copy-paste
+	SetTimer(1,10,NULL); //this is for cursor and copy-paste
 	return 0;
 }
 
@@ -2194,6 +2196,20 @@ void ChangeZOrderOfSelectedObjects(int newpos)
 {
 	tDocumentStruct tmp;
 	
+		/*	if (prevTouchedObject==object) prevTouchedObject=NULL;
+			if (prevTouchedObject>object) prevTouchedObject--;
+			if (SelectedDocumentObject==object) SelectedDocumentObject=NULL;
+			if (SelectedDocumentObject>object) SelectedDocumentObject--;
+			if (SelectedDocumentObject2==object) SelectedDocumentObject2=NULL;
+			if (SelectedDocumentObject2>object) SelectedDocumentObject2--;
+			if (SpecialDrawingHover==object) SpecialDrawingHover=NULL;
+			if (SpecialDrawingHover>object) SpecialDrawingHover--;
+			if (prevSpecialDrawingHover==object) prevSpecialDrawingHover=NULL;
+			if (prevSpecialDrawingHover>object) prevSpecialDrawingHover--;
+			if (m_PopupMenuObject==object) m_PopupMenuObject=NULL;
+			if (m_PopupMenuObject>object) m_PopupMenuObject--;
+			LongClickObject=NULL;*/
+
 	for (int i=0;i<NumDocumentElements;i++)
 		if (TheDocument[i].MovingDotState==3)
 		{
@@ -2203,6 +2219,8 @@ void ChangeZOrderOfSelectedObjects(int newpos)
 				for (int j=i-1;j>=newpos;j--)
 					TheDocument[j+1]=TheDocument[j];
 				TheDocument[newpos]=tmp;
+				LongClickObject=NULL;
+				pMainView->m_PopupMenuObject=prevSpecialDrawingHover=SpecialDrawingHover=SelectedDocumentObject=SelectedDocumentObject2=prevTouchedObject=NULL;
 			}
 			else if (newpos>i)
 			{
@@ -2210,6 +2228,9 @@ void ChangeZOrderOfSelectedObjects(int newpos)
 				for (int j=i;j<newpos;j++)
 					TheDocument[j]=TheDocument[j+1];
 				TheDocument[newpos]=tmp;
+				LongClickObject=NULL;
+				pMainView->m_PopupMenuObject=prevSpecialDrawingHover=SpecialDrawingHover=SelectedDocumentObject=SelectedDocumentObject2=prevTouchedObject=NULL;
+
 			}
 			newpos++;
 		}
@@ -2775,7 +2796,7 @@ void CMathomirView::PaintDrawingHotspot(char erase_only)
 }
 
 int prevDrawingMode2;
-tDocumentStruct *prevTouchedObject=NULL;
+
 int prevSelectionChecksum=0;
 int prev_any_drawing_touched=0;
 int prevXX,prevYY;
@@ -2903,7 +2924,9 @@ void CMathomirView::OnMouseMove(UINT nFlags, CPoint point)
 		}
 	}
 	else
+	{
 		SetCapture();
+	}
 
 	//calculate absolute positions of mouse arrow
 	int AbsoluteX=ViewX+point.x*100/ViewZoom;
@@ -2914,9 +2937,8 @@ void CMathomirView::OnMouseMove(UINT nFlags, CPoint point)
 	int isCTRL=GetKeyState(VK_CONTROL)&0xFFFE;
 
 
-	if (MouseMode==10)
+	if (MouseMode==10) //adjusting size of spacers (tabs)
 	{
-		
 		if ((SelectedTab) && (nFlags&MK_LBUTTON))
 		{
 			try
@@ -3626,7 +3648,7 @@ void CMathomirView::OnMouseMove(UINT nFlags, CPoint point)
 	PaintGuidlines(DC,AbsoluteY);
 	PaintNewlineAddMark(DC);
 
-	if (MouseMode==4) //spacing mode
+	if (MouseMode==4) //spacing mode (adds space between equations - dragging on the vertical ruler)
 	{		
 		if (SpacingBitmap==NULL)
 		{
@@ -3655,7 +3677,7 @@ void CMathomirView::OnMouseMove(UINT nFlags, CPoint point)
 	}
 
 
-	if (MouseMode==5) //multiple selection
+	if (MouseMode==5) //multiple selection (dragging a selection frame over objects)
 	{
 		if ((nFlags&MK_LBUTTON)==0) 
 		{
@@ -3995,7 +4017,7 @@ void CMathomirView::OnRButtonDown(UINT nFlags, CPoint point)
 	
 	
 
-	if (MouseMode==102)
+	if (MouseMode==102) //moving selections (pasted)
 	{
 		//the pasted objects (attached to the cursor) need to be dropped away.
 		tDocumentStruct *ds=TheDocument;
@@ -4058,10 +4080,13 @@ BOOL CMathomirView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 	if ((UseCTRLForZoom) && (!(GetKeyState(VK_CONTROL)&0xFFFE))) is_scroll=1;
 	if ((RightButtonTogglesWheel) && (GetKeyState(VK_RBUTTON)&0xFFFE)) is_scroll=(is_scroll)?0:1;
 
-	if ((zDelta) && (abs(MouseWheelDelta)>=30)) //no internal call (internal call -> zDelta==0)
+	if ((zDelta) && (abs(MouseWheelDelta)>=10)) //no internal call (internal call -> zDelta==0)
 	if (is_scroll)
 	{
-		int step=MouseWheelDelta*WheelScrollingSpeed;
+		MouseWheelAnimation+=MouseWheelDelta*WheelScrollingSpeed;
+		MouseWheelDelta=0;
+		OnTimer(0xFFFF); //0xFFFF indicates internal call (only for smooth scrolling)
+		/*int step=MouseWheelDelta*WheelScrollingSpeed;
 		if (MouseWheelDirection)
 			ViewY+=step/ViewZoom;
 		else
@@ -4072,7 +4097,7 @@ BOOL CMathomirView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 		if (ViewY<0) ViewY=0;
 		SetScrollPos(SB_VERT,ViewY,1);
 		InvalidateRect(NULL,0);
-		UpdateWindow();
+		UpdateWindow();*/
 		return CView::OnMouseWheel(nFlags, zDelta, pt);
 	}
 
@@ -4085,12 +4110,13 @@ BOOL CMathomirView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 		else if (ViewZoom<=34) ViewZoom=40;
 		else if (ViewZoom<=40) ViewZoom=50;
 		else if (ViewZoom<=50) ViewZoom=60;
-		else if (ViewZoom<=60) ViewZoom=80;
-		else if (ViewZoom<=80) ViewZoom=100;
+		else if (ViewZoom<=60) ViewZoom=70;
+		else if (ViewZoom<=70) ViewZoom=85;
+		else if (ViewZoom<=85) ViewZoom=100;
 		else if (ViewZoom<=100) ViewZoom=120;
 		else if (ViewZoom<=120) ViewZoom=150;
-		else if (ViewZoom<=150) ViewZoom=160;
-		else if (ViewZoom<=160) ViewZoom=200;
+		else if (ViewZoom<=150) ViewZoom=170;
+		else if (ViewZoom<=170) ViewZoom=200;
 		else if (ViewZoom<=200) ViewZoom=240;
 		else if (ViewZoom<=240) ViewZoom=300;
 		else if (ViewZoom<=300) ViewZoom=340;
@@ -4103,19 +4129,18 @@ BOOL CMathomirView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 	{
 		MouseWheelDelta=0;
 
-
-
 		if (ViewZoom>=480) ViewZoom=400;
 		else if (ViewZoom>=400) ViewZoom=340;
 		else if (ViewZoom>=340) ViewZoom=300;
 		else if (ViewZoom>=300) ViewZoom=240;
 		else if (ViewZoom>=240) ViewZoom=200;
-		else if (ViewZoom>=200) ViewZoom=160;
-		else if (ViewZoom>=160) ViewZoom=150;
+		else if (ViewZoom>=200) ViewZoom=170;
+		else if (ViewZoom>=170) ViewZoom=150;
 		else if (ViewZoom>=150) ViewZoom=120;
 		else if (ViewZoom>=120) ViewZoom=100;
-		else if (ViewZoom>=100) ViewZoom=80;
-		else if (ViewZoom>=80) ViewZoom=60;
+		else if (ViewZoom>=100) ViewZoom=85;
+		else if (ViewZoom>=85) ViewZoom=70;
+		else if (ViewZoom>=70) ViewZoom=60;
 		else if (ViewZoom>=60) ViewZoom=50;
 		else if (ViewZoom>=50) ViewZoom=40;
 		else if (ViewZoom>=40) ViewZoom=34;
@@ -4350,7 +4375,7 @@ void CMathomirView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	if (SurpressCharMessage) {SurpressCharMessage=0;return;}
 	//initial keyboard testing (determining key codes when the shift key is used)
-	if (keystringmode==2) {keystring3[keystringcnt++]=nChar;return;}
+	//if (keystringmode==2) {keystring3[keystringcnt++]=nChar;return;}
 
 
 	try
@@ -4380,36 +4405,55 @@ void CMathomirView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 		{
 			if ((prevChar==nChar) && (nChar!=8))
 			{
-				int i=0;
+				/*int i=0;
 				while (keystring2[i])
 				{
 					if (keystring2[i]==nChar) 
 						break;
 					i++;
+				}*/
+				int i=0;
+				while (keystring[i])
+				{
+					if (keystring[i]==VkKeyScan(nChar)) break;
+					i++;
 				}
 				if (!lockRepeat)
 				{
-					if (keystring2[i]==0)
+					if (keystring[i]==0)
 					{
 						SendKeyStroke(10,0,0); //converts the last character to uppercase
+						lockRepeat=2;
 					}
 					else
 					{
 						SendKeyStroke(8,0,0); //sends backspace
-						SendKeyStroke(keystring3[i],0,0); 
+
+						//simulating the keypress with the shift key pressed (to get the upper character)
+						keybd_event(VK_SHIFT,0,0,0);
+						keybd_event(keystring[i],0,0,0);
+						keybd_event(VK_SHIFT,0,0x02,0);
+						lockRepeat=1;
+						//SendKeyStroke(keystring3[i],0,0); 
 					}
-					lockRepeat=1;
+					
 				}
 			}
-			else 
+			else if (lockRepeat==1)
 			{
+				if ((!CTRLstate) || (ALTstate))	SendKeyStroke(nChar,0,Flags);
+				lockRepeat=2;
+			}
+			else
+			{
+				prevChar=nChar;
 				lockRepeat=0;
 				if ((!CTRLstate) || (ALTstate))	SendKeyStroke(nChar,0,Flags);
 			}
-			prevChar=nChar;
+			
+	
 			
 		}
-		
 		CView::OnChar(nChar, nRepCnt, nFlags);
 	}
 	catch(...)
@@ -4850,7 +4894,7 @@ void CMathomirView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 						//if ((nChar>='1') && (nChar<='6')) continue;
 						//if ((nChar=='K') || (nChar=='R') || (nChar=='G') || (nChar=='B') || (nChar=='Y')) continue;
 						expr =((CExpression*)(TheDocument[i].Object))->AdjustSelection();
-						if ((nChar==VK_DELETE) && (expr) && (expr->DecodeInternalInsertionPoint())) continue; //babaluj
+						if ((nChar==VK_DELETE) && (expr) && (expr->DecodeInternalInsertionPoint())) continue; 
 						if (nChar!=' ')
 						if (expr==(CExpression*)TheDocument[i].Object)
 						{
@@ -5719,7 +5763,7 @@ void CMathomirView::SendKeyStroke(UINT nChar, UINT nRepCnt, UINT nFlags)
 						tmp=((CExpression*)ds->Object)->AdjustSelection();
 						if ((tmp) && (/*(nChar==13) ||*/ (nChar==27) || /*(nChar==32) ||*/ (nChar==9))) break;
 
-						if ((tmp) && (tmp->DecodeInternalInsertionPoint())) //babaluj
+						if ((tmp) && (tmp->DecodeInternalInsertionPoint())) 
 						{
 							//if this is insertion into text
 						}
@@ -6093,43 +6137,137 @@ int SteadyCursorX;
 int SteadyCursorY;
 
 int OnTimerCounter;
+unsigned int prevTimerTickTime;
+unsigned int TimerTickAccumulator;
 void CMathomirView::OnTimer(UINT nIDEvent)
 {
-
-
-
 	//faster timing functions here
+	unsigned int TimerTickTime=GetTickCount();
+	unsigned int TimerTickDelta=TimerTickTime-prevTimerTickTime;
+	if (TimerTickDelta>199) TimerTickDelta=199;
+	if (nIDEvent==0xFFFF) //we are here only to make scroll - internall call
+		TimerTickDelta=10;
+	else
+		prevTimerTickTime=TimerTickTime;
+	
+	try
+	{
+		//main window scroll animation - for smooth scrolling when scrolling by mouse wheel
+		if (MouseWheelAnimation)
+		{
+			int multiply=TimerTickDelta;
+			if (multiply>30) multiply=30;
+			int step=MouseWheelAnimation;
+			if (abs(step*multiply)>36000)
+				step=step*multiply/60;
+			else if (step>60*multiply) 
+				step=60*multiply;
+			else if (step<-60*multiply)
+				step=-60*multiply;
+			MouseWheelAnimation-=(step/ViewZoom)*ViewZoom;
+			int prevY=ViewY;
+			if (MouseWheelDirection)
+				ViewY+=step/ViewZoom;
+			else
+				ViewY-=step/ViewZoom;
+			if (ViewY!=prevY)
+			{
+				if ((GetKeyState(VK_RBUTTON)&0xFFFE)==0) MouseOverScrollbar=5;
+				if (ViewY<0) ViewY=0;
+				SetScrollPos(SB_VERT,ViewY,1);
+				InvalidateRect(NULL,0);
+				UpdateWindow();
+			}
+		}
+		if (MouseWheelAnimationX)
+		{
+			int multiply=TimerTickDelta;
+			if (multiply>30) multiply=30;
+			int step=MouseWheelAnimationX;
+			if (abs(step*multiply)>36000)
+				step=step*multiply/60;
+			else if (step>60*multiply) 
+				step=60*multiply;
+			else if (step<-60*multiply)
+				step=-60*multiply;
+			MouseWheelAnimationX-=(step/ViewZoom)*ViewZoom;
+			int prevX=ViewX;
+			ViewX-=step/ViewZoom;
+			if (ViewX!=prevX)
+			{
+				if ((GetKeyState(VK_RBUTTON)&0xFFFE)==0) MouseOverScrollbar=5;
+				if (ViewX<0) ViewX=0;
+				SetScrollPos(SB_HORZ,ViewX,1);
+				InvalidateRect(NULL,0);
+				UpdateWindow();
+			}
+		}
+	}
+	catch(...)
+	{
+		FatalErrorHandling();
+	}
 
-	/*{
-		POINT cur;
+	if (nIDEvent==0xFFFF) return; //this was an internal call only for scrolling
+
+	if (((GetKeyState(VK_LBUTTON)&0xFFFE) && 
+		((MouseMode==8) || //drawing node editing
+		 (MouseMode==9) || //selection stretching
+		 (MouseMode==5) || //multiple selections
+		 (MouseMode==2) || (MouseMode==102) || //moving objects on moving dot
+		 (MouseMode==4) || //adding space
+		 (MouseMode==7) || //Moving of drawings
+		 ((MouseMode==6) && (IsDrawingMode!=3) && (IsDrawingMode!=6) && (IsDrawingMode!=7) && (IsDrawingMode!=14) && (IsDrawingMode!=25) && (IsDrawingMode!=26)))) || 
+		 (MouseMode==102)) //moving objects after being pasted
+	{ 
+		//Support for auto scrolling (when doing some actions with mouse and the mouse pointer goes out of main client window)
+		int Speed=8;
+		if ((MouseMode==7) || (MouseMode==2) || (MouseMode==102)) Speed=12;
+		if ((MouseMode==8)) Speed=4;
 		RECT r;
-		GetCursorPos(&cur);
-		theApp.m_pMainWnd->GetWindowRect(&r);
-		if ((cur.x<r.left) || (cur.y<r.top) || (cur.x>r.right) || (cur.y>r.bottom))
+		GetClientRect(&r);
+		POINT p2,p;
+		GetCursorPos(&p);
+		p2=p;
+		ScreenToClient(&p);
+		if (p.y>r.bottom) 
 		{
-			int dx=0;
-			int dy=0;
-			if (cur.x<r.left) dx=r.left-cur.x;
-			if (cur.x>r.right) dx=cur.x-r.right;
-			if (cur.y<r.top) dy=r.top-cur.y;
-			if (cur.y>r.bottom) dy=cur.y-r.bottom;
-			dx=dx+dy;
-			if (dx>235) dx=235;
-			dx=255-dx;
-
-			::SetWindowLong(theApp.m_pMainWnd->m_hWnd,GWL_EXSTYLE,GetWindowLong(theApp.m_pMainWnd->m_hWnd,GWL_EXSTYLE)|WS_EX_LAYERED);
-			::SetLayeredWindowAttributes(theApp.m_pMainWnd->m_hWnd,0,dx,LWA_ALPHA);
-
-			::SetWindowLong(Toolbox->m_hWnd,GWL_EXSTYLE,GetWindowLong(Toolbox->m_hWnd,GWL_EXSTYLE)|WS_EX_LAYERED);
-			::SetLayeredWindowAttributes(Toolbox->m_hWnd,0,dx,LWA_ALPHA);
+			int d=(p.y-r.bottom)*Speed;
+			if (d>350) d=350;
+			MouseWheelAnimation-=d;
+			SetCursorPos(p2.x,p2.y);
 		}
-		else
+		if (p.y<0) 
 		{
-			::SetWindowLong(Toolbox->m_hWnd,GWL_EXSTYLE,GetWindowLong(Toolbox->m_hWnd,GWL_EXSTYLE)&(~WS_EX_LAYERED));
-			::SetWindowLong(theApp.m_pMainWnd->m_hWnd,GWL_EXSTYLE,GetWindowLong(theApp.m_pMainWnd->m_hWnd,GWL_EXSTYLE)&(~WS_EX_LAYERED));
-
+			int d=-p.y*Speed;
+			if (d>350) d=350;
+			MouseWheelAnimation+=d;
+			SetCursorPos(p2.x,p2.y);
 		}
-	}*/
+		if (p.x>r.right) 
+		{
+			int d=(p.x-r.right)*Speed;
+			if (d>350) d=350;
+			MouseWheelAnimationX-=d;
+			SetCursorPos(p2.x,p2.y);
+		}
+		if (p.x<0) 
+		{
+			int d=-p.x*Speed;
+			if (d>350) d=350;
+			MouseWheelAnimationX+=d;
+			SetCursorPos(p2.x,p2.y);
+		}
+	}
+
+	//the further code is executed every 100ms
+	TimerTickAccumulator+=TimerTickDelta;
+	if (TimerTickAccumulator<100)
+	{
+		return;
+	}
+	TimerTickAccumulator-=100;
+
 
 	{
 		//we check if our window has the input focus
@@ -6224,53 +6362,16 @@ void CMathomirView::OnTimer(UINT nIDEvent)
 	}
 
 
-	//slower timig bellow
+	//Following code executes every 300ms
 	OnTimerCounter++;
 	if (OnTimerCounter<3) return;
 	OnTimerCounter=0;
 
 
-
-	if ((keystringtimer) && (keystringmode<3)) //complex and tricky way to test keyboard codes (at program startup) to implement single-finger-shift
-	{
-		keystringtimer--;
-		if (keystringtimer==0)
-		{
-			//abandon special keyboard handling
-			for (int i=0;i<NUM_SPECIAL_KEYS;i++) keystring2[i]=keystring3[i]=0;
-			keystringmode=3;
-		}
-
-		CWnd *activewnd=this->GetActiveWindow();
-		if ((keystringcnt==0) && (keystringmode==0) && ((activewnd==theApp.m_pMainWnd) || (activewnd==this) || (activewnd==Toolbox)))
-		{
-			//mapping keys without shift
-			for (int i=0;keystring[i]!=0;i++)
-			{
-				UINT ch=MapVirtualKey(keystring[i],2);
-				keystring2[i]=ch&0x7FFFFFFF;
-			}
-
-			//mapping keys with shift - we are generating keyboard events (further processing in the OnChar function)
-			keystringmode=2;
-			keystringcnt=0;
-			keybd_event(VK_SHIFT,0,0,0);
-			for (int i=0;keystring[i]!=0;i++)
-			{
-				keybd_event(keystring[i],MapVirtualKey(keystring[i],3),0,0);
-				keybd_event(keystring[i],MapVirtualKey(keystring[i],3),KEYEVENTF_KEYUP,0);
-			}
-			keybd_event(VK_SHIFT,0,KEYEVENTF_KEYUP,0);
-		}
-		if ((keystringcnt==NUM_SPECIAL_KEYS) && (keystringmode==2))
-		{
-			keystringmode=3;
-			keystringtimer=0;
-		}
-	}
-
 	
 	try {
+
+
 
 		if (ReenableMenu==1)
 		{
@@ -6664,9 +6765,9 @@ void CMathomirView::OnTimer(UINT nIDEvent)
 #pragma optimize("s",on)
 void CMathomirView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	prevChar=0;
+	if (nChar!=VK_SHIFT)
+		prevChar=0;
 
-	
 	try{
 
 
@@ -7780,7 +7881,6 @@ void CMathomirView::OnLButtonUp(UINT nFlags, CPoint point)
 			MovingStartX=AbsoluteX;
 			MovingStartY=AbsoluteY;
 		}
-
 		
 	}
 
@@ -10123,12 +10223,13 @@ void CMathomirView::OnViewZoomin()
 	else if (ViewZoom<=34) ViewZoom=40;
 	else if (ViewZoom<=40) ViewZoom=50;
 	else if (ViewZoom<=50) ViewZoom=60;
-	else if (ViewZoom<=60) ViewZoom=80;
-	else if (ViewZoom<=80) ViewZoom=100;
+	else if (ViewZoom<=60) ViewZoom=70;
+	else if (ViewZoom<=70) ViewZoom=85;
+	else if (ViewZoom<=85) ViewZoom=100;
 	else if (ViewZoom<=100) ViewZoom=120;
 	else if (ViewZoom<=120) ViewZoom=150;
-	else if (ViewZoom<=150) ViewZoom=160;
-	else if (ViewZoom<=160) ViewZoom=200;
+	else if (ViewZoom<=150) ViewZoom=170;
+	else if (ViewZoom<=170) ViewZoom=200;
 	else if (ViewZoom<=200) ViewZoom=240;
 	else if (ViewZoom<=240) ViewZoom=300;
 	else if (ViewZoom<=300) ViewZoom=340;
@@ -10192,12 +10293,13 @@ void CMathomirView::OnViewZoomout()
 	else if (ViewZoom>=340) ViewZoom=300;
 	else if (ViewZoom>=300) ViewZoom=240;
 	else if (ViewZoom>=240) ViewZoom=200;
-	else if (ViewZoom>=200) ViewZoom=160;
-	else if (ViewZoom>=160) ViewZoom=150;
+	else if (ViewZoom>=200) ViewZoom=170;
+	else if (ViewZoom>=170) ViewZoom=150;
 	else if (ViewZoom>=150) ViewZoom=120;
 	else if (ViewZoom>=120) ViewZoom=100;
-	else if (ViewZoom>=100) ViewZoom=80;
-	else if (ViewZoom>=80) ViewZoom=60;
+	else if (ViewZoom>=100) ViewZoom=85;
+	else if (ViewZoom>=85) ViewZoom=70;
+	else if (ViewZoom>=70) ViewZoom=60;
 	else if (ViewZoom>=60) ViewZoom=50;
 	else if (ViewZoom>=50) ViewZoom=40;
 	else if (ViewZoom>=40) ViewZoom=34;
