@@ -5951,6 +5951,7 @@ void CToolbox::ShowHelptext(char *text,char *command, char *accelerator, char *e
 	char buff[256];
 	CopyTranslatedString(buff,text,language_code,256);
 	RECT r;
+
 	Toolbox->GetClientRect(&r);
 	CDC *DC=mf->GetDC();
 
@@ -5962,12 +5963,16 @@ void CToolbox::ShowHelptext(char *text,char *command, char *accelerator, char *e
 		Toolbox->Subtoolbox->GetWindowRect(&r2);
 		if (r2.bottom>r.bottom) yy+=r2.bottom-r.bottom;
 	}
-	
+
 	if (prev_lang_code!=language_code+yy)
 		DC->FillSolidRect(0,yy,ToolboxSize,ToolboxSize*2,RGB(128,128,128));
 
 	prev_lang_code=language_code+yy;
-	if (!language_code) return;
+	if (!language_code) 
+	{
+		mf->ReleaseDC(DC);
+		return;
+	}
 
 	DC->SetBkMode(OPAQUE);
 	DC->SetBkColor(RGB(128,128,128));
@@ -5976,7 +5981,6 @@ void CToolbox::ShowHelptext(char *text,char *command, char *accelerator, char *e
 	CRgn myrgn;
 	myrgn.CreateRectRgn(0,yy,ToolboxSize,yy+ToolboxSize);
 	DC->SelectClipRgn(&myrgn);
-
 
 	DC->SetTextColor(RGB(204,204,204));
 	if (buff[0])
@@ -5993,7 +5997,7 @@ void CToolbox::ShowHelptext(char *text,char *command, char *accelerator, char *e
 				buff[i]=0;
 				DC->TextOut(2,yy,buff+last);
 				last=i+1;
-				yy+=ToolboxSize/6;
+				yy+=ToolboxSize/6+2;
 			}
 			i++;
 		}
@@ -6005,7 +6009,7 @@ void CToolbox::ShowHelptext(char *text,char *command, char *accelerator, char *e
 		DC->SelectObject(GetFontFromPool(4,0,0,ToolboxSize/5));
 		size=DC->GetTextExtent(accelerator);if (size.cx>ToolboxSize-1) DC->SelectObject(GetFontFromPool(4,0,0,ToolboxSize/6));
 		DC->TextOut(2,yy,accelerator);
-		yy+=ToolboxSize/6;
+		yy+=ToolboxSize/6+1;
 	}
 
 	if (easycast[0])
@@ -6018,7 +6022,7 @@ void CToolbox::ShowHelptext(char *text,char *command, char *accelerator, char *e
 		DC->SelectObject(GetFontFromPool(4,0,0,ToolboxSize/5));
 		size=DC->GetTextExtent(bbf);if (size.cx>ToolboxSize-1) DC->SelectObject(GetFontFromPool(4,0,0,ToolboxSize/6));
 		DC->TextOut(2,yy,bbf);
-		yy+=ToolboxSize/6;
+		yy+=ToolboxSize/6+1;
 
 	}
 

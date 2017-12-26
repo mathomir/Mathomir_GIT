@@ -1,7 +1,7 @@
 ; -- Mathomir.iss --
 [Setup]
 AppName=Math-o-mir
-AppVerName=Math-o-mir v2.1 beta3
+AppVerName=Math-o-mir v2.1 beta4
 DefaultDirName={pf}\Mathomir
 DefaultGroupName=Math-o-mir
 UninstallDisplayIcon={app}\Mathomir.exe

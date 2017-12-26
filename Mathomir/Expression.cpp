@@ -186,6 +186,8 @@ const struct LIST_OF_KNOWN_FUNCTIONS
 	//{5,'T',"text"},
 	{5,'a',"bra"},
 	{5,'k',"ket"},
+	{5,'c',"ceil"},
+	{5,'f',"floor"},
 	{9,'H',"link"},
 	{9,'L',"label"},
 
@@ -629,6 +631,7 @@ void CExpression::CalculateSize(CDC *DC,short int zoom, short int * length, shor
 			(m_DrawParentheses!='<') && (m_DrawParentheses!='b') &&
 			(m_DrawParentheses!='l') && (m_DrawParentheses!='r') &&
 			(m_DrawParentheses!='a') && (m_DrawParentheses!='k') &&
+			(m_DrawParentheses!='c') && (m_DrawParentheses!='f') &&
 			(m_DrawParentheses!='x') && (m_DrawParentheses!='T')) 
 			m_DrawParentheses='(';
 	} 
@@ -2013,7 +2016,6 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 
 				PaintParentheses(DC,zoom,X,Y-m_ParenthesesAbove-increase/5,X+m_OverallLength,Y+m_ParenthesesBelow+increase/2,m_ParentheseWidth,m_DrawParentheses,m_ParenthesesFlags,IsBlue,color);
 			}
-	
 		}
 	}
 
@@ -2217,19 +2219,19 @@ int CExpression::PaintParentheses(CDC * DC, short zoom, short X1, short Y1, shor
 		}
 	}
 
-	if ((Type=='[') || (Type=='l') || (Type=='r'))
+	if ((Type=='[') || (Type=='l') || (Type=='r') || (Type=='c') || (Type=='f'))
 	{
-		if ((PaintLeft) && ((Type=='[') || (Type=='r')))
+		if ((PaintLeft) && ((Type=='[') || (Type=='r') || (Type=='c') || (Type=='f')))
 		{				
-			DC->FillSolidRect(X1+PenWidth/2,Y1,ParentheseWidth,PenWidth,(IsBlue)?BLUE_COLOR:color);
+			if (Type!='f') DC->FillSolidRect(X1+PenWidth/2,Y1,ParentheseWidth,PenWidth,(IsBlue)?BLUE_COLOR:color);
 			DC->FillSolidRect(X1+PenWidth/2,Y1,PenWidth,Y2-Y1,(IsBlue)?BLUE_COLOR:color);
-			DC->FillSolidRect(X1+PenWidth/2,Y2-PenWidth,ParentheseWidth,PenWidth,(IsBlue)?BLUE_COLOR:color);
+			if (Type!='c') DC->FillSolidRect(X1+PenWidth/2,Y2-PenWidth,ParentheseWidth,PenWidth,(IsBlue)?BLUE_COLOR:color);
 		}
-		if ((PaintRight) && ((Type=='[') || (Type=='l')))
+		if ((PaintRight) && ((Type=='[') || (Type=='l') || (Type=='c') || (Type=='f')))
 		{
-			DC->FillSolidRect(X2-ParentheseWidth-PenWidth/2,Y1,ParentheseWidth,PenWidth,(IsBlue)?BLUE_COLOR:color);
+			if (Type!='f') DC->FillSolidRect(X2-ParentheseWidth-PenWidth/2,Y1,ParentheseWidth,PenWidth,(IsBlue)?BLUE_COLOR:color);
 			DC->FillSolidRect(X2-3*PenWidth/2,Y1,PenWidth,Y2-Y1,(IsBlue)?BLUE_COLOR:color);
-			DC->FillSolidRect(X2-ParentheseWidth-PenWidth/2,Y2-PenWidth,ParentheseWidth,PenWidth,(IsBlue)?BLUE_COLOR:color);
+			if (Type!='c') DC->FillSolidRect(X2-ParentheseWidth-PenWidth/2,Y2-PenWidth,ParentheseWidth,PenWidth,(IsBlue)?BLUE_COLOR:color);
 		}
 		return 1;
 	}
@@ -2770,11 +2772,12 @@ if (!insertion_points_only)
 				int ldelta=delta;
 				int rdelta=delta;
 				if (theElement->Type==3) rdelta=ActualSize/8;
-				if ((Y>theElement->Y_pos+theElement->Below-ActualSize/2) || (Y<theElement->Y_pos-theElement->Above+ActualSize/2))
+				if ((Y>theElement->Y_pos+theElement->Below-ActualSize/2) || (Y<=theElement->Y_pos-theElement->Above+ActualSize/2))
 				{
 					if (theElement->Type==3) rdelta=0;
 					if (theElement->Type==7) {if (theElement->pElementObject->Data1[0]!='/') ldelta=0; else rdelta=0;}
 					if (theElement->Type==9) rdelta=0;
+					if (theElement->Type==4) rdelta=0;
 				}
 				if ((X>theElement->X_pos+ldelta) && (X<theElement->X_pos+theElement->Length-rdelta)) 
 				{
@@ -2970,7 +2973,6 @@ if (no_insertion_points) return NULL;
 			if (ClipboardExpression==NULL)
 			if ((theElement->Type==1) && (theElement->pElementObject->m_Text) && (X<theElement->X_pos+theElement->Length+m_MarginX*2/3))
 			{
-				//babaluj
 				CObject *obj=(theElement->pElementObject)->SelectAtPoint(DC,zoom,X-theElement->X_pos,Y,IsExpression,IsParenthese,1);
 				if (obj) theElement->IsSelected=1;
 				return obj;
@@ -13805,8 +13807,14 @@ int CExpression::AdjustMatrix(void)
 	}
 
 	//check if this is a matrix at all
-	if ((m_MaxNumColumns==1) && (m_MaxNumRows==1)) 
-		return 0; 
+	if ((m_MaxNumColumns==1) && (m_MaxNumRows==1))
+	{
+		//if this is not a matrix, then it should not end with type 12 or type 11 element
+		if (((m_pElementList+m_NumElements-1)->Type==12) ||
+			((m_pElementList+m_NumElements-1)->Type==11))
+			DeleteElement(m_NumElements-1);
+		return 0;
+	}
 
 	//make sure the matrix ends with row separator (element of type 12)
 	if ((m_pElementList+m_NumElements-1)->Type!=12) 
@@ -14620,7 +14628,7 @@ int EqLevel=-1;
 
 //returns defualt operator for given level 
 //(this is somewhat inverse function to 'GetOperatorLevel')
-char CExpression::GetDefaultElementType(int Level)
+char CExpression::GetDefaultElementType(const int Level)
 {
 	return Operators[Level].default_operator;
 }
@@ -14676,7 +14684,7 @@ getelementlen_continue:
 //this function returns level of the lowest-level operator found at specified positions
 //if it cannot determine operator level (for example if only one variable is contained)
 //then the level of the 'default_oper' is returned (or -1 if 'default_oper'==0)
-int CExpression::FindLowestOperatorLevel(const unsigned int StartPos,const unsigned int EndPos, char default_oper)
+int CExpression::FindLowestOperatorLevel(const unsigned int StartPos,const unsigned int EndPos,const char default_oper)
 {
 	//if (EndPos==-1) EndPos=m_NumElements-1;
 	if (StartPos==EndPos)
@@ -14718,7 +14726,7 @@ int CExpression::FindLowestOperatorLevel(const unsigned int StartPos,const unsig
 }
 
 //faster version of the above function - used when the whole expression is to be analyzed
-int CExpression::FindLowestOperatorLevel(char default_oper)
+int CExpression::FindLowestOperatorLevel(const char default_oper)
 {
 	if (m_NumElements==1)
 	{
@@ -14906,7 +14914,7 @@ int CExpression::Compute(int StartPos, int EndPos,int ComputationType, int Outsi
 
 	//special handling for absolute value or determinants
 	if ((this->m_pPaternalExpression==NULL) && 
-		((this->m_ParentheseShape=='|') || (this->m_ParentheseShape=='\\')) && 
+		((this->m_ParentheseShape=='|') || (this->m_ParentheseShape=='\\') ||(this->m_ParentheseShape=='c') || (this->m_ParentheseShape=='f')) && 
 		((this->m_ParenthesesFlags&0x1C)==0) && (StartPos==0) && (EndPos==m_NumElements-1))
 	{
 		// we do a trick - nest the whole expression into empty one (expand otside)
@@ -16887,7 +16895,7 @@ int CExpression::ExecuteComputation(int StartPos, int EndPos, char element_type,
 
 
 //checks if the element at StartPos-Len is a pure number - returns the number as double (with precision)
-int CExpression::IsPureNumber(int StartPos,int Len, double * number,int *precision)
+int CExpression::IsPureNumber(const int StartPos,const int Len, double * number,int *precision)
 {
 	*number=1.0;
 	*precision=0;
@@ -16990,7 +16998,7 @@ int CExpression::IsPureNumber(int StartPos,int Len, double * number,int *precisi
 				}
 			}
 	}
-	if (theElement->Type==5)  //parentheses
+	if ((theElement->Type==5)) //parentheses
 	{
 		double N1;
 		CExpression *a=(CExpression*)(theElement->pElementObject->Expression1);
@@ -16998,6 +17006,8 @@ int CExpression::IsPureNumber(int StartPos,int Len, double * number,int *precisi
 		{
 			*number=N1;
 			if ((a->m_ParentheseShape=='|') || (a->m_ParentheseShape=='\\')) *number=fabs(*number);
+			if (a->m_ParentheseShape=='c') *number=ceil(*number);//(int)((*number>0)?(*number+1):(*number)); //ceiling
+			if (a->m_ParentheseShape=='f') *number=floor(*number);//(int)((*number>0)?(*number):(*number-1.0)); //floor
 			if (minus_sign) *number=-(*number);
 			return 1;
 		}
@@ -17267,7 +17277,7 @@ int CExpression::GenerateASCIINumber(double number_dbl,long long number_int, cha
 
 
 //this function is frequently executed, must be very fast
-int CExpression::CompareElement(tElementStruct * ts1, tElementStruct * ts2)
+int CExpression::CompareElement(const tElementStruct * ts1,const tElementStruct * ts2)
 {
 	if (ts1->Type!=ts2->Type) return 0;
 	if (ts1->Decoration!=ts2->Decoration) return 0;
@@ -20955,6 +20965,7 @@ const int PrimeNumbers[25]=
 {
 	11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,113
 };
+
 //divides N1 and N2 by common factor
 int CExpression::ReduceTwoNumbers(double * N1, double * N2)
 {
@@ -22165,6 +22176,8 @@ int CExpression::MakeExpressionBeautiful(void)
 	//remove parenthese if the whole expression is inside it: (a+b+c)
 	if ((this->m_pPaternalElement==NULL) && (this->m_NumElements==1) && (this->m_pElementList->Type==5) &&
 		(m_pElementList->pElementObject->Expression2==NULL) &&
+		(((CExpression*)m_pElementList->pElementObject->Expression1)->m_ParentheseShape!='c') && //not for ceiling
+		(((CExpression*)m_pElementList->pElementObject->Expression1)->m_ParentheseShape!='f') && //not for floor
 		((((CExpression*)m_pElementList->pElementObject->Expression1)->m_ParenthesesFlags&0x1C)==0))
 	{
 		CExpression *arg=(CExpression*)m_pElementList->pElementObject->Expression1;
@@ -22185,6 +22198,8 @@ int CExpression::MakeExpressionBeautiful(void)
 		tElementStruct *ts=m_pElementList+i;
 		if ((ts->Type==5) && (ts->pElementObject) && (ts->pElementObject->Expression2==NULL) &&
 			(((CExpression*)ts->pElementObject->Expression1)->m_NumElements==1) &&
+			(((CExpression*)ts->pElementObject->Expression1)->m_ParentheseShape!='c') && //not for ceiling
+			(((CExpression*)ts->pElementObject->Expression1)->m_ParentheseShape!='f') && //not for floor
 			((((CExpression*)ts->pElementObject->Expression1)->m_ParenthesesFlags&0x1C)==0))
 		{
 			CExpression *arg=(CExpression*)ts->pElementObject->Expression1;
@@ -24108,7 +24123,8 @@ int CExpression::ComputeParentheses(int Position, char element_type, int Computa
 	if ((InsideLevel==-1) || (InsideLevel>PlusLevel))
 	{
 		//if minus sign is inside, like: (-a)
-		if ((argument->m_pElementList->Type==2) && (argument->m_pElementList->pElementObject->Data1[0]=='-'))
+		if ((argument->m_pElementList->Type==2) && (argument->m_pElementList->pElementObject->Data1[0]=='-') &&
+			(argument->m_ParentheseShape!='c') && (argument->m_ParentheseShape!='f') && (argument->m_ParentheseShape!='|'))
 		{
 			argument->DeleteElement(0);
 			if ((argument->m_ParentheseShape=='|') || (argument->m_ParentheseShape=='\\')) return 1; //the absolute value
@@ -24169,7 +24185,25 @@ int CExpression::ComputeParentheses(int Position, char element_type, int Computa
 		}
 		argument->StrikeoutRemove(0,argument->m_NumElements-1);
 		return retval;
+	}
 
+	//ceiling and floor functions
+	if ((argument->m_ParentheseShape=='c') || (argument->m_ParentheseShape=='f'))
+	{
+		if ((InsideLevel<MulLevel) && (InsideLevel!=-1)) return 1;
+
+		double N=1.0;
+		int p=0;
+		if (argument->IsPureNumber(0,argument->m_NumElements,&N,&p))
+		{
+			if (argument->m_ParentheseShape=='c')
+				N=ceil(N);//(int)((N>0)?(N+1):(N));
+			else
+				N=floor(N);//(int)((N>0)?(N):(N-1));
+			DeleteElement(Position);
+			this->GenerateASCIINumber(N,(int)N,1,p,Position);
+			return 1;
+		}
 	}
 
 	//we can drop the parentheses if the level inside is higher than the outside level

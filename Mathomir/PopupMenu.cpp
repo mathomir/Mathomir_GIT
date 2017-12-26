@@ -1207,9 +1207,12 @@ int PopupMenu::PrepareParenthesesMenu(int y)
 		AddCheckedMenuOptionButton(TSize_1p3+6*tt,"Cross ",((haveParentheses) && (Shape=='x')),49,30,1);
 
 		PopupOption_Y+=TSize_1p20;  //separator
-		AddCheckedMenuOptionButton(TSize/3,"Exclude left/top ",(m_Expression->m_ParenthesesFlags&0x08),151,20,0);
-		AddCheckedMenuOptionButton(TSize_2p3,"Exclude right/bottom ",(m_Expression->m_ParenthesesFlags&0x10),152,19,0);
-		AddCheckedMenuOptionButton(TSize,"Horizontal layout ",(m_Expression->m_ParenthesesFlags&0x04),150,18,1);
+		AddCheckedMenuOptionButton(TSize_1p3,"Ceiling ",((haveParentheses) && (Shape=='c')),40,97,0);
+		AddCheckedMenuOptionButton(TSize_1p3+tt,"Floor ",((haveParentheses) && (Shape=='f')),41,98,0);
+
+		AddCheckedMenuOptionButton(TSize_1p3+4*tt,"Exclude left/top ",(m_Expression->m_ParenthesesFlags&0x08),151,20,0);
+		AddCheckedMenuOptionButton(TSize_1p3+5*tt,"Exclude right/bottom ",(m_Expression->m_ParenthesesFlags&0x10),152,19,0);
+		AddCheckedMenuOptionButton(TSize_1p3+6*tt,"Horizontal layout ",(m_Expression->m_ParenthesesFlags&0x04),150,18,1);
 
 
 		/*AddCheckedMenuOptionButton(4*TSize/3+TSize/6,"Small ",(Height==2),42,15,0);
@@ -3703,7 +3706,7 @@ search_second_pass:
 			{
 				tmpExpression->m_ParenthesesFlags&=0xFE; //clearing the first bit
 			}
-			if (((data>=32) && (data<40)) || (data==49) || ((data>=56) && (data<=59))) //shape options
+			if (((data>=32) && (data<42)) || (data==49) || ((data>=56) && (data<=59))) //shape options
 			{
 				tmpExpression->m_ParenthesesFlags|=0x01; //seting the first bit
 				if (data==32) tmpExpression->m_ParentheseShape='('; // ( ) shape
@@ -3714,18 +3717,16 @@ search_second_pass:
 				if (data==37) tmpExpression->m_ParentheseShape='\\'; /* \ \ shape  */
 				if (data==38) tmpExpression->m_ParentheseShape='<'; /* < > shape  */
 				if (data==39) tmpExpression->m_ParentheseShape='b'; /* box shape  */
+				if (data==40) tmpExpression->m_ParentheseShape='c'; /* ceiling*/
+				if (data==41) tmpExpression->m_ParentheseShape='f'; /* floor*/
 				if (data==49) tmpExpression->m_ParentheseShape='x'; /* crossed shape  */
 				if (data==56) tmpExpression->m_ParentheseShape='l'; /* <]  */
 				if (data==57) tmpExpression->m_ParentheseShape='r'; /* [>  */
 				if (data==58) tmpExpression->m_ParentheseShape='a'; /* <|  - bra*/
 				if (data==59) tmpExpression->m_ParentheseShape='k'; /* |> - ket  */
-
 			}
-			if (((data>=40) && (data<49)) || (data==54) || (data==55)) //size options
+			if (((data>=43) && (data<49)) || (data==54) || (data==55)) //size options
 			{
-				//if (data==40) tmpExpression->m_ParentheseHeightFactor=0;  //large parentheses
-				//if (data==41) tmpExpression->m_ParentheseHeightFactor=1;  //medium parentheses
-				//if (data==42) tmpExpression->m_ParentheseHeightFactor=2;  //small parentheses
 				if (data==45) m_Expression->ChangeFontSize((float)0.95);  //all contents -5%
 				if (data==46) m_Expression->ChangeFontSize((float)1.05);  //all contents +5%
 				if (data==47) m_Expression->ChangeFontSize((float)0.85);  //all contents -15%

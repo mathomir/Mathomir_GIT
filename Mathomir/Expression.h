@@ -227,7 +227,7 @@ public:
 	int ExecuteComputation(int StartPos, int EndPos, char element_type, int StartPos2, int EndPos2, char element_type2,int ComputationType);
 	int IsPureNumber(int StartPos,int len, double * number,int *precision);
 	int GenerateASCIINumber(double number_dbl,long long number_int, char is_integer, int precision, int position);
-	int CompareElement(tElementStruct * ts1, tElementStruct * ts2);
+	int CompareElement(const tElementStruct * ts1,const tElementStruct * ts2);
 	//int GetOperatorLevel(char op);
 	// multiplies this expression with the multiplier
 	int ComputeExponent(int Position, char element_type, int ComputationType);

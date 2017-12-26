@@ -816,7 +816,7 @@ void CMathomirView::OnDraw(CDC* pDC)
 			bitmapDC.LineTo(X1,Y2);bitmapDC.LineTo(X2,Y2);bitmapDC.LineTo(X2,Y1);bitmapDC.LineTo(X1,Y1);
 			MakeQuickDrawing=0;
 			if (NumSelectedObjects) QuickDrawingDisable=5;
-			if ((!NumSelectedObjects) /*&& (KeyboardEntryObject) && (KeyboardEntryBaseObject) */&& (IsDrawingMode==0) && (QuickDrawingDisable==0))
+			if ((!NumSelectedObjects) && (IsDrawingMode==0) && (QuickDrawingDisable==0) && (!ViewOnlyMode))
 			{
 				int do_draw=MouseSteady;
 				//quick painting of curly brackets and section lines
@@ -4405,13 +4405,6 @@ void CMathomirView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 		{
 			if ((prevChar==nChar) && (nChar!=8))
 			{
-				/*int i=0;
-				while (keystring2[i])
-				{
-					if (keystring2[i]==nChar) 
-						break;
-					i++;
-				}*/
 				int i=0;
 				while (keystring[i])
 				{
@@ -4428,31 +4421,26 @@ void CMathomirView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 					else
 					{
 						SendKeyStroke(8,0,0); //sends backspace
-
 						//simulating the keypress with the shift key pressed (to get the upper character)
 						keybd_event(VK_SHIFT,0,0,0);
 						keybd_event(keystring[i],0,0,0);
 						keybd_event(VK_SHIFT,0,0x02,0);
 						lockRepeat=1;
-						//SendKeyStroke(keystring3[i],0,0); 
 					}
 					
 				}
 			}
 			else if (lockRepeat==1)
 			{
-				if ((!CTRLstate) || (ALTstate))	SendKeyStroke(nChar,0,Flags);
+				if ((!CTRLstate) || (ALTstate)) SendKeyStroke(nChar,0,Flags);
 				lockRepeat=2;
 			}
 			else
 			{
 				prevChar=nChar;
 				lockRepeat=0;
-				if ((!CTRLstate) || (ALTstate))	SendKeyStroke(nChar,0,Flags);
+				if ((!CTRLstate) || (ALTstate)) SendKeyStroke(nChar,0,Flags);
 			}
-			
-	
-			
 		}
 		CView::OnChar(nChar, nRepCnt, nFlags);
 	}
@@ -5706,18 +5694,11 @@ void CMathomirView::SendKeyStroke(UINT nChar, UINT nRepCnt, UINT nFlags)
 		//*** if the typing mode is not acitve ***
 
 		if (KeyboardEntryBaseObject==NULL)
-		//if ((nChar>='A') ||
-		//	((nChar>='0') && (nChar<='9')) || (nChar=='.') ||
-		//	(nChar=='+') || (nChar=='-') || (nChar=='/') || (nChar=='*') || (nChar=='(') ||
-		//	(nChar=='[') || (nChar=='{') || (nChar=='=') || (nChar=='<') || (nChar=='>') ||
-		//	(nChar=='|') || (nChar==',') || (nChar==';') || (nChar==':'))
-		
 		if (!ViewOnlyMode)
 		if ((nChar>6) && (nChar!=11) && (nChar!=12))
 		{
 			//replacing or inserting individual character/operator into an expression
 			//at the point where mouse is pointing
-
 
 			POINT cursor;
 			GetCursorPos(&cursor);
@@ -5816,8 +5797,6 @@ void CMathomirView::SendKeyStroke(UINT nChar, UINT nRepCnt, UINT nFlags)
 						{
 							QuickTypeUsed=2;
 							LastQuickTypeObject=ds;
-
-							//if ((IsDrawingMode) && (nChar!=' ')) x+=((CExpression*)ds->Object)->m_MarginX/2;
 							
 							short l,a,b;
 							((CExpression*)ds->Object)->CalculateSize(DC,ViewZoom,&l,&a,&b);
@@ -5835,8 +5814,6 @@ void CMathomirView::SendKeyStroke(UINT nChar, UINT nRepCnt, UINT nFlags)
 							{
 								OnMouseMove(0,pp);
 							}
-
-
 
 
 //*****************************************  //easycast during quick type??
@@ -7073,7 +7050,8 @@ int CMathomirView::AdjustMenu(void)
 
 void CMathomirView::OnSysKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	prevChar=0;
+	if (lockRepeat!=2)
+		prevChar=0;
 	IsSpacebarOnlyHit=0;
 	IsALTDown=0;
 	IsSHIFTALTDown=0;
