@@ -102,8 +102,6 @@ class CExpression
 		tConstant Constants[MAX_SUMMANDS]; //constant factors of all summands of an expression are listed here
 	} tVariableList;
 
-
-
 public:
 	CElement *m_pPaternalElement;
 	CExpression *m_pPaternalExpression;

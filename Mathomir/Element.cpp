@@ -1797,16 +1797,16 @@ void CElement::PaintExpression(CDC * DC, short zoom, short X, short Y,char IsBlu
 	if (m_Color!=-1) color=ColorTable[m_Color];
 	if (m_Type==1)  //variable / constant
 	{
-		//int mask=IsBlue?0xFFFFFFFF:0;
-		if ((((CExpression*)m_pPaternalExpression)->m_InternalInsertionPoint>0) && (IsBlue) && (m_Text) && (!Popup->IsWindowVisible()))  //babaluj
+		if (((IsBlue) && (m_Text) && ((CExpression*)m_pPaternalExpression)->m_InternalInsertionPoint>0) && (!Popup->IsWindowVisible()))
 		{
+			//for plain text we are going to display insertion point also within the words (this differs
+			//from math variables where a multi-letter variable would become 'touched' instead)
 			int kk=((CExpression*)m_pPaternalExpression)->m_InternalInsertionPoint;
-			if (kk==1) kk=-ActualSize/21;
+			if (kk<=1) kk=0;
 			int paternal_pos=this->GetPaternalPosition();
 			if ((((CExpression*)this->m_pPaternalExpression)->m_pElementList+paternal_pos)->IsSelected!=2)
 			if (Data3[strlen(Data1)]>=kk)
 			{
-				//mask=0;
 				IsBlue=0;
 				if ((((CExpression*)m_pPaternalExpression)->m_IsKeyboardEntry!=paternal_pos+1) ||
 					(Data3[((CExpression*)m_pPaternalExpression)->m_KeyboardCursorPos]!=kk))
@@ -1819,13 +1819,14 @@ void CElement::PaintExpression(CDC * DC, short zoom, short X, short Y,char IsBlu
 					}
 					else 
 						ActualSize2=ActualSize/3;
-					int width=max(ActualSize/15,2);
+					int width=max((ActualSize+12)/16,2);
 					int height=2*ActualSize2+ActualSize/16+ActualSize2/2;
+					kk-=width/2;
 					int Ypos=Y-ActualSize2-ActualSize/11+ActualSize/24-ActualSize2/6;
 					if (IsDrawingMode)
-						DC->FillSolidRect(X+kk-1+width/4,Ypos,width/2,height,PALE_RGB(GREEN_COLOR)); //PAINT THE INSERTION POINT
+						DC->FillSolidRect(X+kk+width/4,Ypos,width/2,height,PALE_RGB(GREEN_COLOR)); //PAINT THE INSERTION POINT
 					else
-						DC->FillSolidRect(X+kk-1,Ypos,width,height,GREEN_COLOR); //PAINT THE INSERTION POINT
+						DC->FillSolidRect(X+kk,Ypos,width,height,GREEN_COLOR); //PAINT THE INSERTION POINT
 				}
 			}
 		}
@@ -1855,41 +1856,94 @@ void CElement::PaintExpression(CDC * DC, short zoom, short X, short Y,char IsBlu
 
 	if (m_Type==2)  //operator (Like: '+', '-', '/')
 	{
+		char oper_type=Data1[0];
 		int clr=(IsBlue)?BLUE_COLOR:((Data2[0]&0x10)?PALE_RGB(color):color);
-		if (Data1[0]==(char)0xE3) //arrow with expression above it
-		{
-			if (Expression1) ((CExpression*)Expression1)->PaintExpression(DC,zoom,X+E1_posX,Y+E1_posY,ClipReg,color);
-			DC->FillSolidRect(X,Y-ActualSize/40+ActualSize/24,this->E1_length+ActualSize/2+ActualSize/6,max(1,ActualSize/20),clr);
-			CBrush brush(clr);
-			CPen pen(PS_SOLID,1,clr);
-			HGDIOBJ op=DC->SelectObject(pen);
-			HGDIOBJ ob=DC->SelectObject(brush);
-			CPoint pt[4];
-			pt[0].x=X+this->E1_length+ActualSize/2+ActualSize/4; pt[0].y=Y+ActualSize/24;
-			pt[1].x=pt[0].x-ActualSize/4; pt[1].y=pt[0].y+ActualSize/5;
-			pt[2].x=pt[0].x-ActualSize/8; pt[2].y=pt[0].y;
-			pt[3].x=pt[1].x;              pt[3].y=pt[0].y-ActualSize/5;
-			DC->Polygon(pt,4);
-			DC->SelectObject(ob);
-			DC->SelectObject(op);
-			return;
-		}
 
-		if (Data1[0]=='P') //paralel operator
+		if (oper_type&0x80)
+		{
+			if (oper_type==(char)0xE3) //arrow with expression above it
+			{
+				if (Expression1) ((CExpression*)Expression1)->PaintExpression(DC,zoom,X+E1_posX,Y+E1_posY,ClipReg,color);
+				DC->FillSolidRect(X,Y-ActualSize/40+ActualSize/24,this->E1_length+ActualSize/2+ActualSize/6,max(1,ActualSize/20),clr);
+				CBrush brush(clr);
+				CPen pen(PS_SOLID,1,clr);
+				HGDIOBJ op=DC->SelectObject(pen);
+				HGDIOBJ ob=DC->SelectObject(brush);
+				CPoint pt[4];
+				pt[0].x=X+this->E1_length+ActualSize/2+ActualSize/4; pt[0].y=Y+ActualSize/24;
+				pt[1].x=pt[0].x-ActualSize/4; pt[1].y=pt[0].y+ActualSize/5;
+				pt[2].x=pt[0].x-ActualSize/8; pt[2].y=pt[0].y;
+				pt[3].x=pt[1].x;              pt[3].y=pt[0].y-ActualSize/5;
+				DC->Polygon(pt,4);
+				DC->SelectObject(ob);
+				DC->SelectObject(op);
+				return;
+			}
+
+			if (oper_type==(char)0x9E) //triangle
+			{
+				DC->SelectObject(GetPenFromPool(max(1,Data3[1]/16),IsBlue,clr));
+				int xx=X+Data3[0]+Data3[1]/12;
+				int yy=Y+Data3[2]+Data3[1]/3+Data3[1]/16-((Data3[1]<14)?1:0);
+				int h=Data3[1]/2+Data3[1]/16;
+				int l=h;
+				DC->MoveTo(xx,yy);
+				DC->LineTo(xx+l/2,yy-h);
+				DC->LineTo(xx+l,yy);
+				DC->LineTo(xx,yy);
+				CPoint pt[4];
+				return;
+			}
+			if (oper_type==0x5B) //three dots in upside-down triangle formation
+			{
+				int h=(Data3[1]+3)/6;
+				int r=2*(h+3)/7;
+				DC->SelectObject(GetPenFromPool(max(1,Data3[1]/20),IsBlue,clr));	
+				CBrush br;
+				br.CreateSolidBrush((IsBlue)?BLUE_COLOR:clr);
+				DC->SelectObject(br);
+				Y-=Data3[1]/32;
+				X+=h;
+
+				if (r>3) 
+				{
+					DC->Ellipse(X,Y-h,X+r,Y-h+r);
+					DC->Ellipse(X+2*h,Y-h,X+2*h+r,Y-h+r);
+					DC->Ellipse(X+h,Y+h,X+h+r,Y+h+r);
+				}
+				else if ((r==2) || (r==3))
+				{
+					DC->Rectangle(X,Y-h,X+r,Y-h+r);
+					DC->Rectangle(X+2*h,Y-h,X+2*h+r,Y-h+r);
+					DC->Rectangle(X+h,Y+h,X+h+r,Y+h+r);
+				}
+				else
+				{
+					DC->SetPixelV(X,Y-h,(IsBlue)?BLUE_COLOR:clr);
+					DC->SetPixelV(X+2*h,Y-h,(IsBlue)?BLUE_COLOR:clr);
+					DC->SetPixelV(X+h,Y+h,(IsBlue)?BLUE_COLOR:clr);
+				}
+
+				return;
+			} 
+			if (oper_type==(char)0xB2) //minus plus opertor
+			{
+				if (Data3[1]<20) Data3[1]=120*Data3[1]/100;
+				int corr=max(1,Data3[1]/20);
+				if (corr&0x01) corr=1; else corr=0;
+				DC->FillSolidRect(X+Data3[0],Y+Data3[1]/3-7*Data3[1]/14+Data3[2],max(1,10*Data3[1]/22)-corr,max(1,Data3[1]/20),clr);
+				DC->FillSolidRect(X+Data3[0],Y+Data3[1]/3-3*Data3[1]/14+Data3[2]-max(1,Data3[1]/20)/2-corr,max(1,10*Data3[1]/22)-corr,max(1,Data3[1]/20),clr);			
+				DC->FillSolidRect(X+Data3[0]+5*Data3[1]/22-max(1,Data3[1]/20)/2-corr,Y+Data3[1]/3-6*Data3[1]/14+Data3[2],max(1,Data3[1]/20),max(1,6*Data3[1]/14)-corr,clr);
+				return;
+			}
+		}
+		if (oper_type=='P') //paralel operator
 		{
 			DC->FillSolidRect(X+Data3[0]+Data3[1]/9,Y-Data3[1]/3+Data3[2],max(1,Data3[1]/15),2*Data3[1]/3,clr);
 			DC->FillSolidRect(X+Data3[0]+4*Data3[1]/11,Y-Data3[1]/3+Data3[2],max(1,Data3[1]/15),2*Data3[1]/3,clr);
 			return;
 		}
-		/*if (Data1[0]=='p') //parpendicular operator
-		{
-			//DC->FillSolidRect(X+Data3[0]+5*Data3[1]/20-max(1,Data3[1]/15)/2,Y-Data3[1]/3+Data3[2],max(1,Data3[1]/15),2*Data3[1]/3,clr);
-			//DC->FillSolidRect(X+Data3[0],Y+Data3[1]/3+Data3[2],5*Data3[1]/10,max(1,Data3[1]/15),clr);
-			
-			return;
-		} */
-		
-		if (Data1[0]==0x03) //small circle (composition of functions)
+		if (oper_type==0x03) //small circle (composition of functions)
 		{
 			DC->SelectObject(GetPenFromPool(max(1,Data3[1]/20),IsBlue,clr));			
 			DC->Arc(X+Data3[0]+Data3[1]/16,
@@ -1899,63 +1953,8 @@ void CElement::PaintExpression(CDC * DC, short zoom, short X, short Y,char IsBlu
 					0,0,1,0);
 			return;
 		} 
-		if (Data1[0]==(char)0x9E) //triangle
-		{
-			DC->SelectObject(GetPenFromPool(max(1,Data3[1]/16),IsBlue,clr));
-			int xx=X+Data3[0]+Data3[1]/12;
-			int yy=Y+Data3[2]+Data3[1]/3+Data3[1]/16-((Data3[1]<14)?1:0);
-			int h=Data3[1]/2+Data3[1]/16;
-			int l=h;
-			DC->MoveTo(xx,yy);
-			DC->LineTo(xx+l/2,yy-h);
-			DC->LineTo(xx+l,yy);
-			DC->LineTo(xx,yy);
-			return;
-		}
-		if (Data1[0]==0x5B) //three dots in upside-down triangle formation
-		{
-			int h=(Data3[1]+3)/6;
-			int r=2*(h+3)/7;
-			DC->SelectObject(GetPenFromPool(max(1,Data3[1]/20),IsBlue,clr));	
-			CBrush br;
-			br.CreateSolidBrush((IsBlue)?BLUE_COLOR:clr);
-			DC->SelectObject(br);
-			Y-=Data3[1]/32;
-			X+=h;
-
-			if (r>3) 
-			{
-				DC->Ellipse(X,Y-h,X+r,Y-h+r);
-				DC->Ellipse(X+2*h,Y-h,X+2*h+r,Y-h+r);
-				DC->Ellipse(X+h,Y+h,X+h+r,Y+h+r);
-			}
-			else if ((r==2) || (r==3))
-			{
-				DC->Rectangle(X,Y-h,X+r,Y-h+r);
-				DC->Rectangle(X+2*h,Y-h,X+2*h+r,Y-h+r);
-				DC->Rectangle(X+h,Y+h,X+h+r,Y+h+r);
-			}
-			else
-			{
-				DC->SetPixelV(X,Y-h,(IsBlue)?BLUE_COLOR:clr);
-				DC->SetPixelV(X+2*h,Y-h,(IsBlue)?BLUE_COLOR:clr);
-				DC->SetPixelV(X+h,Y+h,(IsBlue)?BLUE_COLOR:clr);
-			}
-
-			return;
-		} 
-		if (Data1[0]==(char)0xB2) //minus plus opertor
-		{
-			if (Data3[1]<20) Data3[1]=120*Data3[1]/100;
-			int corr=max(1,Data3[1]/20);
-			if (corr&0x01) corr=1; else corr=0;
-			DC->FillSolidRect(X+Data3[0],Y+Data3[1]/3-7*Data3[1]/14+Data3[2],max(1,10*Data3[1]/22)-corr,max(1,Data3[1]/20),clr);
-			DC->FillSolidRect(X+Data3[0],Y+Data3[1]/3-3*Data3[1]/14+Data3[2]-max(1,Data3[1]/20)/2-corr,max(1,10*Data3[1]/22)-corr,max(1,Data3[1]/20),clr);			
-			DC->FillSolidRect(X+Data3[0]+5*Data3[1]/22-max(1,Data3[1]/20)/2-corr,Y+Data3[1]/3-6*Data3[1]/14+Data3[2],max(1,Data3[1]/20),max(1,6*Data3[1]/14)-corr,clr);
-			return;
-		}
-
-		if (((IsBlue) || (((CExpression*)this->m_pPaternalExpression)->m_Selection) || (this->m_pPaternalExpression==KeyboardEntryObject)) && (Data1[0]==9)) //the tab (space)
+		if ((oper_type==9) && 
+			((IsBlue) || (((CExpression*)this->m_pPaternalExpression)->m_Selection) || (this->m_pPaternalExpression==KeyboardEntryObject))) //the tab (space)
 		{
 			int ok=0;
 			if (IsBlue) ok=1;
@@ -1995,7 +1994,6 @@ void CElement::PaintExpression(CDC * DC, short zoom, short X, short Y,char IsBlu
 				}
 				else
 				{
-				
 					int len=Data3[0]*2+Data3[1]/16;
 					int c=Data3[1]/4;
 					int c2=(Data3[1]+28)/16;
@@ -2014,19 +2012,17 @@ void CElement::PaintExpression(CDC * DC, short zoom, short X, short Y,char IsBlu
 					}
 					else
 						DC->FillSolidRect(X+len-c2,Y-c,c2,2*c,BLUE_COLOR);
-
 				}
 			}
 			return;
 		}
-		if (Data1[0]==']') //complement?
+		if (oper_type==']') //complement?
 		{
 			DC->SelectObject(GetPenFromPool(max(1,Data3[1]/16),IsBlue,clr));
 			DC->MoveTo(X,Y-Data3[1]/4);
 			DC->LineTo(X+4*Data3[1]/8,Y+Data3[1]/4);
 			return;
 		}
-
 
 		hfont=GetFontFromPool(Data2[0],max(Data3[1],1));
 		DC->SelectObject(hfont);
@@ -2035,43 +2031,46 @@ void CElement::PaintExpression(CDC * DC, short zoom, short X, short Y,char IsBlu
 			DC->TextOut(X+Data3[0]+1,Y+Data3[1]/3+Data3[2],&Data2[1]);
 		DC->TextOut(X+Data3[0],Y+Data3[1]/3+Data3[2],&Data2[1]);
 
-		if (Data1[0]==(char)0xE2) // |--> operator
+		if (oper_type&0x80)
 		{
-			DC->TextOut(X+Data3[0],Y+Data3[1]/3+Data3[2],&Data2[1]);
-			DC->FillSolidRect(X+Data3[0],Y+ActualSize/40+Data3[2],max(ActualSize/22,1),ActualSize/4+((ActualSize>15)?1:0),clr);
-		}
-		if (Data1[0]==(char)0xA0) //approx. equal (dot over equal)
-		{
-			int corr=max(0,Data3[1]/30);
-			int Xx=X+Data3[0]+5*Data3[1]/23;
-			int Yy=Y+Data3[1]/3+Data3[2]-6*Data3[1]/14;
-			if (corr==0)
+			if (oper_type==(char)0xE2) // |--> operator
 			{
-				DC->SetPixel(Xx,Yy,clr);
-				if (Data3[1]>=20) DC->SetPixel(Xx-1,Yy,clr);
+				DC->TextOut(X+Data3[0],Y+Data3[1]/3+Data3[2],&Data2[1]);
+				DC->FillSolidRect(X+Data3[0],Y+ActualSize/40+Data3[2],max(ActualSize/22,1),ActualSize/4+((ActualSize>15)?1:0),clr);
 			}
-			else if (corr<2)
+			if (oper_type==(char)0xA0) //approx. equal (dot over equal)
 			{
-				DC->FillSolidRect(Xx-corr,Yy-corr,2*corr,2*corr,clr);
+				int corr=max(0,Data3[1]/30);
+				int Xx=X+Data3[0]+5*Data3[1]/23;
+				int Yy=Y+Data3[1]/3+Data3[2]-6*Data3[1]/14;
+				if (corr==0)
+				{
+					DC->SetPixel(Xx,Yy,clr);
+					if (Data3[1]>=20) DC->SetPixel(Xx-1,Yy,clr);
+				}
+				else if (corr<2)
+				{
+					DC->FillSolidRect(Xx-corr,Yy-corr,2*corr,2*corr,clr);
+				}
+				else
+				{
+					DC->SelectObject(GetPenFromPool(max(1,Data3[1]/20),IsBlue,clr));
+					DC->Ellipse(Xx-corr,Yy-corr,Xx+corr,Yy+corr);
+				}
 			}
-			else
+			if (oper_type==(char)0x9F) //equal with hat
 			{
-				DC->SelectObject(GetPenFromPool(max(1,Data3[1]/20),IsBlue,clr));
-				DC->Ellipse(Xx-corr,Yy-corr,Xx+corr,Yy+corr);
+				//int corr=max(0,Data3[1]/30);
+				int Xx=X+Data3[0]+5*Data3[1]/24;
+				int Yy=Y+Data3[1]/3+Data3[2]-14*Data3[1]/32;
+				int pw=max(1,Data3[1]/24);
+				DC->SelectObject(GetPenFromPool(pw,IsBlue,clr));
+				int cc=max(1,Data3[1]/9);
+				DC->MoveTo(Xx-cc,Yy);
+				DC->LineTo(Xx,Yy-cc);
+				if (pw>1) pw=0;
+				DC->LineTo(Xx+cc+pw,Yy+pw);
 			}
-		}
-		if (Data1[0]==(char)0x9F) //equal with hat
-		{
-			//int corr=max(0,Data3[1]/30);
-			int Xx=X+Data3[0]+5*Data3[1]/24;
-			int Yy=Y+Data3[1]/3+Data3[2]-14*Data3[1]/32;
-			int pw=max(1,Data3[1]/24);
-			DC->SelectObject(GetPenFromPool(pw,IsBlue,clr));
-			int cc=max(1,Data3[1]/9);
-			DC->MoveTo(Xx-cc,Yy);
-			DC->LineTo(Xx,Yy-cc);
-			if (pw>1) pw=0;
-			DC->LineTo(Xx+cc+pw,Yy+pw);
 		}
 		return;
 	}

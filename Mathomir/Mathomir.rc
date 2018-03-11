@@ -181,8 +181,8 @@ CAPTION "About Math-o-mir"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,14,20,20
-    LTEXT           "Math-o-mir  2.1 beta4",IDC_STATIC,43,13,125,8,SS_NOPREFIX
-    LTEXT           "Danijel Gorupec, 2017.",IDC_STATIC,44,42,95,8
+    LTEXT           "Math-o-mir  2.1 beta5",IDC_STATIC,43,13,125,8,SS_NOPREFIX
+    LTEXT           "Danijel Gorupec, 2018.",IDC_STATIC,44,42,95,8
     DEFPUSHBUTTON   "OK",IDOK,178,6,50,16,WS_GROUP
     LTEXT           "E-mail me at: danijel.gorupec@gmail.com",IDC_STATIC,43,100,134,8
     LTEXT           "The mathematical notepad.",IDC_STATIC,43,23,88,8
@@ -425,8 +425,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2,1,0,3
- PRODUCTVERSION 2,1,0,3
+ FILEVERSION 2,1,0,4
+ PRODUCTVERSION 2,1,0,4
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L

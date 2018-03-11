@@ -1328,27 +1328,24 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 	if ((X<-8000) || (Y<-8000)) return;
 
 	int ActualSize=GetActualFontSize(zoom);
-	int ActualSize2; 
-
-
 
 	//determine the color of expression
 	if (m_Color!=-1) 
 		color=ColorTable[m_Color];
-	else if ((m_pPaternalExpression==NULL) && (m_IsHeadline) && (color==0))
+	else if ((m_IsHeadline) && (color==0) && (m_pPaternalExpression==NULL))
 		color=RGB(0,128,128);
 
-	if ((KeyboardEntryObject) && (KeyboardEntryBaseObject))
+	//painting yellow shadow (for autocomplete-soruce objects) or blue shadow (when typing indexes or exponents
 	if ((AutocompleteSource==this) || ((KeyboardEntryObject==(CObject*)this) && ((KeyboardIndexMode)||(KeyboardExponentMode))))
+	if ((KeyboardEntryObject) && (KeyboardEntryBaseObject))
 	{
 		int l,a,b;
 		a=this->m_OverallAbove;
 		b=this->m_OverallBelow;
 		l=this->m_OverallLength-2*m_MarginX;
 		int is_empty=0;
-		if ((AutocompleteSource) && (KeyboardEntryObject))
+		if (AutocompleteSource)
 		{
-			
 			if (AutocompleteTriggered) is_empty=1;
 			int fade=min(a+b,l)/2;
 			fade=min(fade,6);
@@ -1374,9 +1371,6 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 				else
 					DC->FillSolidRect(x,y,len,height,clr);
 			}
-			
-			//DC->FillSolidRect(X+m_MarginX+ii,Y-a-1+ii,l-2*ii,a+b+2-2*ii,clr);
-
 			if (!is_empty)
 			{
 				int w=max(ActualSize/12,1);
@@ -1385,12 +1379,11 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 		}
 		else
 		{
-		
 			DC->FillSolidRect(X+m_MarginX,Y-a-1,l,a+b+2,SHADOW_BLUE_COLOR);
-			
 		}
 	}
 
+	int ActualSize2; 
 	if (IsHighQualityRendering) 
 	{
 		ActualSize2=ActualSize/4;
@@ -1420,17 +1413,15 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 			X=0;
 			Y=m_OverallAbove;
 			ClipReg=NULL;
-
 		}
 
 		//we are going to set some DC properties
 		DC->SetBkMode(TRANSPARENT);
 		DC->SetTextAlign(TA_BASELINE);
 	}
-
-	//paint frame around selection ( if is selected or is keyboard entry mode)
-	if ((FrameSelections) && (m_pPaternalExpression))  
+	else if (FrameSelections)
 	{
+		//paint frame around selection ( if is selected or is keyboard entry mode)
 		if ((m_Selection==1) || (m_Selection==m_NumElements+1) || 
 			((m_IsKeyboardEntry==1) && (m_KeyboardCursorPos==0) && ((m_pElementList+m_IsKeyboardEntry-1)->Type==1)) || 
 			((m_IsKeyboardEntry==m_NumElements) && (m_NumElements) && ((m_pElementList+m_IsKeyboardEntry-1)->Type==1) && ((m_pElementList+m_IsKeyboardEntry-1)->pElementObject->Data1[m_KeyboardCursorPos]==0)))
@@ -1441,11 +1432,9 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 			CExpression *exp=this;
 			int corr=0;
 
-
 			int is_cursor_at_end=0;
 			if ((m_NumElements==m_IsKeyboardEntry) && (m_IsKeyboardEntry>0) && (m_KeyboardCursorPos>=0) && (m_KeyboardCursorPos<=23))
 				if ((m_pElementList+m_IsKeyboardEntry-1)->pElementObject->Data1[m_KeyboardCursorPos]==0) is_cursor_at_end=1;
-
 
 			if ((this->m_pPaternalElement) && (this->m_pPaternalElement->IsDifferential(1)) && (this->m_pPaternalExpression->m_pPaternalElement))
 			{
@@ -1459,18 +1448,8 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 				}
 			}
 		
-			int ii;
-			for (ii=0;ii<exp->m_pPaternalExpression->m_NumElements;ii++)
-			{
-				ts=exp->m_pPaternalExpression->m_pElementList+ii;
-				if (ts->pElementObject==exp->m_pPaternalElement)
-				{
-					if (ts->IsSelected) is_pater_object_selected=1;
-					break;
-				}
-			}
-	
-
+			ts=exp->m_pPaternalExpression->m_pElementList+exp->m_pPaternalElement->GetPaternalPosition();
+			if (ts->IsSelected) is_pater_object_selected=1;
 			
 			int Selection=exp->m_Selection;
 			int IsKeyboardEntry=exp->m_IsKeyboardEntry;
@@ -1478,7 +1457,6 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 			int KeyboardCursorPos=exp->m_KeyboardCursorPos;
 			char ParenthesesFlags=exp->m_ParenthesesFlags;
 			tElementStruct *pElementList=exp->m_pElementList;
-
 
 			if ((is_pater_object_selected==0) && (ts) && 
 				((!exp->m_DrawParentheses) || (ParenthesesFlags&0x18)) && (ts->pElementObject->Expression1==((CObject*)exp)))
@@ -1523,16 +1501,13 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 
 					DC->MoveTo(X2,Y2);
 					DC->LineTo(X1,Y2);
-					{
-						DC->LineTo(X1,Y1);
-						DC->LineTo(X3,Y1);
-						DC->LineTo(X3,Y3);
-						DC->LineTo(X4,Y3);
-						DC->LineTo(X4,Y4);
-						
-						DC->LineTo(X2,Y4);
-						DC->LineTo(X2,Y2);
-					}
+					DC->LineTo(X1,Y1);
+					DC->LineTo(X3,Y1);
+					DC->LineTo(X3,Y3);
+					DC->LineTo(X4,Y3);
+					DC->LineTo(X4,Y4);
+					DC->LineTo(X2,Y4);
+					DC->LineTo(X2,Y2);
 					DC->SelectObject(GetStockObject(BLACK_PEN));
 				}
 			}
@@ -1543,14 +1518,11 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 	//the main loop for painting
 	char LastDecoration=m_pElementList->Decoration;
 	short LastDecorationElement=0;
-	short row=0,column=0;
-	int i;
 	tElementStruct *theElement=m_pElementList;
-	for (i=0;i<m_NumElements;i++,theElement++)
+	for (int i=0;i<m_NumElements;i++,theElement++)
 	{
-		
 		if ((((theElement->IsSelected) || ((theElement->Type==5) && (((CExpression*)theElement->pElementObject->Expression1)->m_ParenthesesSelected)))
-			&& ((TouchMouseMode>1) || ((GetKeyState(VK_SHIFT)&0xFFFE) && (DisableMultitouch==0)) /*|| (ClipboardExpression)*/)) || 
+			&& ((TouchMouseMode>1) || ((GetKeyState(VK_SHIFT)&0xFFFE) && (DisableMultitouch==0)))) || 
 			(theElement->IsSelected==2))//painting blue-hue behind selected elements
 		{
 			int a=theElement->Above;
@@ -1562,34 +1534,30 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 			DC->FillSolidRect(X+theElement->X_pos-m_MarginX/2,Y+theElement->Y_pos-a,l,a+b,RGB(240,240,255));
 		}
 
-		if (theElement->Type==11) {column++;}
-		if (theElement->Type==12) {row++;column=0;}
-		if ((theElement->Type==0) /*|| (theElement->Type==11) || (theElement->Type==12)*/)  //empty frame
+		if (theElement->Type==0)  //empty frame
 		{	
 			if (!PrintRendering)
 			{
-				if ((theElement->IsSelected) || (theElement->Type==0))
+				if ((m_StartAsText) && (i==0) && (m_MaxNumRows==1) && (m_MaxNumColumns==1) && 
+					((this->m_pPaternalElement==NULL) || (this->m_pPaternalElement->m_Type==5)))
 				{
-					if ((m_StartAsText) && (i==0) && (m_MaxNumRows==1) && (m_MaxNumColumns==1) && 
-						((this->m_pPaternalElement==NULL) || (this->m_pPaternalElement->m_Type==5)))
+					DC->SelectObject(GetFontFromPool(1,0,1,ActualSize));
+					DC->SetTextColor((theElement->IsSelected)?BLUE_COLOR:color);
+					DC->TextOut(X+theElement->X_pos,Y+theElement->Y_pos+ActualSize/3,"T");
+				}
+				else
+				{
+					int paint=1;
+					if ((this->m_pPaternalElement) && 
+						(this->m_pPaternalElement->m_Type==7) && 
+						(theElement->IsSelected==0) && (this->m_Selection==0) &&
+						(this->m_pPaternalElement->Expression2==(CObject*)this) &&
+						(this->m_pElementList->Type==0) && (this->m_NumElements==1) && 
+						(this->m_pPaternalElement->Expression3!=KeyboardEntryObject) &&
+						(((CExpression*)this->m_pPaternalElement->Expression3)->m_pElementList->Type))
+						paint=0; //for signa or integral signs, no upper limit will be desplayed if empty
+					if (paint) 
 					{
-						DC->SelectObject(GetFontFromPool(1,0,1,ActualSize));
-						DC->SetTextColor((theElement->IsSelected)?BLUE_COLOR:color);
-						DC->TextOut(X+theElement->X_pos,Y+theElement->Y_pos+ActualSize/3,"T");
-					}
-					else
-					{
-						int paint=1;
-						if ((this->m_pPaternalElement) && 
-							(this->m_pPaternalElement->m_Type==7) && 
-							(theElement->IsSelected==0) && (this->m_Selection==0) &&
-							(this->m_pPaternalElement->Expression2==(CObject*)this) &&
-							(this->m_pElementList->Type==0) && (this->m_NumElements==1) && 
-							(this->m_pPaternalElement->Expression3!=KeyboardEntryObject) &&
-							(((CExpression*)this->m_pPaternalElement->Expression3)->m_pElementList->Type))
-							paint=0; //for signa or integral signs, no upper limit will be desplayed if empty
-						if (paint) 
-						{
 						POINT p[5];
 						int CLR=PALE_RGB(color);
 						DC->SelectObject(GetPenFromPool((ActualSize<9)?1:0,(theElement->IsSelected)?1:0,CLR));
@@ -1598,16 +1566,12 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 						p[2].x=p[1].x;									p[2].y=Y+theElement->Y_pos+7*theElement->Below/8-ActualSize/20;
 						p[3].x=p[0].x;									p[3].y=p[2].y;
 						p[4].x=p[0].x;									p[4].y=p[0].y;
-						//if (ActualSize>=9)
-						//	for (int kk=0;kk<4;kk++)
-						//		DC->SetPixelV(p[kk].x,p[kk].y,CLR);						
 						DC->Polyline(p,5);
-						}
 					}
 				}
 			}
 		}
-		else if (theElement->Type>0)
+		else //if (theElement->Type>0)
 		{
 			if ((ClipReg==NULL) ||
 				((X+theElement->X_pos<=ClipReg->right+32) && (X+theElement->X_pos+theElement->Length>=ClipReg->left-32) &&
@@ -1627,11 +1591,11 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 		}
 
 		//paint insertion point
-	
+		if (m_Selection)
 		{
 			int Xpos;
 			int Ypos=Y+theElement->Y_pos-ActualSize2-ActualSize/11+ActualSize/24-ActualSize2/6-1;
-			int width=max(ActualSize/15,2);
+			int width=max((ActualSize+12)/16,2);
 			int height=(5*ActualSize2+1)/2+ActualSize/16+1;
 			int do_green;
 
@@ -1654,7 +1618,6 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 				//all the others
 				do_green=this->DetermineInsertionPointType(m_Selection-1);
 				if ((i==0) || (((theElement-1)->Type==2) && ((theElement-1)->pElementObject->Data1[0]==(char)0xFF)) ||
-					//((theElement-1)->X_pos+(theElement-1)->Length>theElement->X_pos) ||
 					((theElement-1)->Type==11) || ((theElement-1)->Type==12))
 				{
 					//first in the line or matrix/table cell
@@ -1665,12 +1628,11 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 				{
 					//the last in the line or matrix/table cell
 					Xpos=X+(theElement-1)->X_pos+(theElement-1)->Length+((do_green)?10*m_MarginX/8:m_MarginX*2/3)-width/2;
-					
 				}
 				else
 				{
 					int delta=width/2;//ActualSize/20;
-					Xpos=X+(theElement->X_pos+(theElement-1)->X_pos+(theElement-1)->Length)/2-width/2;//-delta-((ActualSize<20)?1:0);
+					Xpos=X+(theElement->X_pos+(theElement-1)->X_pos+(theElement-1)->Length)/2-width/2;
 					if ((theElement-1)->pElementObject->Data2[0]&0x02) Xpos+=(ActualSize+8)/32; //if the previous character is italic, then move insertion point position a bit to the right
 				}
 				if (IsDrawingMode)
@@ -1681,12 +1643,13 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 		}
 
 		//paint cursor (the blinking cursor used in keyboard entry mode)
-		if (m_IsKeyboardEntry-1==i)	
-		{   
+		if (m_IsKeyboardEntry-1==i)
+		{
 			int CPos=0;
 			if (theElement->pElementObject) CPos=theElement->pElementObject->Data3[m_KeyboardCursorPos];
 			if (((m_KeyboardCursorPos>0) && (theElement->pElementObject->Data2[m_KeyboardCursorPos-1]&0x02)) ||
-				((m_KeyboardCursorPos==0) && (m_IsKeyboardEntry>1) && ((theElement-1)->pElementObject->Data2[0]&0x02))) CPos+=(ActualSize+8)/32;
+				((m_KeyboardCursorPos==0) && (m_IsKeyboardEntry>1) && ((theElement-1)->pElementObject->Data2[0]&0x02))) 
+				CPos+=(ActualSize+8)/32;
 			
 			if (theElement->Type==6)
 			{
@@ -1705,7 +1668,6 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 				//repainting the text controlbox
 				if (TextControlboxMode==-1) {Toolbox->AdjustPosition();Toolbox->InvalidateRect(NULL,0);} else Toolbox->PaintTextcontrolbox(NULL);
 				TextControlboxMode=do_green;
-				
 			}
 
 			int hhh=2*ActualSize2+2+ActualSize/10;
@@ -1726,17 +1688,13 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 				}
 				tempdc.SelectObject(cursor_bitmap);
 				
-				
 				tempdc.FillSolidRect(0,0,www,hhh,do_green?RGB(228,255,228):RGB(240,240,255));
 				tempdc.TransparentBlt(0,0,www,hhh,DC,pX,pY,www,hhh,RGB(255,255,255));
 				DC->BitBlt(pX,pY, www,hhh,&tempdc,0,0,SRCCOPY);
 			}
 
-			
-
 			if ((CursorBlinkState) || (IsWindowOutOfFocus))
-			{				
-				//int cw=max((UseWideCursor)?2*ActualSize/10:(ActualSize+12)/16,2);
+			{
 				int cw=max((ActualSize+12)/16,2);
 				int clr=(do_green)?(GREEN_COLOR):(BLUE_COLOR);
 				if (IsWindowOutOfFocus) clr=PALE_RGB(PALE_RGB(clr));
@@ -1769,10 +1727,10 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 				CPen pen(PS_DOT,1,clr);
 				DC->SelectObject(pen);
 				int tmp=(IsHighQualityRendering)?-1:1;
-				int x1=pX;//X+theElement->X_pos+CPos-ActualSize/6-ActualSize/32-tmp+ActualSize/24;
-				int y1=pY+hhh-1;//Y+theElement->Y_pos+ActualSize/3+tmp;
-				int x2=pX+www-1;//X+theElement->X_pos+CPos+ActualSize/6+tmp;//+ActualSize/24;
-				int y2=pY;//Y+theElement->Y_pos-ActualSize/3-1-tmp;
+				int x1=pX;
+				int y1=pY+hhh-1;
+				int x2=pX+www-1;
+				int y2=pY;
 
 				DC->MoveTo(x1,y1);
 				DC->LineTo(x2,y1);
@@ -1795,7 +1753,6 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 		PaintDecoration(DC,zoom,X,Y,LastDecorationElement,m_NumElements,LastDecoration,color);
 	}
 
-
 	//matrix insertion points 
 	//also drawing table border lines
 	if ((m_MatrixColumns) && (m_MatrixRows))
@@ -1817,7 +1774,6 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 			}
 			else 
 				xx=X+m_MatrixColumns[m_MaxNumColumns-1].x+m_MatrixColumns[m_MaxNumColumns-1].length+m_MarginX/2;
-			
 			Xpositions[i]=xx-ActualSize/32;
 		}
 		
@@ -1838,8 +1794,6 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 			Ypositions[i]=yy-ActualSize/32;
 		}
 
-		
-
 		for (int i=0;i<=m_MaxNumColumns;i++)
 			for (int j=0;j<=m_MaxNumRows;j++)
 			{
@@ -1853,7 +1807,6 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 					DC->FillSolidRect(xx,yy,lenx,max(1,ActualSize/24),RGB(240,240,240)); //painting tiny lines
 					DC->FillSolidRect(xx,yy,max(1,ActualSize/24),leny,RGB(240,240,240));
 				}
-
 
 				if ((i<m_MaxNumColumns) || (j<m_MaxNumRows))
 				{
@@ -1883,75 +1836,18 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 							vert=*attrib.left_border;
 						}
 					}
-					/*
-					int elm;
-					if ((i<m_MaxNumColumns) && (j<m_MaxNumRows))
-						elm=this->FindMatrixElement(j,i);
-					else
-					{
-						if ((i==m_MaxNumColumns) && (j<m_MaxNumRows))
-						{elm=this->FindMatrixElement(j,i-1);alternate_data=1;}
-						else if ((j==m_MaxNumRows) && (i<m_MaxNumColumns))
-						{elm=this->FindMatrixElement(j-1,i);alternate_data=2;}
-					}
-
-					int k;
-					for (k=elm;k<m_NumElements;k++)
-					{
-						if ((m_pElementList+k)->Type==11) break;
-						if ((m_pElementList+k)->Type==12) break;
-					}
-					if (k==m_NumElements) //we reached the end of expression -  special case the data is stored in the last 11 or 12 type
-					{
-						if (elm>0) 
-						{
-							k=elm-1;
-							tElementStruct *ts=m_pElementList+k;
-
-							if (ts->Type==11)
-							{
-								char *data=ts->pElementObject->Data1;
-								horiz=data[4];
-								vert=data[1];
-								if (alternate_data==1) {vert=data[5];horiz=0;}
-								if (alternate_data==2) {horiz=data[6];vert=0;}
-							}
-							else if (ts->Type==12)
-							{
-								char *data=ts->pElementObject->Data1;
-								horiz=data[2];
-								vert=data[9];
-								if (alternate_data==1) {vert=data[7];horiz=0;}
-								if (alternate_data==2) {horiz=data[8];vert=0;}
-							}
-						}
-					}
-					else
-					{
-						tElementStruct *ts=m_pElementList+k;
-						char *data=ts->pElementObject->Data1;
-						horiz=data[0];
-						vert=data[3];
-						if (alternate_data==1) {vert=data[1];horiz=0;}
-						if (alternate_data==2) {horiz=data[2];vert=0;}
-					}
-					*/
-
-					//if ((k<m_NumElements) && (((m_pElementList+k)->Type==11) || ((m_pElementList+k)->Type==12)) && ((m_pElementList+k)->pElementObject))
-					{
-						if (horiz=='-') DC->FillSolidRect(xx,yy,lenx,max(1,ActualSize/24),RGB(0,0,0));
-						if (horiz=='=') {DC->FillSolidRect(xx,yy-(ActualSize+8)/24,lenx,max(1,ActualSize/24),RGB(0,0,0));DC->FillSolidRect(xx,yy+(ActualSize+8)/24,lenx,max(1,ActualSize/24),RGB(0,0,0));}
-						if (vert=='-') DC->FillSolidRect(xx,yy,max(1,ActualSize/24),leny,RGB(0,0,0));
-						if (vert=='=') {DC->FillSolidRect(xx-(ActualSize+8)/24,yy,max(1,ActualSize/24),leny,RGB(0,0,0));DC->FillSolidRect(xx+(ActualSize+8)/24,yy,max(1,ActualSize/24),leny,RGB(0,0,0));}
-					}
+					
+					if (horiz=='-') DC->FillSolidRect(xx,yy,lenx,max(1,ActualSize/24),RGB(0,0,0));
+					if (horiz=='=') {DC->FillSolidRect(xx,yy-(ActualSize+8)/24,lenx,max(1,ActualSize/24),RGB(0,0,0));DC->FillSolidRect(xx,yy+(ActualSize+8)/24,lenx,max(1,ActualSize/24),RGB(0,0,0));}
+					if (vert=='-') DC->FillSolidRect(xx,yy,max(1,ActualSize/24),leny,RGB(0,0,0));
+					if (vert=='=') {DC->FillSolidRect(xx-(ActualSize+8)/24,yy,max(1,ActualSize/24),leny,RGB(0,0,0));DC->FillSolidRect(xx+(ActualSize+8)/24,yy,max(1,ActualSize/24),leny,RGB(0,0,0));}
 				}
-				{
-					//painting the selected line in blue color
-					if ((m_IsRowInsertion) && (m_RowSelection==j))
-						DC->FillSolidRect(xx,yy,lenx,max(1,ActualSize/24),BLUE_COLOR);
-					if ((m_IsColumnInsertion) && (m_ColumnSelection==i))
-						DC->FillSolidRect(xx,yy,max(1,ActualSize/24),leny,BLUE_COLOR);
-				}
+				
+				//painting the selected line in blue color
+				if ((m_IsRowInsertion) && (m_RowSelection==j))
+					DC->FillSolidRect(xx,yy,lenx,max(1,ActualSize/24),BLUE_COLOR);
+				if ((m_IsColumnInsertion) && (m_ColumnSelection==i))
+					DC->FillSolidRect(xx,yy,max(1,ActualSize/24),leny,BLUE_COLOR);
 			}
 		if (m_IsMatrixElementSelected)
 		{
@@ -1969,17 +1865,10 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 					if (!painted)
 					{
 						int width=max(1,(ActualSize+12)/16);
-						/*if (TouchMouseMode)
-						{
-							DC->FillSolidRect(Xpositions[column]+lw,Ypositions[row]-lw,Xpositions[column+1]-Xpositions[column]-lw,Ypositions[row+1]-Ypositions[row]-lw,SHADOW_BLUE_COLOR2);
-						}
-						else*/
-						{
 						DC->FillSolidRect(Xpositions[column]+lw,Ypositions[row]+lw,Xpositions[column+1]-Xpositions[column]-lw,width,SHADOW_BLUE_COLOR2);
 						DC->FillSolidRect(Xpositions[column]+lw,Ypositions[row+1]-width,Xpositions[column+1]-Xpositions[column]-lw,width,SHADOW_BLUE_COLOR2);
 						DC->FillSolidRect(Xpositions[column]+lw,Ypositions[row]+lw,width,Ypositions[row+1]-Ypositions[row]-lw,SHADOW_BLUE_COLOR2);
 						DC->FillSolidRect(Xpositions[column+1]-width,Ypositions[row]+lw,width,Ypositions[row+1]-Ypositions[row]-lw,SHADOW_BLUE_COLOR2);
-						}
 						painted=1;
 					}
 				}
@@ -1990,32 +1879,23 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 	//go paint parentheses if needed
 	if (m_DrawParentheses)
 	{
-		//check if the element to whom this expression belongs is selected
 		char IsBlue=m_ParenthesesSelected;
-
-		//if (m_ParenthesesSelected) IsBlue=1;
 
 		if ((m_ParenthesesFlags&0x04) || (m_DrawParentheses=='b'))
 		{
-				PaintHorizontalParentheses(DC,zoom,X,Y-m_OverallAbove,X+m_OverallLength,Y+m_OverallBelow,m_ParentheseWidth,m_DrawParentheses,m_ParenthesesFlags,IsBlue,color);
+			PaintHorizontalParentheses(DC,zoom,X,Y-m_OverallAbove,X+m_OverallLength,Y+m_OverallBelow,m_ParentheseWidth,m_DrawParentheses,m_ParenthesesFlags,IsBlue,color);
 		}
 		else
 		{	
-			//if ((ClipReg==NULL) ||
-			//	((X<=ClipReg->right+32) && (X+m_OverallLength>=ClipReg->left-32) &&
-			//	(Y-m_ParenthesesAbove<=ClipReg->bottom+32) && (Y+m_ParenthesesBelow>=ClipReg->top-32))) //not actually needed - never happens
+			int increase=0;
+			if (m_OverallAbove)
 			{
-				int increase=0;
-				if (m_OverallAbove)
-				{
-					increase=m_OverallLength*m_MarginX/4/(m_OverallAbove+m_OverallBelow);
-					if (increase>m_MarginX) increase=m_MarginX;
-				}
-				if ((ShadowSelection) && (IsBlue==1) && (ActualSize>10) && (ActualSize<40))
-					PaintParentheses(DC,zoom,X+1,Y-m_ParenthesesAbove-increase/5,X+m_OverallLength+1,Y+m_ParenthesesBelow+increase/2,m_ParentheseWidth,m_DrawParentheses,m_ParenthesesFlags,IsBlue,color);
-
-				PaintParentheses(DC,zoom,X,Y-m_ParenthesesAbove-increase/5,X+m_OverallLength,Y+m_ParenthesesBelow+increase/2,m_ParentheseWidth,m_DrawParentheses,m_ParenthesesFlags,IsBlue,color);
+				increase=m_OverallLength*m_MarginX/4/(m_OverallAbove+m_OverallBelow);
+				if (increase>m_MarginX) increase=m_MarginX;
 			}
+			if ((ShadowSelection) && (IsBlue==1) && (ActualSize>10) && (ActualSize<40))
+				PaintParentheses(DC,zoom,X+1,Y-m_ParenthesesAbove-increase/5,X+m_OverallLength+1,Y+m_ParenthesesBelow+increase/2,m_ParentheseWidth,m_DrawParentheses,m_ParenthesesFlags,IsBlue,color);
+			PaintParentheses(DC,zoom,X,Y-m_ParenthesesAbove-increase/5,X+m_OverallLength,Y+m_ParenthesesBelow+increase/2,m_ParentheseWidth,m_DrawParentheses,m_ParenthesesFlags,IsBlue,color);
 		}
 	}
 
@@ -2117,7 +1997,6 @@ void CExpression::PaintExpression(CDC * DC, short zoom, short X, short Y,RECT *C
 
 short CExpression::GetActualFontSize(short zoom)
 {
-	//if (IsHighQualityRendering) return (short)((int)zoom*(int)m_FontSizeHQ*20/10000);
 	return (short)(((int)zoom*(int)m_FontSize*20+3000)/10000);
 }
 
@@ -2125,40 +2004,40 @@ short CExpression::GetActualFontSize(short zoom)
 int CExpression::PaintParentheses(CDC * DC, short zoom, short X1, short Y1, short X2, short Y2, short ParentheseWidth, char Type,short data,char IsBlue,int color)
 {
 	short tmp;
-	char HQR=IsHighQualityRendering;
-	if (((Type&0x80)==0) && (HQR)) ParentheseWidth=11*ParentheseWidth/8; //when expression is edited in presentation mode
-	Type=Type&0x7F;
-	
-
+	int HQPenWidth=0;
+	int PenWidth;
 	int ActualSize=GetActualFontSize(zoom);
+
+	if (X2<X1) {tmp=X2;X2=X1;X1=tmp;}
+	if (Y2<Y1) {tmp=Y2;Y2=Y1;Y1=tmp;}
+
+	char HQR=IsHighQualityRendering;
 	if (HQR)
 	{
+		if ((Type&0x80)==0) ParentheseWidth=11*ParentheseWidth/8; //when expression is edited in presentation mode
 		Y1+=ActualSize/20;
 		Y2-=ActualSize/20;
 		ParentheseWidth-=2*(ActualSize/20);
+
+		Type=Type&0x7F;
+		if (Type=='{') HQPenWidth=7*ParentheseWidth/8;
+		else if ((Type=='/') || (Type=='<')) HQPenWidth=ParentheseWidth*5/8;
+		else HQPenWidth=9*ParentheseWidth/8;
+		if (HQPenWidth<1) HQPenWidth=1;
 	}
+
+	Type=Type&0x7F;
+	if (Type=='{') PenWidth=7*ParentheseWidth/24;
+	else if ((Type=='/') || (Type=='<')) PenWidth=ParentheseWidth*5/24;
+	else PenWidth=ParentheseWidth/3;
+	if (PenWidth<1) PenWidth=1;
 
 	int PaintLeft=1;
 	int PaintRight=1;
 	if (data&0x08) PaintLeft=0;
 	if (data&0x10) PaintRight=0;
 
-	if (X2<X1) {tmp=X2;X2=X1;X1=tmp;}
-	if (Y2<Y1) {tmp=Y2;Y2=Y1;Y1=tmp;}
-	short height3=(Y2-Y1)/3;
-	short height2=(Y2-Y1)/2;
-
 	CMainFrame *mf=(CMainFrame*)theApp.m_pMainWnd;
-	int PenWidth=ParentheseWidth/3;
-	if (Type=='{') PenWidth=7*ParentheseWidth/24;
-	if ((Type=='/') || (Type=='<')) PenWidth=ParentheseWidth*5/24;
-	if (PenWidth<1) PenWidth=1;
-	
-	int HQPenWidth=9*ParentheseWidth/8;
-	if (Type=='{') HQPenWidth=7*ParentheseWidth/8;
-	if ((Type=='/') || (Type=='<')) HQPenWidth=ParentheseWidth*5/8;
-	if (HQPenWidth<1) HQPenWidth=1;
-
 	HPEN pen=GetPenFromPool(PenWidth,IsBlue,color);
 	DC->SelectObject(pen);
 
@@ -2189,7 +2068,7 @@ int CExpression::PaintParentheses(CDC * DC, short zoom, short X1, short Y1, shor
 			if ((PaintRight)&& ((Type=='(') || (Type=='r')))
 			{
 				if (Y2-Y1==ActualSize)
-					DC->Arc(X2-ParentheseWidth*2,Y1,X2,Y2,			X2-ParentheseWidth+1,Y2+100,X2-ParentheseWidth-1,Y1-100);
+					DC->Arc(X2-ParentheseWidth*2,Y1,X2,Y2,X2-ParentheseWidth+1,Y2+100,X2-ParentheseWidth-1,Y1-100);
 				else
 				{
 					DC->Arc(X2-ParentheseWidth*2,Y1,X2,Y1+ActualSize,  X2,Y1+half,X2-ParentheseWidth-1,Y1-100);
@@ -2202,7 +2081,6 @@ int CExpression::PaintParentheses(CDC * DC, short zoom, short X1, short Y1, shor
 		}
 		else
 		{
-			//int PenWidth=ParentheseWidth;
 			int H=(Y2-Y1)*4;
 			int i;
 			mf->StartMyPainting(DC,ParentheseWidth*4,0,(Y2-Y1)*4,color);
@@ -2238,6 +2116,7 @@ int CExpression::PaintParentheses(CDC * DC, short zoom, short X1, short Y1, shor
 
 	if (Type=='{')
 	{
+		short height2=(Y2-Y1)/2;
 		ActualSize=2*ActualSize;
 		if (3*(Y2-Y1)/2<ActualSize) ActualSize=3*(Y2-Y1)/2;
 		if (!HQR)
@@ -2249,7 +2128,6 @@ int CExpression::PaintParentheses(CDC * DC, short zoom, short X1, short Y1, shor
 				X2-=bit;
 				X1+=bit;
 			}
-
 			if (PaintLeft)
 			{
 				DC->MoveTo(X1+ParentheseWidth,Y1);
@@ -2270,44 +2148,40 @@ int CExpression::PaintParentheses(CDC * DC, short zoom, short X1, short Y1, shor
 				DC->LineTo(X2-ParentheseWidth/2,Y2-ParentheseWidth/2);
 				DC->LineTo(X2-ParentheseWidth,Y2);
 			}
-			
 			return 1;
 		}
 		else
 		{
 			int H=(Y2-Y1)*4;
 			int i;
-
+			
+			mf->StartMyPainting(DC,ParentheseWidth*4,0,(Y2-Y1)*4,color);
+			for (i=0;i<=HQPenWidth;i++)
 			{
-				mf->StartMyPainting(DC,ParentheseWidth*4,0,(Y2-Y1)*4,color);
-				for (i=0;i<=HQPenWidth;i++)
-				{
-					mf->MyArc(DC,ParentheseWidth*2-HQPenWidth/2+i, 0,
-							3*ParentheseWidth*2+HQPenWidth/2-i,4*ActualSize/3,  
-							ParentheseWidth*4,0,
-							ParentheseWidth*2,4*ActualSize/6,IsBlue);
-					mf->MyMoveTo(DC,ParentheseWidth*2-HQPenWidth/2+i,4*ActualSize/6-1);
-					mf->MyLineTo(DC,ParentheseWidth*2-HQPenWidth/2+i,H/2-4*ActualSize/6,IsBlue);
-					mf->MyArc(DC,-ParentheseWidth*2+HQPenWidth/2-i,H/2-4*ActualSize/3,
-							ParentheseWidth*2-HQPenWidth/2+i,H/2,  
-							0, H/2,
-							ParentheseWidth*2, H/2-4*ActualSize/6,IsBlue);
+				mf->MyArc(DC,ParentheseWidth*2-HQPenWidth/2+i, 0,
+						3*ParentheseWidth*2+HQPenWidth/2-i,4*ActualSize/3,  
+						ParentheseWidth*4,0,
+						ParentheseWidth*2,4*ActualSize/6,IsBlue);
+				mf->MyMoveTo(DC,ParentheseWidth*2-HQPenWidth/2+i,4*ActualSize/6-1);
+				mf->MyLineTo(DC,ParentheseWidth*2-HQPenWidth/2+i,H/2-4*ActualSize/6,IsBlue);
+				mf->MyArc(DC,-ParentheseWidth*2+HQPenWidth/2-i,H/2-4*ActualSize/3,
+						ParentheseWidth*2-HQPenWidth/2+i,H/2,  
+						0, H/2,
+						ParentheseWidth*2, H/2-4*ActualSize/6,IsBlue);
 
-					mf->MyArc(DC,-ParentheseWidth*2+HQPenWidth/2-i,H/2,
-							ParentheseWidth*2-HQPenWidth/2+i,H/2+4*ActualSize/3,  
-							ParentheseWidth*2, H/2+4*ActualSize/6,
-							0, H/2,IsBlue);
-					mf->MyMoveTo(DC,ParentheseWidth*2-HQPenWidth/2+i,H/2+4*ActualSize/6);
-					mf->MyLineTo(DC,ParentheseWidth*2-HQPenWidth/2+i,H-4*ActualSize/6,IsBlue);
-					mf->MyArc(DC,ParentheseWidth*2-HQPenWidth/2+i,H-4*ActualSize/3, 
-							3*ParentheseWidth*2+HQPenWidth/2-i,H,
-							ParentheseWidth*2, H-4*ActualSize/6,
-							ParentheseWidth*4, H, IsBlue);
-				}
-				if (PaintLeft) mf->EndMyPainting(DC,X1,Y1);
-				if (PaintRight) mf->EndMyPainting(DC,X2-ParentheseWidth,Y1,0,1);
-				
+				mf->MyArc(DC,-ParentheseWidth*2+HQPenWidth/2-i,H/2,
+						ParentheseWidth*2-HQPenWidth/2+i,H/2+4*ActualSize/3,  
+						ParentheseWidth*2, H/2+4*ActualSize/6,
+						0, H/2,IsBlue);
+				mf->MyMoveTo(DC,ParentheseWidth*2-HQPenWidth/2+i,H/2+4*ActualSize/6);
+				mf->MyLineTo(DC,ParentheseWidth*2-HQPenWidth/2+i,H-4*ActualSize/6,IsBlue);
+				mf->MyArc(DC,ParentheseWidth*2-HQPenWidth/2+i,H-4*ActualSize/3, 
+						3*ParentheseWidth*2+HQPenWidth/2-i,H,
+						ParentheseWidth*2, H-4*ActualSize/6,
+						ParentheseWidth*4, H, IsBlue);
 			}
+			if (PaintLeft) mf->EndMyPainting(DC,X1,Y1);
+			if (PaintRight) mf->EndMyPainting(DC,X2-ParentheseWidth,Y1,0,1);
 		}
 	}
 
@@ -2322,28 +2196,22 @@ int CExpression::PaintParentheses(CDC * DC, short zoom, short X1, short Y1, shor
 			DC->FillSolidRect(X2-ParentheseWidth/2-PenWidth/2,Y1,PenWidth,Y2-Y1,(IsBlue)?BLUE_COLOR:color);
 		}
 		if (Type=='|') return 1;
-
 	}
 	
 	if (Type=='/')
 	{
+		if (PaintLeft)
 		{
-			if (PaintLeft)
-			{
 			DC->MoveTo(X1+9*ParentheseWidth/10,Y1);
 			DC->LineTo(X1,Y2);
-			}
-
-			if (PaintRight)
-			{
+		}
+		if (PaintRight)
+		{
 			DC->MoveTo(X2,Y1);
 			DC->LineTo(X2-9*ParentheseWidth/10,Y2);
-			}
-
-			return 1;
 		}
+		return 1;
 	}
-
 
 	if (Type=='\\')  //absolute value || ||
 	{
@@ -2358,55 +2226,47 @@ int CExpression::PaintParentheses(CDC * DC, short zoom, short X1, short Y1, shor
 			DC->FillSolidRect(X2-3*ParentheseWidth/4-PenWidth/2,Y1,PenWidth,Y2-Y1,(IsBlue)?BLUE_COLOR:color);
 		}
 		return 1;
-		
 	}
 
 	if ((Type=='<')  || (Type=='a') || (Type=='k'))
 	{
+		if ((PaintLeft) && (Type!='k'))
 		{
-			if ((PaintLeft) && (Type!='k'))
-			{
 			DC->MoveTo(X1+9*ParentheseWidth/10,Y1);
 			DC->LineTo(X1+ParentheseWidth/10,(Y1+Y2)/2);
 			DC->LineTo(X1+9*ParentheseWidth/10,Y2);
-			}
+		}
 
-			if ((PaintRight) && (Type!='a'))
-			{
+		if ((PaintRight) && (Type!='a'))
+		{
 			DC->MoveTo(X2-9*ParentheseWidth/10,Y1);
 			DC->LineTo(X2-ParentheseWidth/10,(Y1+Y2)/2);
 			DC->LineTo(X2-9*ParentheseWidth/10,Y2);
-			}
-			return 1;
 		}
-
+		return 1;
 	}
 
 	if ((Type=='b') || ((Type=='T') && (IsBlue)))  //box or text
 	{
+		int tt=0;if (IsHighQualityRendering) tt=5*this->m_MarginY/2;
+
+		if (PaintLeft)
 		{
-			int tt=0;if (IsHighQualityRendering) tt=5*this->m_MarginY/2;
-
-			if (PaintLeft)
-			{
-				DC->MoveTo(X1+ParentheseWidth/10,Y2-ParentheseWidth/10+3*tt/2);
-				DC->LineTo(X1+ParentheseWidth/10,Y1+ParentheseWidth/10-tt);
-				DC->LineTo(X2-ParentheseWidth/10,Y1+ParentheseWidth/10-tt);
-			}
-			if (PaintRight)
-			{
-				DC->MoveTo(X1+ParentheseWidth/10,Y2-ParentheseWidth/10+3*tt/2);
-				DC->LineTo(X2-ParentheseWidth/10,Y2-ParentheseWidth/10+3*tt/2);
-				DC->LineTo(X2-ParentheseWidth/10,Y1+ParentheseWidth/10-tt);
-			}
-			return 1;
+			DC->MoveTo(X1+ParentheseWidth/10,Y2-ParentheseWidth/10+3*tt/2);
+			DC->LineTo(X1+ParentheseWidth/10,Y1+ParentheseWidth/10-tt);
+			DC->LineTo(X2-ParentheseWidth/10,Y1+ParentheseWidth/10-tt);
 		}
-
+		if (PaintRight)
+		{
+			DC->MoveTo(X1+ParentheseWidth/10,Y2-ParentheseWidth/10+3*tt/2);
+			DC->LineTo(X2-ParentheseWidth/10,Y2-ParentheseWidth/10+3*tt/2);
+			DC->LineTo(X2-ParentheseWidth/10,Y1+ParentheseWidth/10-tt);
+		}
+		return 1;
 	}
 
 	if (Type=='x')  //crossed
 	{
-		//only non-high-quality is proveded because lot of memory is consumet for large pictures
 		if (PaintLeft)
 		{
 			DC->MoveTo(X1+ParentheseWidth/10,Y1+ParentheseWidth/10);
@@ -2548,8 +2408,7 @@ void CExpression::DeselectExpression()
 CObject* CExpression::SelectObjectAtPoint(CDC* DC, short zoom, short X, short Y,short *IsExpression, char *IsParenthese,char ForceInsertionPoints)
 {
 	int i;
-
-
+	if ((DC==NULL) || (X<-5000) || (X>30000) || (Y<-5000) || (Y>15000) || (IsExpression==NULL)) return NULL;
 
 	if ((m_IsVertical) && (m_pPaternalExpression==NULL)) 
 	{
@@ -2563,73 +2422,47 @@ CObject* CExpression::SelectObjectAtPoint(CDC* DC, short zoom, short X, short Y,
 	m_IsRowInsertion=0;
 	m_IsColumnInsertion=0;
 
-	if (DC==NULL) return NULL;
 	if (zoom<5) zoom=5;
 	if (zoom>5000) zoom=5000;
-	if (X<-5000) return NULL;
-	if (X>30000) return NULL;
-	if (Y<-5000) return NULL;
-	if (Y>15000) return NULL;
-	if (IsExpression==NULL) return NULL;
-
-	int startItem=-1;
-	int column=0,row=0;
-
-	this->m_IsPointerHover=1;
-
-	*IsParenthese=0;
 	int ActualSize=this->GetActualFontSize(zoom);
-	//first check if the pointer is pointing at any element inside the Expression
-	int maxX=-32767;
-	int minX=32767;
 
-int insertion_points_only=0;
-int no_insertion_points=0;
-int delta=0;
+	int startItem=-1; //start item of an matrix cell
+	int column=0,row=0;
+	this->m_IsPointerHover=1;
+	*IsParenthese=0;
 
-if (((GetKeyState(VK_MENU)&0xFFFE)) || (ForceInsertionPoints==2) || (QuickTypeUsed)) {insertion_points_only=1;delta=2*m_MarginX/3;}
-else if (((GetKeyState(VK_SHIFT)&0xFFFE)) || (TouchMouseMode)) {if (QuickTypeUsed==0) no_insertion_points=1;}
-if (ForceInsertionPoints) no_insertion_points=0;
+	int insertion_points_only=0; //if only insertion points are to be touched (for example if ALT key is held down)
+	int no_insertion_points=0; //if insertion points are not to be touched (for example if SHIFT key is held down)
+	int delta=0; //used in insertion_points_only mode to allow easier selection of an insertion point)
+	if (((GetKeyState(VK_MENU)&0xFFFE)) || (ForceInsertionPoints==2) || (QuickTypeUsed)) {insertion_points_only=1;delta=2*m_MarginX/3;}
+	else if (((GetKeyState(VK_SHIFT)&0xFFFE)) || (TouchMouseMode)) {if (ForceInsertionPoints==0) no_insertion_points=1;}
 
+	//check if the pointer is pointing at any element or insertion point inside the Expression
 	for (i=0;i<=m_NumElements;i++)
 	{
-		tElementStruct *theElement;
-		theElement=m_pElementList+i;
-
+		tElementStruct *theElement=m_pElementList+i;
 		if (startItem==-1) startItem=i;
 
-		//if (theElement->X_pos<minX) minX=theElement->X_pos;
-		//if (theElement->X_pos+theElement->Length>maxX) maxX=theElement->Length+theElement->X_pos;
-if (!insertion_points_only)
-{
-		if ((m_MatrixRows) && (m_MatrixColumns))
+		//handling matrices
+		if ((!insertion_points_only) && (m_MatrixRows) && (m_MatrixColumns))
 		if ((i==m_NumElements) || (theElement->Type==11) || (theElement->Type==12))
 		{
-			minX=m_MatrixColumns[column].x;
-			maxX=m_MatrixColumns[column].x+m_MatrixColumns[column].length;
 			int Ybaseline=m_MatrixRows[row].y;
-			int startX,endX;
-			if (startItem>=0)
-				startX=minX;//(m_pElementList+startItem)->X_pos;
-			if (i>0)
-				endX=maxX;//(m_pElementList+i-1)->X_pos+((m_pElementList+i-1)->Length);
-
-			minX=maxX=0;
+			int startX=m_MatrixColumns[column].x;
+			int endX=m_MatrixColumns[column].x+m_MatrixColumns[column].length;
 			int maxAbove=-m_MatrixRows[row].above+Ybaseline;
 			int maxBelow=m_MatrixRows[row].below+Ybaseline;
 
 			if (startItem==i) endX=startX;
-
-			//we found matrix separator
 
 			int t1=m_OverallLength-((m_DrawParentheses)?m_ParentheseWidth:0);
 			int t2=((m_DrawParentheses)?m_ParentheseWidth:0);
 			if ((GetKeyState(VK_SHIFT)&0xFFFE)==0)
 			if (TouchMouseMode==0)
 			if ( ((X>=endX) && (X<t1) && (i==m_NumElements) && (Y>m_OverallBelow-ActualSize/6)) ||
-				 ((X>=endX) && (X<t1) && (row==0) && (column==m_MaxNumColumns-1) && (Y<-m_OverallAbove+ActualSize/6)) ||
-				 ((X<=startX) && (X>t2) && (column==0) && (row==m_MaxNumRows-1) && (Y>m_OverallBelow-ActualSize/6)) ||
-				 ((X<=startX) && (X>t2) && (column==0) && (row==0) && (Y<-m_OverallAbove+ActualSize/6)))
+				 /*((X>=endX) && (X<t1) && (row==0) && (column==m_MaxNumColumns-1) && (Y<-m_OverallAbove+ActualSize/6)) ||*/
+				 ((X<=startX) && (X>t2) && (column==0) && (row==m_MaxNumRows-1) && (Y>m_OverallBelow-ActualSize/6)) 
+				 /*((X<=startX) && (X>t2) && (column==0) && (row==0) && (Y<-m_OverallAbove+ActualSize/6))*/)
 			{
 				//the cursor is pointing at the corner of the expression - select the whole expression
 				if (ContainsBlinkingCursor()) return NULL;
@@ -2639,27 +2472,21 @@ if (!insertion_points_only)
 				return (CObject*)this;
 			}
 
-			//if (row==0) maxAbove+=m_MarginY/2;
-			//if (row==m_MaxNumRows-1) maxBelow-=m_MarginY/2;
 			if ((m_MaxNumRows==1) && (m_MaxNumColumns==1))
 			{
 				maxAbove=-m_OverallAbove;
 				maxBelow=m_OverallBelow;
 			}
 
+			if ((TouchMouseMode==0) && ((GetKeyState(VK_SHIFT)&0xFFFE)==0))
 			if ((m_MaxNumRows>1) || (m_MaxNumColumns>1))
 			{
-				if ((GetKeyState(VK_SHIFT)&0xFFFE)==0)
-				if (TouchMouseMode==0)
-				{
 				//check if the mouse is pointing at column insert point
 				if ((Y>=maxAbove) && (Y<=maxBelow))
 				{
 					int lx;
-					if (column>0)
-						lx=m_MatrixColumns[column-1].x+m_MatrixColumns[column-1].length;
-					else
-						lx=m_MatrixColumns[column].x-m_MarginX;
+					if (column>0) lx=m_MatrixColumns[column-1].x+m_MatrixColumns[column-1].length;
+					else lx=m_MatrixColumns[column].x-m_MarginX;
 
 					if ((X<m_MatrixColumns[column].x) && (X>lx))
 					{
@@ -2667,7 +2494,6 @@ if (!insertion_points_only)
 						m_ColumnSelection=column;
 						m_IsColumnInsertion=1;
 						m_IsRowInsertion=0;
-
 						m_Selection=0;
 						*IsExpression=i+1;
 						return(CObject*)this;
@@ -2679,7 +2505,6 @@ if (!insertion_points_only)
 						m_ColumnSelection=column+1;
 						m_IsColumnInsertion=1;
 						m_IsRowInsertion=0;
-
 						m_Selection=0;
 						*IsExpression=i+1;
 						return(CObject*)this;
@@ -2690,11 +2515,8 @@ if (!insertion_points_only)
 				if ((X>m_MatrixColumns[column].x) && (X<m_MatrixColumns[column].x+m_MatrixColumns[column].length))
 				{
 					int ly;
-
-					if (row==m_MaxNumRows-1)
-						ly=maxBelow+m_MarginY;
-					else
-						ly=m_MatrixRows[row+1].y-m_MatrixRows[row+1].above;
+					if (row==m_MaxNumRows-1) ly=maxBelow+m_MarginY;
+					else ly=m_MatrixRows[row+1].y-m_MatrixRows[row+1].above;
 
 					if ((Y>maxBelow+m_MarginY/4) && (Y<=ly-m_MarginY/4)) 
 					{
@@ -2702,15 +2524,13 @@ if (!insertion_points_only)
 						m_ColumnSelection=column;
 						m_IsColumnInsertion=0;
 						m_IsRowInsertion=1;
-
 						m_Selection=0;
 						*IsExpression=i+1;
 						return(CObject*)this;
 					}
-					if (row==0)
-						ly=maxAbove-m_MarginY;
-					else
-						ly=m_MatrixRows[row-1].y+m_MatrixRows[row-1].below;
+
+					if (row==0) ly=maxAbove-m_MarginY;
+					else ly=m_MatrixRows[row-1].y+m_MatrixRows[row-1].below;
 
 					if ((Y<maxAbove-m_MarginY/4) && (Y>=ly+m_MarginY/4)) 
 					{
@@ -2718,26 +2538,21 @@ if (!insertion_points_only)
 						m_ColumnSelection=column;
 						m_IsColumnInsertion=0;
 						m_IsRowInsertion=1;
-
 						m_Selection=0;
 						*IsExpression=i+1;
 						return(CObject*)this;
 					}
 				}
-				}
 			}
 
 			if ((X>startX) && (X<endX))
 			{
-				//if ((m_IsText==0) || ((m_MaxNumRows>1) && (m_MaxNumColumns>1)))
-				//if (((Y>=ActualSize/4+Ybaseline) && (Y<=maxBelow)) ||
-				//	((Y<=-ActualSize/4+Ybaseline) && (Y>=maxAbove)))
 				if (((Y<=maxBelow+m_MarginY/4) && (Y>=maxBelow-ActualSize/8)) ||
 					((Y>=maxAbove-m_MarginY/4) && (Y<=maxAbove+ActualSize/8)))
 				{
 					if ((startItem==0) && (i==m_NumElements))
 					{
-						//there is everything selected
+						//all items are being selected
 						if (ContainsBlinkingCursor()) return NULL;
 						SelectExpression(2); //no parentheses included in selection
 						m_Selection=0x7FFF;
@@ -2748,7 +2563,8 @@ if (!insertion_points_only)
 					SelectMatrixElement(row,column);
 					if ((ClipboardExpression) && ((ClipboardExpression->m_MaxNumColumns>1) || (ClipboardExpression->m_MaxNumRows>1)))
 					{
-						//there is some matrix/vector in clipboard expression - adjust selection according to its size
+						//there is some matrix/vector in clipboard expression that we are carying with the cursor
+						//adjust selection according to its size so that cell-replacement can be done
 						int ii,jj;
 						for (ii=row;ii<row+ClipboardExpression->m_MaxNumRows;ii++)
 							for (jj=column;jj<column+ClipboardExpression->m_MaxNumColumns;jj++)
@@ -2761,9 +2577,10 @@ if (!insertion_points_only)
 			}
 			column++;
 			startItem=-1;
-			if (theElement->Type==12) {	column=0;row++;	}
+			if (theElement->Type==12) {column=0;row++;}
 		}
-}
+		
+		//checking if particular elements are pointed-at (touched)
 		if (i<m_NumElements)
 		{
 			int is_ok=0;
@@ -2815,8 +2632,6 @@ if (!insertion_points_only)
 
 			if (is_ok)
 			{
-				//if ((GetKeyState(VK_SHIFT)&0xFFFE)==0)
-				//if (TouchMouseMode<2)
 				if ((theElement->Type==0) || (theElement->Type==11) || (theElement->Type==12))
 				{
 					//this is only an empty frame (placeholder)
@@ -2825,7 +2640,8 @@ if (!insertion_points_only)
 					*IsExpression=i+1;
 					return (CObject*)this;
 				}
-				//theElement
+				
+				//an element is being pointed at - we will call its 'selectAtPoint' function to recursively determine which final element is being touched
 				CObject *obj=NULL;
 				if (theElement->pElementObject)
 				{
@@ -2837,7 +2653,6 @@ if (!insertion_points_only)
 						return NULL;
 					}
 				}
-				
 				m_Selection=0;
 				if (obj==(CObject*)theElement->pElementObject)
 					theElement->IsSelected=1;
@@ -2848,92 +2663,86 @@ if (!insertion_points_only)
 
 	SelectedTab=0;
 
-if (!insertion_points_only)
-{
-	//check if it is pointing at the parenthese 
-	if (m_DrawParentheses) 
+	if (!insertion_points_only)
 	{
-		int parenthese_width_top=0;
-		int parenthese_width_bottom=0;
-		int parenthese_width_right=0;
-		int parenthese_width_left=0;
-		char parenthese_shape=m_DrawParentheses; //this contains the shape of parenth. or 0 if no parentheses are to be displayed
-		if (m_ParenthesesFlags&0x04) //if parentheses are horizontal
+		//check if it is pointing at the parenthese 
+		if (m_DrawParentheses) 
 		{
-			if ((m_ParenthesesFlags&0x08)==0)
-				parenthese_width_top=m_ParentheseWidth;
-			if ((m_ParenthesesFlags&0x10)==0)
-				parenthese_width_bottom=m_ParentheseWidth;
-		}
-		else
-		{
-			if ((m_ParenthesesFlags&0x08)==0)
-				parenthese_width_left=m_ParentheseWidth;
-			if ((m_ParenthesesFlags&0x10)==0)
-				parenthese_width_right=m_ParentheseWidth;
-		}
-		if ((parenthese_shape=='x') || (parenthese_shape=='b')) //for box or crossed
-		{
-			parenthese_width_top=parenthese_width_bottom=parenthese_width_left=parenthese_width_right=m_ParentheseWidth;
-		}
-		
-		if (IsHighQualityRendering) {parenthese_width_left=max(1,3*parenthese_width_left/4);parenthese_width_right=max(1,3*parenthese_width_right/4);}
-		if ((X<parenthese_width_left) || (X>m_OverallLength-parenthese_width_right) ||
-			(Y<-m_OverallAbove+parenthese_width_top) || (Y>m_OverallBelow-parenthese_width_bottom))
-		{
-			if (ContainsBlinkingCursor()) return NULL;
-			m_ParenthesesSelected=1;
-			SelectExpression(1);
-			m_Selection=0x7FFF;
-			*IsExpression=0x7FFF;
-			*IsParenthese=1;
-			return (CObject*)this;
-		}
-	}
-
-
-	
-	
-	//then check if it is pointing at the expression edge (selecting all elements in the Expression)
-	if ((GetKeyState(VK_SHIFT)&0xFFFE)==0)
-	if (TouchMouseMode==0)
-	if (m_MaxNumRows==1)
-	{
-		int maxAbove=m_OverallAbove-ActualSize/6;
-		int maxBelow=m_OverallBelow-ActualSize/6;
-		if (IsHighQualityRendering) {maxAbove+=ActualSize/16;maxBelow+=ActualSize/16;}
-		int maxXb;
-		int minXa;
-		int maxXa;
-		if (m_NumElements)
-			maxXb=max((m_pElementList+m_NumElements-1)->X_pos+(m_pElementList+m_NumElements-1)->Length,ActualSize);
-		minXa=min(m_pElementList->X_pos,this->m_OverallLength-ActualSize);
-		maxXa=this->m_OverallLength;
-		for (int i=0;i<m_NumElements;i++)
-		{
-			tElementStruct *ts=m_pElementList+i;
-			if ((ts->Type==2) && (ts->pElementObject->Data1[0]==(char)0xFF))
+			int parenthese_width_top=0;
+			int parenthese_width_bottom=0;
+			int parenthese_width_right=0;
+			int parenthese_width_left=0;
+			char parenthese_shape=m_DrawParentheses; //this contains the shape of parenth. or 0 if no parentheses are to be displayed
+			if (m_ParenthesesFlags&0x04) //if parentheses are horizontal
 			{
-				maxXa=ts->X_pos+ts->Length;
-				break;
+				if ((m_ParenthesesFlags&0x08)==0)
+					parenthese_width_top=m_ParentheseWidth;
+				if ((m_ParenthesesFlags&0x10)==0)
+					parenthese_width_bottom=m_ParentheseWidth;
+			}
+			else
+			{
+				if ((m_ParenthesesFlags&0x08)==0)
+					parenthese_width_left=m_ParentheseWidth;
+				if ((m_ParenthesesFlags&0x10)==0)
+					parenthese_width_right=m_ParentheseWidth;
+			}
+			if ((parenthese_shape=='x') || (parenthese_shape=='b')) //for box or crossed
+			{
+				parenthese_width_top=parenthese_width_bottom=parenthese_width_left=parenthese_width_right=m_ParentheseWidth;
+			}
+			
+			if (IsHighQualityRendering) {parenthese_width_left=max(1,3*parenthese_width_left/4);parenthese_width_right=max(1,3*parenthese_width_right/4);}
+			if ((X<parenthese_width_left) || (X>m_OverallLength-parenthese_width_right) ||
+				(Y<-m_OverallAbove+parenthese_width_top) || (Y>m_OverallBelow-parenthese_width_bottom))
+			{
+				if (ContainsBlinkingCursor()) return NULL;
+				m_ParenthesesSelected=1;
+				SelectExpression(1);
+				m_Selection=0x7FFF;
+				*IsExpression=0x7FFF;
+				*IsParenthese=1;
+				return (CObject*)this;
 			}
 		}
 
-		if (((Y<=-maxAbove) && (X<=maxXa) && (X>=minXa)) || ((Y>=maxBelow) && (X<=maxXb)))
+
+		//then check if it is pointing at the expression edge (selecting all elements in the Expression)
+		if ((TouchMouseMode==0) && (m_MaxNumRows==1) && ((GetKeyState(VK_SHIFT)&0xFFFE)==0))
 		{
-			if (ContainsBlinkingCursor()) return NULL;
-			SelectExpression(2);
-			m_Selection=0x7FFF;
-			*IsExpression=0x7FFF;
-			return (CObject*)this;
+			//int maxAbove=m_OverallAbove-ActualSize/6;
+			int maxBelow=m_OverallBelow-ActualSize/6;
+			//if (IsHighQualityRendering) {maxAbove+=ActualSize/16;maxBelow+=ActualSize/16;}
+			int maxXb;
+			//int minXa;
+			//int maxXa;
+			if (m_NumElements)
+				maxXb=max((m_pElementList+m_NumElements-1)->X_pos+(m_pElementList+m_NumElements-1)->Length,ActualSize);
+			/*minXa=min(m_pElementList->X_pos,this->m_OverallLength-ActualSize);
+			maxXa=this->m_OverallLength;
+			for (int i=0;i<m_NumElements;i++) //for multi-line expressions, the uppermost-line length is determined
+			{
+				tElementStruct *ts=m_pElementList+i;
+				if ((ts->Type==2) && (ts->pElementObject->Data1[0]==(char)0xFF))
+				{
+					maxXa=ts->X_pos+ts->Length;
+					break;
+				}
+			}*/
+
+			if (/*((Y<=-maxAbove) && (X<=maxXa) && (X>=minXa)) ||*/ ((Y>=maxBelow) && (X<=maxXb)))
+			{
+				if (ContainsBlinkingCursor()) return NULL;
+				SelectExpression(2);
+				m_Selection=0x7FFF;
+				*IsExpression=0x7FFF;
+				return (CObject*)this;
+			}
 		}
 	}
-}
 
 
-if (no_insertion_points) return NULL;
-
-
+	if (no_insertion_points) return NULL;
 
 	//Finally check if it is pointing between elements (insertion point)
 	if (m_NumElements==0) 
@@ -2941,10 +2750,8 @@ if (no_insertion_points) return NULL;
 		//an empty expression (should not be) 
 		m_Selection=1;
 		*IsExpression=1;
-
 		return (CObject*)this;
 	}
-
 	
 	//checking the very last insertion point
 	{
@@ -3016,6 +2823,7 @@ if (no_insertion_points) return NULL;
 		}
 	}
 
+	//checking all other insertion points
 	{
 		int row=0;
 		int col=0;
