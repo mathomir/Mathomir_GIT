@@ -1,4 +1,3 @@
-// Equation.h : main header file for the Equation application
 #pragma once
 
 #ifndef __AFXWIN_H__

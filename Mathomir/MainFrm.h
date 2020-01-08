@@ -4,7 +4,6 @@
 
 #pragma once
 
-
 class CMainFrame : public CFrameWnd
 {
 	
