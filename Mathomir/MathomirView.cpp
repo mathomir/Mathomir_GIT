@@ -10041,22 +10041,15 @@ int CMathomirView::CopyLaTeXCode(CObject *expr)
 	len+=(int)strlen(foot);
 
 	HGLOBAL mem=GlobalAlloc(GMEM_MOVEABLE,len+256);
-	if(mem!=nullptr)
-	{
-		char *pnt=(char*)GlobalLock(mem);
+	char *pnt=(char*)GlobalLock(mem);
+	strcpy(pnt,head);pnt+=strlen(head);
 
-		if(pnt!=nullptr)
-		{
-			strcpy(pnt,head);pnt+=strlen(head);
-
-			int tt=((CExpression*)expr)->LaTeX_output(pnt,0);
-			pnt+=tt;
-			strcpy(pnt,foot);pnt+=strlen(foot);
+	int tt=((CExpression*)expr)->LaTeX_output(pnt,0);
+	pnt+=tt;
+	strcpy(pnt,foot);pnt+=strlen(foot);
 	
-			pnt=0;
-		}
-		GlobalUnlock(mem);
-	}
+	pnt=0;
+	GlobalUnlock(mem);
 
 
 	if ((theApp.m_pMainWnd->OpenClipboard()) && (EmptyClipboard()))
