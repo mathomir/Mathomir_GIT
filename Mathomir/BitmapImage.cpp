@@ -72,7 +72,8 @@ int CBitmapImage::CopyFrom(CDrawing *Original)
 	{
 		Image=(char*)malloc(org->imgsize);
 		imgsize=org->imgsize;
-		memcpy(Image,org->Image,org->imgsize);
+		if(Image!=0)
+			memcpy(Image,org->Image,org->imgsize);
 	}
 	else
 	{
@@ -452,7 +453,6 @@ int CBitmapImage::LoadImageFromFile(CObject *dwg, char *fname)
 	//this function loads an bitmap from file and stories it into CDrawing object (SpecialData=52 -> bitmap image object)
 	CImage img;
 	CDrawing *d=(CDrawing*)dwg;
-
 	
 	int X,Y,bpp;
 	CDC *DC=pMainView->GetDC();
@@ -460,7 +460,11 @@ int CBitmapImage::LoadImageFromFile(CObject *dwg, char *fname)
 	{
 		try
 		{
-			if (img.Load(fname)) {pMainView->ReleaseDC(DC);return 0;}
+			if (img.Load(fname)!=S_OK)
+			{
+				pMainView->ReleaseDC(DC);
+				return 0;
+			}
 			X=img.GetWidth();
 			Y=img.GetHeight();
 			bpp=img.GetBPP();

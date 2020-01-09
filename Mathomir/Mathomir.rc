@@ -13,13 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Croatian resources
+// Croatian (Croatia) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_HRV)
-#ifdef _WIN32
 LANGUAGE LANG_CROATIAN, SUBLANG_DEFAULT
 #pragma code_page(1250)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -64,13 +62,21 @@ END
 //
 
 IDC_CURSOR_TEXT         CURSOR                  "res\\cursor1.cur"
+
 IDC_CURSOR_RECT         CURSOR                  "res\\cursor2.cur"
+
 IDC_CURSOR_FREE         CURSOR                  "res\\cur00001.cur"
+
 IDC_CURSOR_RECTANGLE    CURSOR                  "res\\cur00002.cur"
+
 IDC_CURSOR_CIRCLE       CURSOR                  "res\\cursor3.cur"
+
 IDC_CURSOR_LINE         CURSOR                  "res\\cur00003.cur"
+
 IDC_CURSOR_SCROLL       CURSOR                  "res\\cur00004.cur"
+
 IDC_CURSOR_ARW          CURSOR                  "res\\cur00005.cur"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -78,7 +84,9 @@ IDC_CURSOR_ARW          CURSOR                  "res\\cur00005.cur"
 //
 
 IDB_TOOLBAR             BITMAP                  "res\\Toolbar.bmp"
+
 IDB_TOOLBAR2            BITMAP                  "res\\toolbar2.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -88,8 +96,11 @@ IDB_TOOLBAR2            BITMAP                  "res\\toolbar2.bmp"
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_ICON1               ICON                    "res\\icon1.ico"
+
 IDI_ICON2               ICON                    "res\\icon2.ico"
+
 IDI_ICON3               ICON                    "res\\icon3.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -120,7 +131,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_DIALOG_PASSWORD, DIALOG
     BEGIN
@@ -132,18 +143,16 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // Croatian resources
+#endif    // Croatian (Croatia) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// English (U.S.) resources
+// English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -152,13 +161,16 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 IDC_POINTER_COPY        CURSOR                  "res\\arrowcop.cur"
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Bitmap
 //
 
 IDB_MENUITEMS           BITMAP                  "res\\menuitems.bmp"
+
 IDB_MENUITEMS2          BITMAP                  "res\\menuitem.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -168,7 +180,9 @@ IDB_MENUITEMS2          BITMAP                  "res\\menuitem.bmp"
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\Mathomir.ico"
+
 IDR_EquationTYPE        ICON                    "res\\MathomirDoc.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -181,8 +195,8 @@ CAPTION "About Math-o-mir"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,14,20,20
-    LTEXT           "Math-o-mir  2.1 beta5",IDC_STATIC,43,13,125,8,SS_NOPREFIX
-    LTEXT           "Danijel Gorupec, 2018.",IDC_STATIC,44,42,95,8
+    LTEXT           "Math-o-mir  2.2",IDC_STATIC,43,13,125,8,SS_NOPREFIX
+    LTEXT           "Danijel Gorupec, 2020.",IDC_STATIC,44,42,95,8
     DEFPUSHBUTTON   "OK",IDOK,178,6,50,16,WS_GROUP
     LTEXT           "E-mail me at: danijel.gorupec@gmail.com",IDC_STATIC,43,100,134,8
     LTEXT           "The mathematical notepad.",IDC_STATIC,43,23,88,8
@@ -200,7 +214,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
@@ -218,7 +232,7 @@ END
 // Menu
 //
 
-IDR_MAINFRAME MENU 
+IDR_MAINFRAME MENU
 BEGIN
     POPUP "&File"
     BEGIN
@@ -425,8 +439,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2,1,0,4
- PRODUCTVERSION 2,1,0,4
+ FILEVERSION 2,2,0,0
+ PRODUCTVERSION 2,2,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -442,11 +456,11 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "FileDescription", "Math-o-mir, the mathematical notepad."
-            VALUE "FileVersion", "2.1"
+            VALUE "FileVersion", "2.2.0.0"
             VALUE "InternalName", "mathomir.exe"
             VALUE "OriginalFilename", "mathomir.exe"
             VALUE "ProductName", "Math-o-mir"
-            VALUE "ProductVersion", "2.1"
+            VALUE "ProductVersion", "2.2.0.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -463,23 +477,35 @@ END
 
 IDR_BINARY1             BINARY                  "res\\MathomirHandyHelp.chm"
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDR_MAINFRAME           "Math-o-mir\n\nMath-o-mir\n\n\nMath-o-mir.Document\nMath-o-mir.Document"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_APP_TITLE       "Math-o-mir"
     AFX_IDS_IDLEMESSAGE     "Ready"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_INDICATOR_EXT        "EXT"
     ID_INDICATOR_CAPS       "CAP"
@@ -489,7 +515,7 @@ BEGIN
     ID_INDICATOR_REC        "REC"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_FILE_NEW             "Create a new document\nNew"
     ID_FILE_OPEN            "Open an existing document\nOpen"
@@ -502,13 +528,13 @@ BEGIN
     ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
     ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_FILE_MRU_FILE1       "Open this document"
     ID_FILE_MRU_FILE2       "Open this document"
@@ -528,18 +554,18 @@ BEGIN
     ID_FILE_MRU_FILE16      "Open this document"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
     ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_EDIT_CLEAR           "Erase the selection\nErase"
     ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
@@ -554,12 +580,12 @@ BEGIN
     ID_EDIT_REDO            "Redo the previously undone action\nRedo"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_SCSIZE          "Change the window size"
     AFX_IDS_SCMOVE          "Change the window position"
@@ -570,18 +596,18 @@ BEGIN
     AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_SCRESTORE       "Restore the window to normal size"
     AFX_IDS_SCTASKLIST      "Activate Task List"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
 END
 
-#endif    // English (U.S.) resources
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

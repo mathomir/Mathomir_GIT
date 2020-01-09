@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="BitmapImage.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DiffieHellman.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawing.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawingBox.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Element.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Expression.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionPlotter.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Mathomir.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="PasswordDlg.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="PopupMenu.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolbox.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="MathomirDoc.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="MathomirView.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DiffieHellman.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawing.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Element.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Expression.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathomir.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MathomirDoc.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MathomirView.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PopupMenu.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolbox.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PasswordDlg.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\icon1.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\icon2.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\icon3.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\Mathomir.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\menuitem.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\menuitems.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\toolbar2.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\MathomirDoc.ico">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\arrowcop.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00001.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00002.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00003.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00004.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00005.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cursor1.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cursor2.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cursor3.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="Example.mom">
+      <Filter>Additional Files</Filter>
+    </None>
+    <None Include="FirstRun_.mom">
+      <Filter>Additional Files</Filter>
+    </None>
+    <None Include="Language_d.csv">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="Mathomir.iss">
+      <Filter>Additional Files</Filter>
+    </None>
+    <None Include="Mathomir_d.iss">
+      <Filter>Additional Files</Filter>
+    </None>
+    <None Include="res\MathomirHandyHelp.chm">
+      <Filter>Additional Files</Filter>
+    </None>
+    <None Include="res\Mathomir.rc2">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="MIT_License.txt" />
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{16cb53c6-b00c-4c74-a62c-0566f2adbc38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{be3bc06e-384f-4959-a895-bc8a314ba3ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Additional Files">
+      <UniqueIdentifier>{f9762ea6-1932-48f1-9597-69cf2b8072c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{254637a9-6d6d-4ad0-b429-351df8e4961e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Mathomir.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="Mathomir.manifest" />
+  </ItemGroup>
+</Project>

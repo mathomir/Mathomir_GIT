@@ -5290,7 +5290,7 @@ int CExpression::KeyboardKeyHit(CDC* DC, short zoom, UINT nChar, UINT nRptCnt, U
 							Toolbox->GetUniformFormatting();
 					}
 					exp->m_IsKeyboardEntry=exp->m_NumElements;
-					exp->m_KeyboardCursorPos=(int)strlen((exp->m_pElementList+exp->m_NumElements-1)->pElementObject->Data1);
+					exp->m_KeyboardCursorPos=(short)strlen((exp->m_pElementList+exp->m_NumElements-1)->pElementObject->Data1);
 					KeyboardEntryStringLen=-1;
 					KeyboardEntryObject=(CObject*)exp;
 
@@ -5836,7 +5836,7 @@ int CExpression::KeyboardKeyHit(CDC* DC, short zoom, UINT nChar, UINT nRptCnt, U
 				if (ts)
 				{
 					m_pPaternalExpression->m_IsKeyboardEntry=(int)(ts-m_pPaternalExpression->m_pElementList)+1;
-					m_pPaternalExpression->m_KeyboardCursorPos=(int)strlen(m_pPaternalElement->Data1);
+					m_pPaternalExpression->m_KeyboardCursorPos=(short)strlen(m_pPaternalElement->Data1);
 					m_IsKeyboardEntry=0; 
 					KeyboardEntryObject=(CObject*)m_pPaternalExpression;
 					return 2;
@@ -7313,7 +7313,7 @@ int CExpression::KeyboardKeyHit(CDC* DC, short zoom, UINT nChar, UINT nRptCnt, U
 			//(this is if we accidentaly typed a letter, after backspace everything is as it was before we typed the accidental letter)
 			if ((m_KeyboardCursorPos==0) && (KeyboardCursorWasAttached) && (m_IsKeyboardEntry>1) && ((theElement-1)->Type==1))
 			{
-				m_KeyboardCursorPos=(int)strlen((theElement-1)->pElementObject->Data1);
+				m_KeyboardCursorPos=(short)strlen((theElement-1)->pElementObject->Data1);
 				m_IsKeyboardEntry--;
 				DeleteElement(m_IsKeyboardEntry);
 				return 1;
@@ -7476,7 +7476,7 @@ int CExpression::KeyboardKeyHit(CDC* DC, short zoom, UINT nChar, UINT nRptCnt, U
 				{
 					delete index;
 					theElement->pElementObject->Expression1=NULL;
-					m_KeyboardCursorPos=(int)strlen(theElement->pElementObject->Data1);
+					m_KeyboardCursorPos=(short)strlen(theElement->pElementObject->Data1);
 				}
 				else
 				{
@@ -7499,7 +7499,7 @@ int CExpression::KeyboardKeyHit(CDC* DC, short zoom, UINT nChar, UINT nRptCnt, U
 				{
 					(theElement+1)->pElementObject->m_Text=2;
 					m_IsKeyboardEntry--;
-					m_KeyboardCursorPos=(int)strlen(theElement->pElementObject->Data1);
+					m_KeyboardCursorPos=(short)strlen(theElement->pElementObject->Data1);
 					return 1;
 				}
 
@@ -7597,7 +7597,7 @@ int CExpression::KeyboardKeyHit(CDC* DC, short zoom, UINT nChar, UINT nRptCnt, U
 				{
 					//this part of code ensures to return everyting to the previous situation if we accidentally typed an operator and then 
 					//corrected it with the backspace
-					m_KeyboardCursorPos=(int)strlen((theElement-1)->pElementObject->Data1);
+					m_KeyboardCursorPos=(short)strlen((theElement-1)->pElementObject->Data1);
 					m_IsKeyboardEntry--;
 					return 1;
 				}
@@ -9050,7 +9050,7 @@ show_keymode_label:
 				DeleteElement(m_IsKeyboardEntry-1);
 				m_IsKeyboardEntry--;
 				theElement=this->m_pElementList+m_IsKeyboardEntry-1;
-				m_KeyboardCursorPos=(int)(strlen(theElement->pElementObject->Data1));
+				m_KeyboardCursorPos=(short) strlen(theElement->pElementObject->Data1);
 			}
 		}
 		if ((!IsText) && (ch=='.') && (lastkeystrokes[1]!=' ') && (theElement->pElementObject->Data1[m_KeyboardCursorPos]==0) && 
@@ -10502,7 +10502,7 @@ int CExpression::KeyboardQuickType(CDC* DC, short zoom, UINT nChar, UINT nRepCnt
 		{
 			DeleteElement(m_IsKeyboardEntry-1);
 			m_IsKeyboardEntry--;
-			m_KeyboardCursorPos=(int)strlen(ts->pElementObject->Data1);
+			m_KeyboardCursorPos=(short)strlen(ts->pElementObject->Data1);
 		}
 	
 	}
