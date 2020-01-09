@@ -382,7 +382,7 @@ char *CBitmapImage::XML_input(char * file)
 			if (file==NULL) return NULL;
 			if ((strcmp(attribute,"len")==0) || (strcmp(attribute,"bmplen")==0))
 			{
-				Image=(char*)malloc(atoi(value)+16);
+				Image=(char*)malloc((size_t) atoi(value)+16);
 				imgsize=atoi(value);
 				bitmap_position_counter=0;
 			}
@@ -496,22 +496,26 @@ int CBitmapImage::LoadImageFromFile(CObject *dwg, char *fname)
 	dc.SelectObject(bmp);
 	dc.FillSolidRect(0,0,X,Y,RGB(255,255,255));
 	if (fname) img.BitBlt(dc.m_hDC,0,0);
-	LPBITMAPINFO m2=(LPBITMAPINFO)malloc(X*Y*3+1024);
-	m2->bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
-	m2->bmiHeader.biWidth=X;
-	m2->bmiHeader.biHeight=Y;
-	m2->bmiHeader.biPlanes=1;
-	m2->bmiHeader.biBitCount=min(bpp,24);
-	m2->bmiHeader.biCompression=BI_RGB;
-	m2->bmiHeader.biSizeImage=0;
-	int colors=0;
-	if (m2->bmiHeader.biBitCount<24) colors=1<<m2->bmiHeader.biBitCount;
-	int tablesize=colors*sizeof(RGBQUAD);
-	GetDIBits(dc.m_hDC,bmp,0,Y,((char*)m2)+sizeof(BITMAPINFOHEADER)+tablesize,m2,DIB_RGB_COLORS);
-	((CBitmapImage*)(d->SpecialData))->Image=(char*)m2;
-	((CBitmapImage*)(d->SpecialData))->imgsize=m2->bmiHeader.biSizeImage+tablesize+sizeof(BITMAPINFOHEADER)+16;
-	pMainView->ReleaseDC(DC);
-	pMainView->RepaintTheView();
+	LPBITMAPINFO m2=(LPBITMAPINFO)malloc((size_t)X*Y*3+1024);
+	if(m2!=nullptr)
+	{
+		m2->bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
+		m2->bmiHeader.biWidth=X;
+		m2->bmiHeader.biHeight=Y;
+		m2->bmiHeader.biPlanes=1;
+		m2->bmiHeader.biBitCount=min(bpp,24);
+		m2->bmiHeader.biCompression=BI_RGB;
+		m2->bmiHeader.biSizeImage=0;
+
+		int colors=0;
+		if (m2->bmiHeader.biBitCount<24) colors=1<<m2->bmiHeader.biBitCount;
+		int tablesize=colors*sizeof(RGBQUAD);
+		GetDIBits(dc.m_hDC,bmp,0,Y,((char*)m2)+sizeof(BITMAPINFOHEADER)+tablesize,m2,DIB_RGB_COLORS);
+		((CBitmapImage*)(d->SpecialData))->Image=(char*)m2;
+		((CBitmapImage*)(d->SpecialData))->imgsize=m2->bmiHeader.biSizeImage+tablesize+sizeof(BITMAPINFOHEADER)+16;
+		pMainView->ReleaseDC(DC);
+		pMainView->RepaintTheView();
+	}
 	
 	return 1;
 }
@@ -550,11 +554,16 @@ int CBitmapImage::SaveImageToFileForEditing(CObject *dwg)
 	*((int*)&buff[2])=40+tablesize+hdr->biSizeImage;
 	*((int*)&buff[10])=40+tablesize+14;
 	fwrite(buff,14,1,fil);
-	fwrite(hdr,40+tablesize+hdr->biSizeImage,1,fil);
+	fwrite(hdr,(size_t) 40+tablesize+hdr->biSizeImage,1,fil);
 	fclose(fil);
 
-	int result=(int)ShellExecute(NULL,"edit",filename,NULL,NULL,SW_SHOWNORMAL);
-	if (result<=32) return 0;
+	int result = static_cast<int>(
+		reinterpret_cast<uintptr_t>(
+				ShellExecute(NULL,"edit",filename,NULL,NULL,SW_SHOWNORMAL)
+			)
+		);
+	if (result<=32)
+		return 0;
 
 	return 1;
 }
