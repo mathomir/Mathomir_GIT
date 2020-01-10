@@ -138,6 +138,8 @@ extern int AutoResizeToolbox;
 extern int UseComplexIndexes;
 extern char NoImageAutogeneration;
 
+extern int PrimaryDisplayDPI;
+
 //coloring definitions
 #define BLUE_COLOR RGB(92,92,255)
 #define GREEN_COLOR RGB(32,224,32)
