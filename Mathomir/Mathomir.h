@@ -17,6 +17,7 @@ class CMathomirApp : public CWinApp
 {
 public:
 	CMathomirApp();
+	~CMathomirApp();
 
 public:
 	virtual BOOL InitInstance();
@@ -45,8 +46,6 @@ typedef struct THE_DOCUMENT
 	char Type; //1-expression, 2-drawing
 } tDocumentStruct;
 
-
-
 // *************************************
 // initializes Undo memory
 #define NUM_UNDO_LEVELS 5
@@ -69,8 +68,6 @@ typedef struct UNDO2
 extern tUndoStruct UndoStruct[];
 extern int UndoNumLevels;
 // ***********************************
-
-
 
 #define NUM_COLORS 4
 extern const unsigned int ColorTable[];
