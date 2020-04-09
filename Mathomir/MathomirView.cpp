@@ -708,7 +708,7 @@ void CMathomirView::OnDraw(CDC* pDC)
 						if (ViewZoom&0xFF00) bitmapDC.SetPixelV(ax,*pnt+1,RGB(0,192,0));
 					}				
 				}
-				delete yarray;
+				delete[] yarray;
 			}
 		}
 		else
@@ -6116,7 +6116,7 @@ int SteadyCursorY;
 int OnTimerCounter;
 unsigned int prevTimerTickTime;
 unsigned int TimerTickAccumulator;
-void CMathomirView::OnTimer(UINT nIDEvent)
+void CMathomirView::OnTimer(UINT_PTR nIDEvent)
 {
 	//faster timing functions here
 	unsigned int TimerTickTime=GetTickCount();
@@ -10042,13 +10042,13 @@ int CMathomirView::CopyLaTeXCode(CObject *expr)
 
 	HGLOBAL mem=GlobalAlloc(GMEM_MOVEABLE,len+256);
 	char *pnt=(char*)GlobalLock(mem);
-
 	strcpy(pnt,head);pnt+=strlen(head);
+
 	int tt=((CExpression*)expr)->LaTeX_output(pnt,0);
 	pnt+=tt;
 	strcpy(pnt,foot);pnt+=strlen(foot);
 	
-	*pnt=0;
+	pnt=0;
 	GlobalUnlock(mem);
 
 
@@ -10619,28 +10619,29 @@ void CMathomirView::OnEditCopylatexcode()
 	//len+=(int)strlen(foot);
 
 	HGLOBAL mem=GlobalAlloc(GMEM_MOVEABLE,len+256);
-	char *pnt=(char*)GlobalLock(mem);
-	//strcpy(pnt,head);pnt+=strlen(head);
-	int start=0;
-	for (int i=0;i<NumDocumentElements;i++)
-	{		
-		if (((TheDocument+i)->MovingDotState==3) && ((TheDocument+i)->Type==1))
-		{
-			if (start)
+	if(mem!=nullptr)
+	{
+		char *pnt=(char*)GlobalLock(mem);
+		int start=0;
+		for (int i=0;i<NumDocumentElements;i++)
+		{		
+			if (((TheDocument+i)->MovingDotState==3) && ((TheDocument+i)->Type==1))
 			{
-				strcpy(pnt,"\\qquad \\\\\r\n\r\n");
-				pnt+=6;	
-			}
-			start++;
-			int tt=((CExpression*)((TheDocument+i)->Object))->LaTeX_output(pnt,0);
-			pnt+=tt;
+				if (start)
+				{
+					strcpy(pnt,"\\qquad \\\\\r\n\r\n");
+					pnt+=6;	
+				}
+				start++;
+				int tt=((CExpression*)((TheDocument+i)->Object))->LaTeX_output(pnt,0);
+				pnt+=tt;
 		
-		}		
+			}		
+		}
+		//strcpy(pnt,foot);pnt+=strlen(foot);
+		pnt=0;
+		GlobalUnlock(mem);
 	}
-	//strcpy(pnt,foot);pnt+=strlen(foot);
-	*pnt=0;
-	GlobalUnlock(mem);
-
 
 	if ((theApp.m_pMainWnd->OpenClipboard()) && (EmptyClipboard()))
 	{

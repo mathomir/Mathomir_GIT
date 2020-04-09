@@ -72,7 +72,8 @@ int CBitmapImage::CopyFrom(CDrawing *Original)
 	{
 		Image=(char*)malloc(org->imgsize);
 		imgsize=org->imgsize;
-		memcpy(Image,org->Image,org->imgsize);
+		if(Image!=0)
+			memcpy(Image,org->Image,org->imgsize);
 	}
 	else
 	{
@@ -452,7 +453,6 @@ int CBitmapImage::LoadImageFromFile(CObject *dwg, char *fname)
 	//this function loads an bitmap from file and stories it into CDrawing object (SpecialData=52 -> bitmap image object)
 	CImage img;
 	CDrawing *d=(CDrawing*)dwg;
-
 	
 	int X,Y,bpp;
 	CDC *DC=pMainView->GetDC();
@@ -460,7 +460,11 @@ int CBitmapImage::LoadImageFromFile(CObject *dwg, char *fname)
 	{
 		try
 		{
-			if (img.Load(fname)) {pMainView->ReleaseDC(DC);return 0;}
+			if (img.Load(fname)!=S_OK)
+			{
+				pMainView->ReleaseDC(DC);
+				return 0;
+			}
 			X=img.GetWidth();
 			Y=img.GetHeight();
 			bpp=img.GetBPP();
@@ -500,6 +504,7 @@ int CBitmapImage::LoadImageFromFile(CObject *dwg, char *fname)
 	m2->bmiHeader.biBitCount=min(bpp,24);
 	m2->bmiHeader.biCompression=BI_RGB;
 	m2->bmiHeader.biSizeImage=0;
+
 	int colors=0;
 	if (m2->bmiHeader.biBitCount<24) colors=1<<m2->bmiHeader.biBitCount;
 	int tablesize=colors*sizeof(RGBQUAD);
@@ -549,8 +554,13 @@ int CBitmapImage::SaveImageToFileForEditing(CObject *dwg)
 	fwrite(hdr,40+tablesize+hdr->biSizeImage,1,fil);
 	fclose(fil);
 
-	int result=(int)ShellExecute(NULL,"edit",filename,NULL,NULL,SW_SHOWNORMAL);
-	if (result<=32) return 0;
+	int result = static_cast<int>(
+		reinterpret_cast<uintptr_t>(
+				ShellExecute(NULL,"edit",filename,NULL,NULL,SW_SHOWNORMAL)
+			)
+		);
+	if (result<=32)
+		return 0;
 
 	return 1;
 }

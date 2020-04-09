@@ -1427,8 +1427,8 @@ int CDrawing::EndCreatingItem(int *X, int *Y, int absX, int absY)
 			int y2=(Items+NumItems-1)->Y1;
 			int x3=(Items+NumItems-2)->X1;
 			int y3=(Items+NumItems-2)->Y1;
-			float a1=atan2((float)(y1-y2),(float)(x1-x2));
-			float a2=atan2((float)(y1-y3),(float)(y1-x3));
+			float a1=(float) atan2((float)(y1-y2),(float)(x1-x2));
+			float a2=(float) atan2((float)(y1-y3),(float)(y1-x3));
 			if (fabs(a1-a2)<0.06)
 			{
 				(Items+NumItems-2)->Y2=y1;
@@ -3329,8 +3329,8 @@ int CDrawing::ScaleForFactor(float factorx,float factory)
 			//((CExpression*)(di->pSubdrawing))->ScaleForFactor(factorx,factory);
 			if ((factorx!=1.0) && (factory!=1.0))
 			{
-				float fx=fabs(factorx);	
-				float fy=fabs(factory); 
+				float fx=(float) fabs(factorx);	
+				float fy=(float) fabs(factory); 
 				if ((fx>1.0) && (fy>1.0)) fx=min(fx,fy);
 				else if ((fx<=1.0) && (fy>1.0)) fx=1.0;
 				else if ((fx>1.0) && (fy<1.0)) fx=1.0;

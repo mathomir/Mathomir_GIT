@@ -145,7 +145,7 @@ class CBitmapImage
 {
 public:
 	CDrawing *Base; //this is a pointer to main document item that cointains Drawing box frame and other data
-	char *Image;
+	char *Image = nullptr;
 	int imgsize;
 	unsigned char ShowMenu,SelectedItem;
 	int MenuX,MenuY;

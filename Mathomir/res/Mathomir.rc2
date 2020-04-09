@@ -1,5 +1,5 @@
 //
-// Equation.RC2 - resources Microsoft Visual C++ does not edit directly
+// Mathomir.rc2- resources Microsoft Visual C++ does not edit directly
 //
 
 #ifdef APSTUDIO_INVOKED
@@ -9,5 +9,4 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // Add manually edited resources here...
-
 /////////////////////////////////////////////////////////////////////////////

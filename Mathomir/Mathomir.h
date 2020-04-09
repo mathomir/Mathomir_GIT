@@ -1,4 +1,3 @@
-// Equation.h : main header file for the Equation application
 #pragma once
 
 #ifndef __AFXWIN_H__
@@ -18,6 +17,7 @@ class CMathomirApp : public CWinApp
 {
 public:
 	CMathomirApp();
+	~CMathomirApp();
 
 public:
 	virtual BOOL InitInstance();
@@ -46,8 +46,6 @@ typedef struct THE_DOCUMENT
 	char Type; //1-expression, 2-drawing
 } tDocumentStruct;
 
-
-
 // *************************************
 // initializes Undo memory
 #define NUM_UNDO_LEVELS 5
@@ -70,8 +68,6 @@ typedef struct UNDO2
 extern tUndoStruct UndoStruct[];
 extern int UndoNumLevels;
 // ***********************************
-
-
 
 #define NUM_COLORS 4
 extern const unsigned int ColorTable[];
@@ -141,6 +137,8 @@ extern int PageNumeration;
 extern int AutoResizeToolbox;
 extern int UseComplexIndexes;
 extern char NoImageAutogeneration;
+
+extern int PrimaryDisplayDPI;
 
 //coloring definitions
 #define BLUE_COLOR RGB(92,92,255)
